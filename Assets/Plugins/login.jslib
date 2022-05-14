@@ -9,9 +9,9 @@ mergeInto(LibraryManager.library, {
                         response ? 1 : 0);
                   });
   },
-  Init: async function(name, carrer) {
+  Init: async function(name, career) {
     await window.myContract.methods.init(
-        UTF8ToString(name), parseInt(carrer, 10)).send({
+        UTF8ToString(name), parseInt(career, 10)).send({
             from: window.playerAccount
         });
     myGameInstance.SendMessage('CreateButton', 'LoadInitScene');
