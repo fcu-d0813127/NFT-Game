@@ -58,7 +58,6 @@ MonoBehaviour:
   ItemSprite: {fileID: 5927067776459049778}
   ItemCount: {fileID: 5468604931881576847}
   AssignedInventorySlot:
-    _itemData: {fileID: 0}
     _stackSize: -1
 --- !u!114 &6726648905331727738
 MonoBehaviour:
@@ -154,10 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4ef48fc0d3501458173313380fc600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Detail: {fileID: 0}
   _itemSprite: {fileID: 5927067776459049778}
   _itemCount: {fileID: 5468604931881576847}
   _assignedInventorySlot:
-    _itemData: {fileID: 0}
     _stackSize: -1
 --- !u!1 &7107039604371888619
 GameObject:

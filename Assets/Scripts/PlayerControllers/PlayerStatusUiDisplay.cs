@@ -6,6 +6,7 @@ using TMPro;
 public class PlayerStatusUiDisplay : MonoBehaviour {
   public TMP_Text Name;
   public TMP_Text Level;
+  public TMP_Text Exp;
   public TMP_Text DistributableAbility;
   public TMP_Text[] Ability;
   public Canvas PlayerStatus;
@@ -43,6 +44,7 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
       PlayerStatus.gameObject.SetActive(true);
       Name.text = $"Name: {PlayerInfo.PlayerStatus.Name}";
       Level.text = $"Level: {PlayerInfo.PlayerStatus.Level}";
+      Exp.text = $"EXP: {PlayerInfo.PlayerStatus.Experience}";
       LoadAbility();
       DisplayAbility();
     } else if (Input.GetKey(KeyCode.Escape)) {

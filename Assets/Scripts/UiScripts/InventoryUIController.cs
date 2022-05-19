@@ -3,7 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class InventoryUIController : MonoBehaviour {
-  public DynamicInventoryDisplay PlayerBackpackPanel;
+  public GameObject BackpackParent;
+  public DynamicInventoryDisplay EquipmentBackpackPanel;
+  public DynamicInventoryDisplay DropBackpackPanel;
   public Button CloseButton;
 
   private void OnEnable() {
@@ -15,27 +17,30 @@ public class InventoryUIController : MonoBehaviour {
   }
 
   private void Awake() {
-    PlayerBackpackPanel.gameObject.SetActive(false);
     CloseButton?.onClick.AddListener(CloseBackpackUI);
   }
 
   private void Update() {
-    if (PlayerBackpackPanel.gameObject.activeInHierarchy &&
+    if (BackpackParent.activeInHierarchy &&
         Keyboard.current.escapeKey.wasPressedThisFrame) {
       CloseBackpackUI();
     }
   }
 
   private void CloseBackpackUI() {
-    PlayerBackpackPanel.gameObject.SetActive(false);
+    BackpackParent.SetActive(false);
   }
 
   private void OpenBackpackUI() {
-    PlayerBackpackPanel.gameObject.SetActive(true);
+    BackpackParent.SetActive(true);
   }
 
-  private void DisplayInventory(InventorySystem invToDisplay) {
+  private void DisplayInventory(InventorySystem invToDisplay, bool isDrop) {
     OpenBackpackUI();
-    PlayerBackpackPanel.RefreshDyncmicInventory(invToDisplay);
+    if (isDrop) {
+      DropBackpackPanel.RefreshDyncmicInventory(invToDisplay);
+    } else {
+      EquipmentBackpackPanel.RefreshDyncmicInventory(invToDisplay);
+    }
   }
 }

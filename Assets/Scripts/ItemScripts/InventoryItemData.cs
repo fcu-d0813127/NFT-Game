@@ -1,8 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory System/Inventory Item")]
-
-public class InventoryItemData : ScriptableObject {
+public class InventoryItemData {
   public int Id;
   public string DisplayName;
   [TextArea(4, 4)]
