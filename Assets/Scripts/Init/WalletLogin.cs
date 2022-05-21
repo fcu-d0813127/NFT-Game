@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class WalletLogin : MonoBehaviour {
-  public Button LoginButton;
+  [SerializeField] private Button _loginButton;
   // [DllImport("__Internal")]
   // private static extern void OnLogin();
   // [DllImport("__Internal")]
@@ -13,7 +13,7 @@ public class WalletLogin : MonoBehaviour {
 
   private void Awake() {
     // LoginButton.onClick.AddListener(OnLogin);
-    LoginButton.onClick.AddListener(Load);
+    _loginButton.onClick.AddListener(Load);
   }
 
   // private void SetPlayerAccount(string account) {
@@ -27,9 +27,8 @@ public class WalletLogin : MonoBehaviour {
   }
 
   IEnumerator LoadSceneAsync() {
-    AsyncOperation asyncLoad = 
-        SceneManager.LoadSceneAsync(
-            SceneManager.GetActiveScene().buildIndex + 1);
+    AsyncOperation asyncLoad =
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     while (!asyncLoad.isDone) {
       yield return null;
     }

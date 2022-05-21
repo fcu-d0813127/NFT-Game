@@ -4,7 +4,7 @@ using UnityEngine;
 public class InventorySlot {
   public InventoryItemData ItemData => _itemData;
   public int StackSize => _stackSize;
-  [SerializeField] private InventoryItemData _itemData;
+  private InventoryItemData _itemData;
   [SerializeField] private int _stackSize;
 
   public InventorySlot(InventoryItemData source, int amount) {

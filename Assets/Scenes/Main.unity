@@ -651,9 +651,9 @@ GameObject:
   m_Component:
   - component: {fileID: 205251376}
   - component: {fileID: 205251375}
-  - component: {fileID: 205251377}
   - component: {fileID: 205251378}
   - component: {fileID: 205251379}
+  - component: {fileID: 205251380}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -728,30 +728,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &205251377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 205251373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96953f842725e9841ae5d3ab5c84d636, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: {fileID: 841730693}
-  Level: {fileID: 1030216148}
-  Exp: {fileID: 1840981150}
-  DistributableAbility: {fileID: 1503912329}
-  Ability:
-  - {fileID: 938525365}
-  - {fileID: 46194855}
-  - {fileID: 290705069}
-  - {fileID: 187591869}
-  - {fileID: 1633515553}
-  PlayerStatus: {fileID: 1237219729}
-  SaveButton: {fileID: 562021173}
 --- !u!114 &205251378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,6 +752,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5fae66da605754cb3ed0e0684272a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &205251380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205251373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e588ffd859437874f80879fd4b3b4f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: {fileID: 841730693}
+  _level: {fileID: 1030216148}
+  _exp: {fileID: 1840981150}
+  _distributableAbility: {fileID: 1503912329}
+  _ability:
+  - {fileID: 938525365}
+  - {fileID: 46194855}
+  - {fileID: 290705069}
+  - {fileID: 187591869}
+  - {fileID: 1633515553}
+  _playerStatus: {fileID: 1237219729}
+  _saveButton: {fileID: 562021173}
 --- !u!1001 &223398508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2838,19 +2838,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc375a762284081498e8db5924696f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlusButtons:
+  _plusButtons:
   - {fileID: 6581220537428647808}
   - {fileID: 2011212378}
   - {fileID: 2095586309}
   - {fileID: 22878588}
   - {fileID: 1646192459}
-  SubButtons:
+  _subButtons:
   - {fileID: 8426212202671052227}
   - {fileID: 223398510}
   - {fileID: 2027992353}
   - {fileID: 1295368868}
   - {fileID: 667487508}
-  PlayerClick: {fileID: 205251377}
+  _playerClick: {fileID: 205251380}
 --- !u!1 &1840981148
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,60 +2,60 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class AbilityButtonController : MonoBehaviour {
-  public Button[] PlusButtons;
-  public Button[] SubButtons;
-  public PlayerStatusUiDisplay PlayerClick;
+  [SerializeField] private Button[] _plusButtons;
+  [SerializeField] private Button[] _subButtons;
+  [SerializeField] private PlayerStatusUiDisplay _playerClick;
 
   private void Awake() {
-    PlusButtons[0].onClick.AddListener(PlusStr);
-    PlusButtons[1].onClick.AddListener(PlusIntllegence);
-    PlusButtons[2].onClick.AddListener(PlusDex);
-    PlusButtons[3].onClick.AddListener(PlusVit);
-    PlusButtons[4].onClick.AddListener(PlusLuk);
-    SubButtons[0].onClick.AddListener(SubStr);
-    SubButtons[1].onClick.AddListener(SubIntllegence);
-    SubButtons[2].onClick.AddListener(SubDex);
-    SubButtons[3].onClick.AddListener(SubVit);
-    SubButtons[4].onClick.AddListener(SubLuk);
+    _plusButtons[0].onClick.AddListener(PlusStr);
+    _plusButtons[1].onClick.AddListener(PlusIntllegence);
+    _plusButtons[2].onClick.AddListener(PlusDex);
+    _plusButtons[3].onClick.AddListener(PlusVit);
+    _plusButtons[4].onClick.AddListener(PlusLuk);
+    _subButtons[0].onClick.AddListener(SubStr);
+    _subButtons[1].onClick.AddListener(SubIntllegence);
+    _subButtons[2].onClick.AddListener(SubDex);
+    _subButtons[3].onClick.AddListener(SubVit);
+    _subButtons[4].onClick.AddListener(SubLuk);
   }
 
   private void PlusStr() {
-    PlayerClick.UpdateAbility(0, true);
+    _playerClick.UpdateAbility(0, true);
   }
 
   private void PlusIntllegence() {
-    PlayerClick.UpdateAbility(1, true);
+    _playerClick.UpdateAbility(1, true);
   }
 
   private void PlusDex() {
-    PlayerClick.UpdateAbility(2, true);
+    _playerClick.UpdateAbility(2, true);
   }
 
   private void PlusVit() {
-    PlayerClick.UpdateAbility(3, true);
+    _playerClick.UpdateAbility(3, true);
   }
 
   private void PlusLuk() {
-    PlayerClick.UpdateAbility(4, true);
+    _playerClick.UpdateAbility(4, true);
   }
 
   private void SubStr() {
-    PlayerClick.UpdateAbility(0, false);
+    _playerClick.UpdateAbility(0, false);
   }
 
   private void SubIntllegence() {
-    PlayerClick.UpdateAbility(1, false);
+    _playerClick.UpdateAbility(1, false);
   }
 
   private void SubDex() {
-    PlayerClick.UpdateAbility(2, false);
+    _playerClick.UpdateAbility(2, false);
   }
 
   private void SubVit() {
-    PlayerClick.UpdateAbility(3, false);
+    _playerClick.UpdateAbility(3, false);
   }
 
   private void SubLuk() {
-    PlayerClick.UpdateAbility(4, false);
+    _playerClick.UpdateAbility(4, false);
   }
 }

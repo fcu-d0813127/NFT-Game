@@ -4,16 +4,16 @@ using UnityEngine.UI;
 using TMPro;
 
 public class PlayerStatusUiDisplay : MonoBehaviour {
-  public TMP_Text Name;
-  public TMP_Text Level;
-  public TMP_Text Exp;
-  public TMP_Text DistributableAbility;
-  public TMP_Text[] Ability;
-  public Canvas PlayerStatus;
-  public Button SaveButton;
   private int _tmpDistributableAbility;
   private int[] _originAbility = new int[5];
   private int[] _tmpAbility = new int[5];
+  [SerializeField] private TMP_Text _name;
+  [SerializeField] private TMP_Text _level;
+  [SerializeField] private TMP_Text _exp;
+  [SerializeField] private TMP_Text _distributableAbility;
+  [SerializeField] private TMP_Text[] _ability;
+  [SerializeField] private Canvas _playerStatus;
+  [SerializeField] private Button _saveButton;
 
   public void UpdateAbility(int index, bool operation) {
     // Not do
@@ -35,20 +35,20 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
   }
 
   private void Awake() {
-    PlayerStatus.gameObject.SetActive(false);
-    SaveButton.onClick.AddListener(Save);
+    _playerStatus.gameObject.SetActive(false);
+    _saveButton.onClick.AddListener(Save);
   }
 
   private void Update() {
     if (Input.GetKey(KeyCode.S)) {
-      PlayerStatus.gameObject.SetActive(true);
-      Name.text = $"Name: {PlayerInfo.PlayerStatus.Name}";
-      Level.text = $"Level: {PlayerInfo.PlayerStatus.Level}";
-      Exp.text = $"EXP: {PlayerInfo.PlayerStatus.Experience}";
+      _playerStatus.gameObject.SetActive(true);
+      _name.text = $"Name: {PlayerInfo.PlayerStatus.Name}";
+      _level.text = $"Level: {PlayerInfo.PlayerStatus.Level}";
+      _exp.text = $"EXP: {PlayerInfo.PlayerStatus.Experience}";
       LoadAbility();
       DisplayAbility();
     } else if (Input.GetKey(KeyCode.Escape)) {
-      PlayerStatus.gameObject.SetActive(false);
+      _playerStatus.gameObject.SetActive(false);
     }
   }
 
@@ -63,12 +63,12 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
   }
 
   private void DisplayAbility() {
-    DistributableAbility.text = $"{_tmpDistributableAbility}";
-    Ability[0].text = $"Str: {_tmpAbility[0]}";
-    Ability[1].text = $"Intllegence: {_tmpAbility[1]}";
-    Ability[2].text = $"Dex: {_tmpAbility[2]}";
-    Ability[3].text = $"Vit: {_tmpAbility[3]}";
-    Ability[4].text = $"Luk: {_tmpAbility[4]}";
+    _distributableAbility.text = $"{_tmpDistributableAbility}";
+    _ability[0].text = $"Str: {_tmpAbility[0]}";
+    _ability[1].text = $"Intllegence: {_tmpAbility[1]}";
+    _ability[2].text = $"Dex: {_tmpAbility[2]}";
+    _ability[3].text = $"Vit: {_tmpAbility[3]}";
+    _ability[4].text = $"Luk: {_tmpAbility[4]}";
   }
 
   private void Save() {
@@ -78,5 +78,7 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
     PlayerInfo.PlayerAbility.Dex = _tmpAbility[2];
     PlayerInfo.PlayerAbility.Vit = _tmpAbility[3];
     PlayerInfo.PlayerAbility.Luk = _tmpAbility[4];
+    LoadAbility();
+    DisplayAbility();
   }
 }

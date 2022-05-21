@@ -8,9 +8,8 @@ public class PlayerLoadBackpack : MonoBehaviour {
   }
 
   IEnumerator LoadSceneAsync() {
-    AsyncOperation asyncLoad = 
-        SceneManager.LoadSceneAsync(
-            "Backpack", LoadSceneMode.Additive);
+    AsyncOperation asyncLoad =
+        SceneManager.LoadSceneAsync("Backpack", LoadSceneMode.Additive);
     while (!asyncLoad.isDone) {
       yield return null;
     }

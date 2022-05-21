@@ -6,19 +6,19 @@ using TMPro;
 public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
   public InventorySlot AssignedInventorySlot => _assignedInventorySlot;
   public InventoryDisplay ParentDisplay {get; private set;}
-  private DetailDisplay DetailDisplay;
-  private GameObject Detail;
-  private Button button;
+  private DetailDisplay _detailDisplay;
+  private GameObject _detail;
+  private Button _button;
   [SerializeField] private Image _itemSprite;
   [SerializeField] private TextMeshProUGUI _itemCount;
   [SerializeField] private InventorySlot _assignedInventorySlot;
 
   private void Awake() {
     ClearSlot();
-    Detail = FindInActiveObjectByName("Detail");
-    DetailDisplay = Detail?.GetComponent<DetailDisplay>();
-    button = GetComponent<Button>();
-    button?.onClick.AddListener(OnUISlotClick);
+    _detail = FindInActiveObjectByName("Detail");
+    _detailDisplay = _detail?.GetComponent<DetailDisplay>();
+    _button = GetComponent<Button>();
+    _button?.onClick.AddListener(OnUISlotClick);
     ParentDisplay = transform.parent.GetComponent<InventoryDisplay>();
   }
 
@@ -63,12 +63,12 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     if (_assignedInventorySlot.ItemData == null) {
       return;
     }
-    DetailDisplay.OnHover(_assignedInventorySlot.ItemData);
-    Detail?.SetActive(true);
+    _detailDisplay.OnHover(_assignedInventorySlot.ItemData);
+    _detail?.SetActive(true);
   }
 
   public void OnPointerExit(PointerEventData eventData) {
-    Detail?.SetActive(false);
+    _detail?.SetActive(false);
   }
 
   GameObject FindInActiveObjectByName(string name) {

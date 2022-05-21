@@ -1554,10 +1554,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2769bf9f8375f214a8d229211a713854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackpackParent: {fileID: 1967273940}
-  EquipmentBackpackPanel: {fileID: 1655772090}
-  DropBackpackPanel: {fileID: 203672311}
-  CloseButton: {fileID: 0}
+  _backpackParent: {fileID: 1967273940}
+  _equipmentBackpackPanel: {fileID: 1655772090}
+  _materialBackpackPanel: {fileID: 203672311}
 --- !u!1 &914502576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,18 +1604,18 @@ MonoBehaviour:
   _hotBarInventorySystem:
     _inventorySlots: []
   _inventorySize: 10
-  Equipment: {fileID: 289609285}
-  Material: {fileID: 1464272166}
-  BackpackParent: {fileID: 1967273940}
-  Detail: {fileID: 1067726917}
-  EquipmentBackpackPanel: {fileID: 1655772090}
-  MaterialBackpackPanel: {fileID: 203672311}
   _backpackInventorySize: 30
   _equipmentBackpackInventorySystem:
     _inventorySlots: []
   _materialBackpackInventorySystem:
     _inventorySlots: []
   _mouseInventoryItem: {fileID: 603928693}
+  _equipment: {fileID: 289609285}
+  _material: {fileID: 1464272166}
+  _backpackParent: {fileID: 1967273940}
+  _detail: {fileID: 1067726917}
+  _equipmentBackpackPanel: {fileID: 1655772090}
+  _materialBackpackPanel: {fileID: 203672311}
 --- !u!224 &984860339 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2723645629100116752, guid: c7e888094e9e32743b318dccfcda42f3, type: 3}
@@ -1827,14 +1826,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb084af6a271f2446b4ff0e9c061754c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: {fileID: 126670615}
-  Rarity: {fileID: 597755273}
-  Atk: {fileID: 458045317}
-  Matk: {fileID: 2079290428}
-  Def: {fileID: 71753922}
-  Mdef: {fileID: 157530773}
-  Cri: {fileID: 1119117004}
-  CriDmgRatio: {fileID: 1103610418}
+  _name: {fileID: 126670615}
+  _rarity: {fileID: 597755273}
+  _atk: {fileID: 458045317}
+  _matk: {fileID: 2079290428}
+  _def: {fileID: 71753922}
+  _mdef: {fileID: 157530773}
+  _cri: {fileID: 1119117004}
+  _criDmgRatio: {fileID: 1103610418}
 --- !u!1 &1103610416
 GameObject:
   m_ObjectHideFlags: 0

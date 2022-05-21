@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class InventoryUIController : MonoBehaviour {
-  public GameObject BackpackParent;
-  public DynamicInventoryDisplay EquipmentBackpackPanel;
-  public DynamicInventoryDisplay DropBackpackPanel;
-  public Button CloseButton;
+  [SerializeField] private GameObject _backpackParent;
+  [SerializeField] private DynamicInventoryDisplay _equipmentBackpackPanel;
+  [SerializeField] private DynamicInventoryDisplay _materialBackpackPanel;
 
   private void OnEnable() {
     InventoryHolder.OnDynamicInventoryDisplayRequested += DisplayInventory;
@@ -16,31 +14,27 @@ public class InventoryUIController : MonoBehaviour {
     InventoryHolder.OnDynamicInventoryDisplayRequested -= DisplayInventory;
   }
 
-  private void Awake() {
-    CloseButton?.onClick.AddListener(CloseBackpackUI);
-  }
-
   private void Update() {
-    if (BackpackParent.activeInHierarchy &&
+    if (_backpackParent.activeInHierarchy &&
         Keyboard.current.escapeKey.wasPressedThisFrame) {
       CloseBackpackUI();
     }
   }
 
   private void CloseBackpackUI() {
-    BackpackParent.SetActive(false);
+    _backpackParent.SetActive(false);
   }
 
   private void OpenBackpackUI() {
-    BackpackParent.SetActive(true);
+    _backpackParent.SetActive(true);
   }
 
   private void DisplayInventory(InventorySystem invToDisplay, bool isDrop) {
     OpenBackpackUI();
     if (isDrop) {
-      DropBackpackPanel.RefreshDyncmicInventory(invToDisplay);
+      _materialBackpackPanel.RefreshDyncmicInventory(invToDisplay);
     } else {
-      EquipmentBackpackPanel.RefreshDyncmicInventory(invToDisplay);
+      _equipmentBackpackPanel.RefreshDyncmicInventory(invToDisplay);
     }
   }
 }
