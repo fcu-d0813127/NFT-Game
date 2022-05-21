@@ -132,6 +132,7 @@ MonoBehaviour:
   hpBar: {fileID: 7937616349341860335}
   _deathDelayTime: 0
   _searchRadius: 0
+  _attackRadius: 0
   _enemyStatus: 0
 --- !u!95 &3625441901622608868
 Animator:
@@ -223,9 +224,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1045012903
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -105541197
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: b19386df1aa5ae3409148026194c12a9,
     type: 3}
   m_Color: {r: 0.24180019, g: 1, b: 0, a: 1}
@@ -309,8 +310,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -105541197
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: b19386df1aa5ae3409148026194c12a9,
     type: 3}

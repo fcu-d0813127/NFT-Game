@@ -42,15 +42,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Layer 1
+  - name: UnderPlayerObject
     uniqueID: 2425651459
     locked: 0
-  - name: Layer 2
+  - name: SameAsPlayer
     uniqueID: 4250941897
     locked: 0
-  - name: Layer 3
+  - name: ObjectUI
     uniqueID: 4189426099
     locked: 0
-  - name: UI
+  - name: PlayerUI
     uniqueID: 3249954393
     locked: 0
