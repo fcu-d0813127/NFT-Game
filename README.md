@@ -2,6 +2,13 @@
 ## 前置動作
 - 在Unity最上方找到 Window -> Package Manager -> 在+號的右邊，切換到"Unity Registry" -> 找到"Input System"然後import.
 - 當準備要Build成WebGL時先到File -> Build Settings -> Player Settings -> Other Settings -> 找到"Active Input Handling*" -> 切換到"Both".
+## 資料夾內的內容有
+1. Scene : 兩個 scene，分別為主畫面及第一個副本
+2. importAssets : 兩個網路 import 進來的 assets
+3. Enemy : Enemy 相關之程式碼，及哥布林這個 prefab 物件
+4. Animations : 所有動畫控制以及動畫檔案
+
+預計下個版本會導入路徑規劃套件，此版本較為乾淨
 ## 功能
 ### 登入
 - 基本的註冊跟登入功能
