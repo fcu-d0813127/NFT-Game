@@ -4,30 +4,42 @@ using UnityEngine;
 
 public class EnemyControllor : MonoBehaviour {
     [SerializeField] int _hp;
-    [SerializeField] int _hpMax;
+    [SerializeField] int _hpMax; //最大血量
     [SerializeField] GameObject hpBar;
     [SerializeField] float _deathDelayTime; //怪物血量歸零後至怪物被清除的時間
-    [SerializeField] float _searchRadius;
-    [SerializeField] float _attackRadius;
+    [SerializeField] float _searchRadius; //怪物會發現玩家的距離
+    [SerializeField] float _attackRadius; //怪物會開始攻擊玩家得距離
     [SerializeField] enum Status{idle, run, attack};
     [SerializeField] Status _enemyStatus;
     private GameObject player;
-
+    private Vector2 playerPos;
+    private UnityEngine.AI.NavMeshAgent agent;
+    
     // Start is called before the first frame update
     void Start() {
         _hpMax = 100;
         _hp = _hpMax;
         _deathDelayTime = 1.5f; 
-        _searchRadius = 3.5f;
+        _searchRadius = 2.5f;
         _attackRadius = 0.8f;
         _enemyStatus = Status.idle;
+
         player = GameObject.FindWithTag("Player");
+        playerPos = player.transform.position;
+
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
+       // Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
     }
 
     // Update is called once per frame
     void Update() {
+        playerPos = player.transform.position;
         HpControllor();
         EnemyAI();
+
     }
 
     void HpControllor(){
@@ -51,6 +63,7 @@ public class EnemyControllor : MonoBehaviour {
 
     void EnemyAI(){
         
+        // 依據怪物與玩家距離決定狀態
         if(isPlayerInThisCricle(_attackRadius)){
             _enemyStatus = Status.attack;
         } else if(isPlayerInThisCricle(_searchRadius)){
@@ -76,38 +89,48 @@ public class EnemyControllor : MonoBehaviour {
                 break;
         }
 
-        bool isPlayerInThisCricle(float radius){
-            Collider2D[] nearObject = Physics2D.OverlapCircleAll(transform.position, radius);
-            if (nearObject.Length > 0)
-                for (int i = 0; i < nearObject.Length; i++)
-                    if (nearObject[i].tag.Equals("Player"))
-                        return true;
-            return false;
-        }
+        
 
+        // 在每個狀態該做什麼事
         void enemyIdle() {
             GetComponent<Animator>().SetBool("isAttack", false);
             GetComponent<Animator>().SetBool("isRun", false);
         }
+
         void enemyRun(){
-            // GetComponent<Animator>().SetBool("isRun", true);
             GetComponent<Animator>().SetBool("isAttack", false);
-            Vector2 playerPos = player.transform.position;
+            GetComponent<Animator>().SetBool("isRun", true);
+            
             if(playerPos.x >= transform.position.x){
                 GetComponent<SpriteRenderer>().flipX = false;
             } else {
                 GetComponent<SpriteRenderer>().flipX = true;
             }
+            
+            agent.SetDestination(playerPos);
            
         }
     
         void enemyAttack(){
             GetComponent<Animator>().SetBool("isAttack", true);
         }
+
+       
+
     }
+
     void DestroyThis(){
         Destroy(this.gameObject);
     }
     
+    bool isPlayerInThisCricle(float radius){ //判定玩家是否在此物件所有之園內
+        Collider2D[] nearObject = Physics2D.OverlapCircleAll(transform.position, radius);
+        if (nearObject.Length > 0)
+            for (int i = 0; i < nearObject.Length; i++)
+                if (nearObject[i].tag.Equals("Player"))
+                    return true;
+        return false;
+    }
+
 }
 

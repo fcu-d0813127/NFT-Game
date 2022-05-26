@@ -6,6 +6,10 @@ public class EnemyCreater : MonoBehaviour
 {
     [SerializeField] GameObject enemy;
     [SerializeField] int enemyNum;
+
+    [SerializeField] private LayerMask layermask;
+
+    private int layerAsLayerMask;
     void Start()
     {
         //Debug.Log(enemy.GetComponent<Renderer>().bounds.size.x);
@@ -28,7 +32,7 @@ public class EnemyCreater : MonoBehaviour
                 Vector2 genaratePos = new Vector2(Random.Range(-9.0f, 7.0f), Random.Range(-4f, 4f)); //生成之位置
                 //Vector2 boxSize = new Vector2(3f, 2.5f); //該矩形區域的大小
 
-                if (!Physics2D.OverlapBox(genaratePos, enemy.transform.localScale / 2, 0.0f)) //查看該矩形區域是否有任何碰撞體
+                if (!Physics2D.OverlapBox(genaratePos, enemy.transform.localScale / 2, 0.0f, layermask)) //查看該矩形區域是否有任何碰撞體
                 {
                     Instantiate(enemy, genaratePos, Quaternion.identity);
                     tempCount++;
