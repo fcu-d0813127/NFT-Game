@@ -21,7 +21,9 @@ public class Initialization : MonoBehaviour {
     // IsInited(_playerAccount);
     PlayerInfo.PlayerStatus = new PlayerStatus("asdf", 1, 1, 5, 1, 1);
     PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
-    StartCoroutine(LoadSceneAsync());
+    StartCoroutine(LoadSceneAsync("Main", false));
+    StartCoroutine(LoadSceneAsync("HomeMap", true));
+    StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp", true));
   }
 
   private void CheckInited(int isInited) {
@@ -52,8 +54,13 @@ public class Initialization : MonoBehaviour {
     PlayerInfo.PlayerStatus = PlayerStatus.CreateStatus(playerStatus);
   }
 
-  IEnumerator LoadSceneAsync() {
-    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main");
+  IEnumerator LoadSceneAsync(string sceneName, bool isAddtion) {
+    AsyncOperation asyncLoad;
+    if (isAddtion) {
+      asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+    } else {
+      asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+    }
     while (!asyncLoad.isDone) {
       yield return null;
     }

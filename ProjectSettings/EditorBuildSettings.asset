@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EntryDungeon.unity
     guid: a540dafe19aa94c4eae6a25d7a9aa096
+  - enabled: 1
+    path: Assets/Scenes/HomeMap.unity
+    guid: c36628053a8627c44a563c6863d275d7
+  - enabled: 1
+    path: Assets/Scenes/DungeonEntryButtonTemp.unity
+    guid: b2f331fdad3d2d948915abdda52bbafa
   m_configObjects: {}

@@ -26,7 +26,7 @@ public class DungeonButton : MonoBehaviour {
 
   IEnumerator LoadSceneAsync() {
     AsyncOperation asyncLoad =
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadSceneAsync("Initialization");
     while (!asyncLoad.isDone) {
       yield return null;
     }
