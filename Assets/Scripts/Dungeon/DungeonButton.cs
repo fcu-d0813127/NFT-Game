@@ -16,17 +16,20 @@ public class DungeonButton : MonoBehaviour {
   private void ButtonHandler() {
     string name = this.gameObject.name;
     if (name == "Exit") {
-      StartCoroutine(LoadSceneAsync());
+      StartCoroutine(LoadSceneAsync("Initialization"));
     } else if (name == "Entry") {
+      if (_nowSelectDungeon.text == "Dungeon1") {
+        StartCoroutine(LoadSceneAsync("InstanceDungeon1"));
+      }
       Debug.Log("You entry " + _nowSelectDungeon.text);
     } else {
       _nowSelectDungeon.text = name;
     }
   }
 
-  IEnumerator LoadSceneAsync() {
+  IEnumerator LoadSceneAsync(string sceneName) {
     AsyncOperation asyncLoad =
-        SceneManager.LoadSceneAsync("Initialization");
+        SceneManager.LoadSceneAsync(sceneName);
     while (!asyncLoad.isDone) {
       yield return null;
     }

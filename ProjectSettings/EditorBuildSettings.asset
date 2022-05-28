@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DungeonEntryButtonTemp.unity
     guid: b2f331fdad3d2d948915abdda52bbafa
+  - enabled: 1
+    path: Assets/Scenes/InstanceDungeon1.unity
+    guid: f3361280e4f9db84791e27104df3cb68
   m_configObjects: {}

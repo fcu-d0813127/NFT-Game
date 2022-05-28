@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 
@@ -40,14 +41,16 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
   }
 
   private void Update() {
-    if (Input.GetKey(KeyCode.S)) {
+    if (Keyboard.current.sKey.isPressed && PopUpWindowController.IsBackpackOpen == false) {
+      PopUpWindowController.IsPlayerStatusOpen = true;
       _playerStatus.gameObject.SetActive(true);
       _name.text = $"Name: {PlayerInfo.PlayerStatus.Name}";
       _level.text = $"Level: {PlayerInfo.PlayerStatus.Level}";
       _exp.text = $"EXP: {PlayerInfo.PlayerStatus.Experience}";
       LoadAbility();
       DisplayAbility();
-    } else if (Input.GetKey(KeyCode.Escape)) {
+    } else if (Keyboard.current.escapeKey.isPressed) {
+      PopUpWindowController.IsPlayerStatusOpen = false;
       _playerStatus.gameObject.SetActive(false);
     }
   }

@@ -7,7 +7,9 @@ public class CameraFollow : MonoBehaviour {
   [SerializeField] private Transform _target;
 
   private void Awake() {
-    _target = GameObject.Find("Player").GetComponent<Transform>();
+    if (_target == null) {
+      _target = GameObject.Find("Player").GetComponent<Transform>();
+    }
   }
 
   private void FixedUpdate() {
