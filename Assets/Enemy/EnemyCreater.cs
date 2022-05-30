@@ -34,7 +34,7 @@ public class EnemyCreater : MonoBehaviour
 
                 if (!Physics2D.OverlapBox(genaratePos, enemy.transform.localScale / 2, 0.0f, layermask)) //查看該矩形區域是否有任何碰撞體
                 {
-                    Instantiate(enemy, genaratePos, Quaternion.identity);
+                    Instantiate(enemy, genaratePos, new Quaternion(0, 0, 0, 1));
                     tempCount++;
                 }
 

@@ -25,7 +25,7 @@ public class DungeonButton : MonoBehaviour {
     if (name == "Exit") {
       StartCoroutine(LoadSceneAsync("Initialization"));
     } else if (name == "Entry") {
-      if (_nowSelectDungeon.text == "Dungeon1") {
+      if (_name.text == "Dungeon1") {
         StartCoroutine(LoadSceneAsync("InstanceDungeon1"));
       }
       Debug.Log("You entry " + _nowSelectDungeon.text);
