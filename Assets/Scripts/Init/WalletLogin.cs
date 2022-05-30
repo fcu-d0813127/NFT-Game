@@ -5,13 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class WalletLogin : MonoBehaviour {
-  [SerializeField] private Button _loginButton;
+  private Button _loginButton;
+  [SerializeField] private Animator _loginAnimation;
   // [DllImport("__Internal")]
   // private static extern void OnLogin();
   // [DllImport("__Internal")]
   // private static extern void EnableChangeAccountReload();
 
   private void Awake() {
+    _loginButton = GetComponent<Button>();
     // LoginButton.onClick.AddListener(OnLogin);
     _loginButton.onClick.AddListener(Load);
   }
@@ -23,10 +25,16 @@ public class WalletLogin : MonoBehaviour {
   // }
 
   private void Load() {
-    StartCoroutine(LoadSceneAsync());
+    StartCoroutine(PlayAnimation());
   }
 
-  IEnumerator LoadSceneAsync() {
+  private IEnumerator PlayAnimation() {
+    _loginAnimation.SetTrigger("Create");
+    yield return new WaitForSeconds(1f);
+    yield return StartCoroutine(LoadSceneAsync());
+  }
+
+  private IEnumerator LoadSceneAsync() {
     AsyncOperation asyncLoad =
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     while (!asyncLoad.isDone) {

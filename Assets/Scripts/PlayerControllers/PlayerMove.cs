@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour {
     if (_playerMove == false) {
       return;
     }
-    Vector2 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     Vector2 nowPosition = this.gameObject.transform.position;
     if (move != Vector2.zero) {
       _body.MovePosition(nowPosition + move * Time.deltaTime * _playerSpeed);

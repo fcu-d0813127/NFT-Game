@@ -1,4 +1,5 @@
 public class PlayerInfo {
+  public static string TempName;
   public static PlayerStatus PlayerStatus;
   public static int[] PlayerSkills;
   public static PlayerAbility PlayerAbility;

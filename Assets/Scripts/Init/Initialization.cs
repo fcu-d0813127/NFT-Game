@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Initialization : MonoBehaviour {
   private string _playerAccount;
+  [SerializeField] private Animator _fadeOut;
   // [DllImport("__Internal")]
   // private static extern void IsInited(string playerAccount);
   // [DllImport("__Internal")]
@@ -19,11 +20,13 @@ public class Initialization : MonoBehaviour {
   private void Awake() {
     // _playerAccount = PlayerPrefs.GetString("account");
     // IsInited(_playerAccount);
-    PlayerInfo.PlayerStatus = new PlayerStatus("asdf", 1, 1, 5, 1, 1);
+    string tempName = PlayerInfo.TempName;
+    PlayerInfo.PlayerStatus = new PlayerStatus(tempName, 1, 1, 5, 1, 1);
     PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
-    StartCoroutine(LoadSceneAsync("Main", false));
-    StartCoroutine(LoadSceneAsync("HomeMap", true));
-    StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp", true));
+    StartCoroutine(LoadSceneAsync("Main"));
+    StartCoroutine(LoadSceneAsync("HomeMap"));
+    StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
+    StartCoroutine(UnLoadSceneAsync("Initialization"));
   }
 
   private void CheckInited(int isInited) {
@@ -54,13 +57,15 @@ public class Initialization : MonoBehaviour {
     PlayerInfo.PlayerStatus = PlayerStatus.CreateStatus(playerStatus);
   }
 
-  IEnumerator LoadSceneAsync(string sceneName, bool isAddtion) {
-    AsyncOperation asyncLoad;
-    if (isAddtion) {
-      asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-    } else {
-      asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-    }
+  private IEnumerator UnLoadSceneAsync(string sceneName) {
+    _fadeOut.SetTrigger("Start");
+    yield return new WaitForSeconds(1f);
+    SceneManager.UnloadSceneAsync(sceneName);
+  }
+
+  private IEnumerator LoadSceneAsync(string sceneName) {
+    AsyncOperation asyncLoad =
+        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
     while (!asyncLoad.isDone) {
       yield return null;
     }
