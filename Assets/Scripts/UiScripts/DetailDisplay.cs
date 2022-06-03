@@ -15,13 +15,13 @@ public class DetailDisplay : MonoBehaviour {
     if (equipment == null) {
       return;
     }
-    _name.text = $"Name: {equipment.DisplayName}";
-    _rarity.text = $"Rarity: {equipment.Rarity}";
-    _atk.text = $"+Atk: {equipment.Ability[0]}";
-    _matk.text = $"+Matk: {equipment.Ability[1]}";
-    _def.text = $"+Def: {equipment.Ability[2]}";
-    _mdef.text = $"+Mdef: {equipment.Ability[3]}";
-    _cri.text = $"+Cri: {equipment.Ability[4]}";
-    _criDmgRatio.text = $"+CriDmgRatio: {equipment.Ability[5]}";
+    _name.text = equipment.DisplayName;
+    _rarity.text = equipment.Rarity;
+    _atk.text = equipment.Ability[0].ToString();
+    _matk.text = equipment.Ability[1].ToString();
+    _def.text = equipment.Ability[2].ToString();
+    _mdef.text = equipment.Ability[3].ToString();
+    _cri.text = equipment.Ability[4].ToString();
+    _criDmgRatio.text = equipment.Ability[5].ToString();
   }
 }

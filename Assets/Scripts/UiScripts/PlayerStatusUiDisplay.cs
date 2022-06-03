@@ -44,9 +44,9 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
     if (Keyboard.current.sKey.isPressed && PopUpWindowController.IsBackpackOpen == false) {
       PopUpWindowController.IsPlayerStatusOpen = true;
       _playerStatus.gameObject.SetActive(true);
-      _name.text = $"Name: {PlayerInfo.PlayerStatus.Name}";
-      _level.text = $"Level: {PlayerInfo.PlayerStatus.Level}";
-      _exp.text = $"EXP: {PlayerInfo.PlayerStatus.Experience}";
+      _name.text = PlayerInfo.PlayerStatus.Name;
+      _level.text = PlayerInfo.PlayerStatus.Level.ToString();
+      _exp.text = PlayerInfo.PlayerStatus.Experience.ToString();
       LoadAbility();
       DisplayAbility();
     } else if (Keyboard.current.escapeKey.isPressed) {
@@ -67,11 +67,11 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
 
   private void DisplayAbility() {
     _distributableAbility.text = $"{_tmpDistributableAbility}";
-    _ability[0].text = $"Str: {_tmpAbility[0]}";
-    _ability[1].text = $"Intllegence: {_tmpAbility[1]}";
-    _ability[2].text = $"Dex: {_tmpAbility[2]}";
-    _ability[3].text = $"Vit: {_tmpAbility[3]}";
-    _ability[4].text = $"Luk: {_tmpAbility[4]}";
+    _ability[0].text = _tmpAbility[0].ToString();
+    _ability[1].text = _tmpAbility[1].ToString();
+    _ability[2].text = _tmpAbility[2].ToString();
+    _ability[3].text = _tmpAbility[3].ToString();
+    _ability[4].text = _tmpAbility[4].ToString();
   }
 
   private void Save() {

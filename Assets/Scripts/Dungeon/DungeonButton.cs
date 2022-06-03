@@ -30,6 +30,12 @@ public class DungeonButton : MonoBehaviour {
       }
       Debug.Log("You entry " + _nowSelectDungeon.text);
     } else {
+      GameObject outline = transform.Find("Outline").gameObject;
+      if (OnSelectedDungeon.Outline != null) {
+        OnSelectedDungeon.Outline.SetActive(false);
+      }
+      outline.SetActive(true);
+      OnSelectedDungeon.Outline = outline;
       _nowSelectDungeon.text = _displayName.text;
       _name.text = name;
       _dungeonPreview.color = Color.white;
