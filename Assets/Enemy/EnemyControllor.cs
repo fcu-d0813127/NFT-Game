@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyControllor : MonoBehaviour {
-    [SerializeField] int _hp;
+    public int hp;
     [SerializeField] int _hpMax; //最大血量
     [SerializeField] GameObject hpBar;
     [SerializeField] float _deathDelayTime; //怪物血量歸零後至怪物被清除的時間
@@ -18,8 +18,8 @@ public class EnemyControllor : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         _hpMax = 100;
-        _hp = _hpMax;
-        _deathDelayTime = 1.5f; 
+        hp = _hpMax;
+        _deathDelayTime = 1.0f; 
         _searchRadius = 2.5f;
         _attackRadius = 0.8f;
         _enemyStatus = Status.idle;
@@ -43,7 +43,7 @@ public class EnemyControllor : MonoBehaviour {
     }
 
     void HpControllor(){
-        if (_hp <= 0){ //敵人死亡
+        if (hp <= 0){ //敵人死亡
 
             //血條長度設定(不能讓血條變負的)
             hpBar.transform.localScale = new Vector3(0, hpBar.transform.localScale.y, hpBar.transform.localScale.z);
@@ -54,7 +54,7 @@ public class EnemyControllor : MonoBehaviour {
             
         }else {
              //敵人未死亡
-            float _percent = ((float)_hp / (float)_hpMax);
+            float _percent = ((float)hp / (float)_hpMax);
             hpBar.transform.localScale = new Vector3(_percent, hpBar.transform.localScale.y, hpBar.transform.localScale.z); //縮放hpBar
         }
 

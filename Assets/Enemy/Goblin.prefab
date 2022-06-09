@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5013685862997118479}
   - component: {fileID: 3625441901622608868}
   - component: {fileID: 3366094941223383143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 386839159471643295}
   - component: {fileID: 5990369284374689554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8646855526206995000}
   - component: {fileID: 2064317747764112032}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HpBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
