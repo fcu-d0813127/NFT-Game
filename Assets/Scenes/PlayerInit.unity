@@ -189,6 +189,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1263481776654916849, guid: f53b3f934b106c34ba2639edf2fb3d27,
         type: 3}
+      propertyPath: skillEffect
+      value: 
+      objectReference: {fileID: 5294572246900308109, guid: c8c3cfe5099c4cb489914048204d489f,
+        type: 3}
+    - target: {fileID: -1263481776654916849, guid: f53b3f934b106c34ba2639edf2fb3d27,
+        type: 3}
       propertyPath: enemyLayers.m_Bits
       value: 128
       objectReference: {fileID: 0}
@@ -211,6 +217,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Offset.y
       value: 0.6597958
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656525870751669809, guid: f53b3f934b106c34ba2639edf2fb3d27,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1972262924866377560, guid: f53b3f934b106c34ba2639edf2fb3d27,
         type: 3}
@@ -245,12 +256,12 @@ PrefabInstance:
     - target: {fileID: 7777372307455794338, guid: f53b3f934b106c34ba2639edf2fb3d27,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.84
+      value: 8.428
       objectReference: {fileID: 0}
     - target: {fileID: 7777372307455794338, guid: f53b3f934b106c34ba2639edf2fb3d27,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.72
+      value: 4.201
       objectReference: {fileID: 0}
     - target: {fileID: 7777372307455794338, guid: f53b3f934b106c34ba2639edf2fb3d27,
         type: 3}

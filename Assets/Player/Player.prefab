@@ -160,7 +160,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000000
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -214,13 +214,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b28685808adec4bb11794d48735a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _demage: 0
-  attackPointLeft: {fileID: 9041419289048365877}
-  attackPointRight: {fileID: 1972262924866377560}
-  attackRange: 0.5
+  _normalDemage: 0
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0
+  attackPointLeft: {fileID: 9041419289048365877}
+  attackPointRight: {fileID: 1972262924866377560}
+  attackRange: 0.5
+  skillEffect: {fileID: 5294572246900308109, guid: c8c3cfe5099c4cb489914048204d489f,
+    type: 3}
+  _skillOffsetX: 0
+  _skillOffsetY: 0
 --- !u!1 &8663215770703136613
 GameObject:
   m_ObjectHideFlags: 0

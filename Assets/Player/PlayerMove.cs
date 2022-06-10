@@ -19,7 +19,10 @@ public class PlayerMove : MonoBehaviour {
       // 右邊
       GetComponent<SpriteRenderer>().flipX = false;
       GetComponent<Animator>().SetBool("isRun", true);
-    } else{
+    } else if (Input.GetAxis("Vertical") != 0) {
+      GetComponent<Animator>().SetBool("isRun", true);
+      // 上下
+    }  else{
        GetComponent<Animator>().SetBool("isRun", false);
     }
     //
