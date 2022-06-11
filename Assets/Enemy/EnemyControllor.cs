@@ -45,15 +45,13 @@ public class EnemyControllor : MonoBehaviour {
         if (hp <= 0){ //敵人死亡
             //血條長度設定(不能讓血條變負的)
             hpBar.transform.localScale = new Vector3(0, hpBar.transform.localScale.y, hpBar.transform.localScale.z);
-        }else {
-             //敵人未死亡
+        }else { //敵人未死亡
             float _percent = ((float)hp / (float)_hpMax);
             hpBar.transform.localScale = new Vector3(_percent, hpBar.transform.localScale.y, hpBar.transform.localScale.z); //縮放hpBar
         }
     }
 
     void EnemyAI(){
-        
         // 依據條件轉換狀態
         if(hp <= 0){ //怪物死亡
             _enemyStatus = Status.dead;
