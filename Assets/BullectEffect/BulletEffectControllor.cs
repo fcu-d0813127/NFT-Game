@@ -18,6 +18,7 @@ public class BulletEffectControllor : MonoBehaviour
         _timer = 3; 
         _originDistance = this.gameObject.transform.position;
 
+        // 依據玩家方向判斷子彈飛行方向
         if(playerDirection()){
             _shootDirection = true;
             GetComponent<SpriteRenderer>().flipX = true;
@@ -28,17 +29,18 @@ public class BulletEffectControllor : MonoBehaviour
           
     }
 
-    // Update is called once per frame
     void Update()
     {     
         // move the bullet
         if(_shootDirection){ //角色向左時
             this.gameObject.transform.position += new Vector3(-1 * bulletSpeed * Time.deltaTime * 60, 0 , 0 );
+            
             //到一定距離銷毀
             if(_originDistance.x - this.gameObject.transform.position.x > flyDistance)
                 Destroy(this.gameObject);
         } else{
             this.gameObject.transform.position += new Vector3(bulletSpeed * Time.deltaTime * 60, 0 , 0 );
+            
             //到一定距離銷毀
             if(_originDistance.x - this.gameObject.transform.position.x < -1 * flyDistance)
                 Destroy(this.gameObject);
@@ -59,16 +61,15 @@ public class BulletEffectControllor : MonoBehaviour
             col.gameObject.GetComponent<EnemyControllor>().hp = col.gameObject.GetComponent<EnemyControllor>().hp - _bulletDemage;         
             Vector3 genaratePos = col.gameObject.transform.position;
 
+            //生成碰撞到的特效
             Instantiate(hitEffect, genaratePos, new Quaternion(0, 0, 0, 1)); 
         }
-        //生成碰撞到的特效
 
-       
         Destroy(this.gameObject);
     }
 
+    //判斷玩家所在方向 true右方, left左方
     bool playerDirection(){
-
         return GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX;
     }
     

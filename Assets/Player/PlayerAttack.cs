@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {   
+    public string normakAttackKey = "k";
+    public string skillAttack1 = "x";
+
     // 攻擊傷害
     [SerializeField] int _normalDemage;
     
@@ -31,9 +34,9 @@ public class PlayerAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(Input.GetKeyDown(KeyCode.K)) {
+        if(Input.GetKeyDown(normakAttackKey)) {
             normalAttackControllor();
-        } else if(Input.GetKeyDown(KeyCode.X)){
+        } else if(Input.GetKeyDown(skillAttack1)){
             specialAttackControllor();
         } else {
             GetComponent<Animator>().SetBool("isAttack", false);
