@@ -34,6 +34,8 @@ public class PlayerAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        
+        //依據按鍵判定攻擊類型
         if(Input.GetKeyDown(normakAttackKey)) {
             normalAttackControllor();
         } else if(Input.GetKeyDown(skillAttack1)){
