@@ -58,7 +58,8 @@ public class BulletEffectControllor : MonoBehaviour
         
         if(col.gameObject.tag == "Enemy"){
             //減少Hp
-            col.gameObject.GetComponent<EnemyControllor>().hp = col.gameObject.GetComponent<EnemyControllor>().hp - _bulletDemage;         
+            //col.gameObject.GetComponent<EnemyControllor>().hp = col.gameObject.GetComponent<EnemyControllor>().hp - _bulletDemage;         
+            col.gameObject.GetComponent<EnemyControllor>().sufferDemage(_bulletDemage);
             Vector3 genaratePos = col.gameObject.transform.position;
 
             //生成碰撞到的特效

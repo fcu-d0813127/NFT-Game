@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyControllor : MonoBehaviour {
-    public int hp;
 
+    [SerializeField] int _hp;
     [SerializeField] int _hpMax; //最大血量
     [SerializeField] GameObject hpBar;
     [SerializeField] float _deathDelayTime;  //怪物血量歸零後至怪物被清除的時間
@@ -20,7 +20,7 @@ public class EnemyControllor : MonoBehaviour {
     
     void Start() {
         _hpMax = 100;
-        hp = _hpMax;
+        _hp = _hpMax;
         player = GameObject.FindWithTag("Player");
         playerPos = player.transform.position;
         _lastPos = transform.position;
@@ -41,19 +41,25 @@ public class EnemyControllor : MonoBehaviour {
         //Debug.Log(_enemyStatus);
     }
 
+    // 給外部傷害開放之接口
+    public void sufferDemage(int demage) {
+        
+        _hp -= demage;
+    }
+
     void HpBarControllor(){
-        if (hp <= 0){ //敵人死亡
+        if (_hp <= 0){ //敵人死亡
             //血條長度設定(不能讓血條變負的)
             hpBar.transform.localScale = new Vector3(0, hpBar.transform.localScale.y, hpBar.transform.localScale.z);
         }else { //敵人未死亡
-            float _percent = ((float)hp / (float)_hpMax);
+            float _percent = ((float)_hp / (float)_hpMax);
             hpBar.transform.localScale = new Vector3(_percent, hpBar.transform.localScale.y, hpBar.transform.localScale.z); //縮放hpBar
         }
     }
 
     void EnemyAI(){
         // 依據條件轉換狀態
-        if(hp <= 0){ //怪物死亡
+        if(_hp <= 0){ //怪物死亡
             _enemyStatus = Status.dead;
         }else if(isPlayerInThisCricle(_attackRadius)){ //怪物發現玩家
             _enemyStatus = Status.attack;

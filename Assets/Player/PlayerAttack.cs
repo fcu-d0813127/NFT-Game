@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         _normalDemage = 20;
-        attackRange = 0.5f;
+        attackRange = 0.6f;
         _skillOffsetX = 1.0f;
         _skillOffsetY = 0.5f;
     }
@@ -56,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
         Collider2D[] hitEnmies = Physics2D.OverlapCircleAll(_attackPoint.position,attackRange,enemyLayers);
 
         foreach(Collider2D enemy in hitEnmies){
-            enemy.GetComponent<EnemyControllor>().hp = enemy.GetComponent<EnemyControllor>().hp - _normalDemage;          
+            enemy.GetComponent<EnemyControllor>().sufferDemage(_normalDemage);      
         }
     }
     
