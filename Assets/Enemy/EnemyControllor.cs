@@ -39,7 +39,6 @@ public class EnemyControllor : MonoBehaviour {
     }
 
     void Update() {
-        
         HpBarControllor();
         EnemyAI();
         //Debug.Log(_enemyStatus);
@@ -63,7 +62,7 @@ public class EnemyControllor : MonoBehaviour {
             _enemyStatus = Status.attack;
         } else if(isPlayerInThisCricle(_searchRadius)){ //怪物即將攻擊玩家
             _enemyStatus = Status.run;
-        }  else { //怪物未發現玩家
+        } else { //怪物未發現玩家
             _enemyStatus = Status.idle;  
         }
            
@@ -157,11 +156,7 @@ public class EnemyControllor : MonoBehaviour {
         }
     }
 
-    //invoke需呼叫function，故建立此
-    void DestroyThis(){
-        Destroy(this.gameObject);
-    }
-    
+
     //判定玩家是否在此物件所圍之園內
     bool isPlayerInThisCricle(float radius){ 
         Collider2D[] nearObject = Physics2D.OverlapCircleAll(transform.position, radius);
@@ -172,6 +167,9 @@ public class EnemyControllor : MonoBehaviour {
         return false;
     }
 
-    
+    //invoke需呼叫function，故建立此
+    void DestroyThis(){
+        Destroy(this.gameObject);
+    }
 }
 

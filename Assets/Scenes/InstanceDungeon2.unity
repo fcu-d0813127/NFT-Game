@@ -6853,7 +6853,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759924741}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -6907,7 +6907,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759924741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.18, y: 12.24, z: 0}
+  m_LocalPosition: {x: -21.75, y: -9.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7069,7 +7069,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173098446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4136589, y: 2.858742, z: -0.040547103}
+  m_LocalPosition: {x: -41.48, y: -7.4, z: -0.040547103}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7090,11 +7090,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skeleton: {fileID: 7053220199202796345, guid: 066f803b564be414b82cb1fd77568483,
     type: 3}
-  generateRange:
-  - -12
-  - 10
-  - 6.8
-  - -5
+  mushroom: {fileID: 7053220199202796345, guid: ffa446f80d4ca7f44b2eea3c948d2de5,
+    type: 3}
+  flyingEye: {fileID: 7053220199202796345, guid: f7a485efd7a62e14d934f7d9af160bcb,
+    type: 3}
+  skeletonNum1: 10
+  skeletonNum2: 3
+  mushroomNum: 5
+  flyingEyeNum: 4
+  skeletonGenerateRange1: []
+  skeletonGenerateRange2: []
+  mushroomGenerateRange: []
+  flyingEyeGenerateRange: []
 --- !u!1 &1237075821 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8640610273325010495, guid: 0f5fc0c29f6081d4d9fb26e7d22e50a2,
