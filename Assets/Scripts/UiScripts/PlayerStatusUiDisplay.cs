@@ -8,11 +8,13 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
   private int _tmpDistributableAbility;
   private int[] _originAbility = new int[5];
   private int[] _tmpAbility = new int[5];
+  private int[] _tmpPanel = new int[6];
   [SerializeField] private TMP_Text _name;
   [SerializeField] private TMP_Text _level;
   [SerializeField] private TMP_Text _exp;
   [SerializeField] private TMP_Text _distributableAbility;
   [SerializeField] private TMP_Text[] _ability;
+  [SerializeField] private TMP_Text[] _panel;
   [SerializeField] private Canvas _playerStatus;
   [SerializeField] private Button _saveButton;
 
@@ -33,6 +35,7 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
       _tmpAbility[index]--;
     }
     DisplayAbility();
+    UpdatePanel();
   }
 
   private void Awake() {
@@ -49,6 +52,7 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
       _exp.text = PlayerInfo.PlayerStatus.Experience.ToString();
       LoadAbility();
       DisplayAbility();
+      UpdatePanel();
     } else if (Keyboard.current.escapeKey.isPressed) {
       PopUpWindowController.IsPlayerStatusOpen = false;
       _playerStatus.gameObject.SetActive(false);
@@ -67,20 +71,39 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
 
   private void DisplayAbility() {
     _distributableAbility.text = $"{_tmpDistributableAbility}";
-    _ability[0].text = _tmpAbility[0].ToString();
-    _ability[1].text = _tmpAbility[1].ToString();
-    _ability[2].text = _tmpAbility[2].ToString();
-    _ability[3].text = _tmpAbility[3].ToString();
-    _ability[4].text = _tmpAbility[4].ToString();
+    for (int i = 0; i < 5; i++) {
+      _ability[i].text = _tmpAbility[i].ToString();
+    }
+  }
+
+  private void UpdatePanel() {
+    PlayerAbility playerAbility = new PlayerAbility(
+      _tmpAbility[0], _tmpAbility[1], _tmpAbility[2], _tmpAbility[3], _tmpAbility[4]
+    );
+    PlayerPanel playerPanel = new PlayerPanel(playerAbility, new int[6]);
+    _tmpPanel[0] = (int)playerPanel.Atk;
+    _tmpPanel[1] = (int)playerPanel.Matk;
+    _tmpPanel[2] = (int)playerPanel.Def;
+    _tmpPanel[3] = (int)playerPanel.Mdef;
+    _tmpPanel[4] = (int)playerPanel.Cri;
+    _tmpPanel[5] = (int)(playerPanel.CriDmgRatio * 100);
+    DisplayPanel();
+  }
+
+  private void DisplayPanel() {
+    for (int i = 0; i < 5; i++) {
+      _panel[i].text = _tmpPanel[i].ToString();
+    }
+    _panel[5].text = $"{_tmpPanel[5]}%";
   }
 
   private void Save() {
     PlayerInfo.PlayerStatus.DistributableAbility = _tmpDistributableAbility;
-    PlayerInfo.PlayerAbility.Str = _tmpAbility[0];
-    PlayerInfo.PlayerAbility.Intllegence = _tmpAbility[1];
-    PlayerInfo.PlayerAbility.Dex = _tmpAbility[2];
-    PlayerInfo.PlayerAbility.Vit = _tmpAbility[3];
-    PlayerInfo.PlayerAbility.Luk = _tmpAbility[4];
+    PlayerAbility playerAbility = new PlayerAbility(
+      _tmpAbility[0], _tmpAbility[1], _tmpAbility[2], _tmpAbility[3], _tmpAbility[4]
+    );
+    PlayerPanel playerPanel = new PlayerPanel(playerAbility, new int[6]);
+    PlayerInfo.PlayerAbility = playerAbility;
     LoadAbility();
     DisplayAbility();
   }

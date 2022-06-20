@@ -2019,8 +2019,20 @@ PrefabInstance:
     - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_text
-      value: Entry
+      value: "\u9032\u5165"
       objectReference: {fileID: 0}
+    - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
+    - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc3f894d0fb2874aa910d392c5edc11, type: 3}
 --- !u!1001 &752498941
@@ -3007,10 +3019,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: No Select
+  m_text: "\u672A\u9078\u64C7"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c0fc949fc39fbb2488bc381b7b9df05a, type: 2}
-  m_sharedMaterial: {fileID: 6159649864702632928, guid: c0fc949fc39fbb2488bc381b7b9df05a,
+  m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
+  m_sharedMaterial: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4019,8 +4031,20 @@ PrefabInstance:
     - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_text
-      value: Exit
+      value: "\u96E2\u958B"
       objectReference: {fileID: 0}
+    - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
+    - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc3f894d0fb2874aa910d392c5edc11, type: 3}
 --- !u!224 &1800409274 stripped
@@ -4795,7 +4819,18 @@ PrefabInstance:
     - target: {fileID: 11125458726634233, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_text
-      value: The Fading Forest
+      value: "\u54E5\u5E03\u6797"
+      objectReference: {fileID: 0}
+    - target: {fileID: 11125458726634233, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
+    - target: {fileID: 11125458726634233, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2578398500878602862, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
@@ -4907,10 +4942,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4575345368823439233, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_text
-      value: Dungeon1
+      value: "\u526F\u672C1"
       objectReference: {fileID: 0}
+    - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
+    - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc3f894d0fb2874aa910d392c5edc11, type: 3}
