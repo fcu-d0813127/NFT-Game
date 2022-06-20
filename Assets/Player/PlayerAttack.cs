@@ -37,6 +37,8 @@ public class PlayerAttack : MonoBehaviour
         
         //依據按鍵判定攻擊類型
         if(Input.GetKeyDown(normakAttackKey)) {
+            float skill = 1.5f;
+            Debug.Log(DamageController.RealDamage(new int[]{100, 100, 1}, false, skill));
             normalAttackControllor();
         } else if(Input.GetKeyDown(skillAttack1)){
             specialAttackControllor();
@@ -56,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
         Collider2D[] hitEnmies = Physics2D.OverlapCircleAll(_attackPoint.position,attackRange,enemyLayers);
 
         foreach(Collider2D enemy in hitEnmies){
-            enemy.GetComponent<EnemyControllor>().sufferDemage(_normalDemage);      
+            enemy.GetComponent<EnemyControllor>().sufferDemage(DamageController.RealDamage(new int[]{100, 100, 1}, false, 1.5f));      
         }
     }
     

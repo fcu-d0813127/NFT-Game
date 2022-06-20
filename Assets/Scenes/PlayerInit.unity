@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1613267224}
-  nextScene: 1
+  nextScene: 3
 --- !u!1 &1613267224 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5869242670888567459, guid: f53b3f934b106c34ba2639edf2fb3d27,

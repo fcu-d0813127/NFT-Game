@@ -19,7 +19,7 @@ public class EnemyControllor : MonoBehaviour {
     private Vector3 _lastPos;
     
     void Start() {
-        _hpMax = 100;
+        _hpMax = 10000;
         _hp = _hpMax;
         player = GameObject.FindWithTag("Player");
         playerPos = player.transform.position;

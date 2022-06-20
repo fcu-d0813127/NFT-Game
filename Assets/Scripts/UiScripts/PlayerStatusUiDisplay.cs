@@ -104,6 +104,7 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
     );
     PlayerPanel playerPanel = new PlayerPanel(playerAbility, new int[6]);
     PlayerInfo.PlayerAbility = playerAbility;
+    PlayerInfo.PlayerPanel = playerPanel;
     LoadAbility();
     DisplayAbility();
   }

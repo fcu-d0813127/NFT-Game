@@ -1,6 +1,8 @@
 	using UnityEngine;
+using UnityEngine.InputSystem;
  
 public class PlayerMove : MonoBehaviour {
+  private bool _playerMove = true;
   private Rigidbody2D _body;
   [SerializeField] private float _playerSpeed = 5.0f;
  
@@ -10,6 +12,14 @@ public class PlayerMove : MonoBehaviour {
   }
  
   private void FixedUpdate() {
+    if (Keyboard.current.bKey.isPressed || Keyboard.current.sKey.isPressed) {
+      _playerMove = false;
+    } else if (Keyboard.current.escapeKey.isPressed) {
+      _playerMove = true;
+    }
+    if (_playerMove == false) {
+      return;
+    }
     if (Input.GetAxis("Horizontal") < 0) {
       // 左邊
       GetComponent<SpriteRenderer>().flipX = true;
