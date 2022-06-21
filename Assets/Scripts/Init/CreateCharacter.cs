@@ -20,7 +20,7 @@ public class CreateCharacter : MonoBehaviour {
 
   private void InitPlayer() {
     // Init(_name.text, 0);
-    PlayerInfo.TempName = _name.text;
+    PlayerInfo.Name = _name.text;
     StartCoroutine(PlayAnimation());
   }
 

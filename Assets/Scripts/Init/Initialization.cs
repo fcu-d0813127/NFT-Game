@@ -20,7 +20,7 @@ public class Initialization : MonoBehaviour {
   private void Awake() {
     // _playerAccount = PlayerPrefs.GetString("account");
     // IsInited(_playerAccount);
-    string tempName = PlayerInfo.TempName;
+    string tempName = PlayerInfo.Name;
     PlayerInfo.PlayerStatus = new PlayerStatus(tempName, 1, 1, 5, 1, 1);
     PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
     PlayerInfo.PlayerPanel = new PlayerPanel(PlayerInfo.PlayerAbility, new int[6]);

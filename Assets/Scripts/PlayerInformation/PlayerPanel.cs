@@ -34,9 +34,9 @@ public class PlayerPanel {
         2000 * intllegence / (intllegence + 250) +
         (1 + 0.25f * vit / (vit + 250)) * eMdef;
     this.Cri =
-        8000 * dex / (dex + 250) +
+        (8000 * dex / (dex + 250) +
         2000 * luk / (luk + 250) +
-        (1 + 0.25f * dex / (dex + 250)) * eCri;
+        (1 + 0.25f * dex / (dex + 250)) * eCri) / 10000;
     this.CriDmgRatio = 1.5f + (1 + 0.25f * luk / (luk + 250)) * eCriDmgRatio;
   }
 }

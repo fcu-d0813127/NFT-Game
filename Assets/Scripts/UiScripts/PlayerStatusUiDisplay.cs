@@ -85,15 +85,16 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
     _tmpPanel[1] = (int)playerPanel.Matk;
     _tmpPanel[2] = (int)playerPanel.Def;
     _tmpPanel[3] = (int)playerPanel.Mdef;
-    _tmpPanel[4] = (int)playerPanel.Cri;
+    _tmpPanel[4] = (int)(playerPanel.Cri * 100);
     _tmpPanel[5] = (int)(playerPanel.CriDmgRatio * 100);
     DisplayPanel();
   }
 
   private void DisplayPanel() {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
       _panel[i].text = _tmpPanel[i].ToString();
     }
+    _panel[4].text = $"{_tmpPanel[4]}%";
     _panel[5].text = $"{_tmpPanel[5]}%";
   }
 
