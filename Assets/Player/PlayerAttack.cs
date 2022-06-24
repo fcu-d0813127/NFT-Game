@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {   
+
     public string normakAttackKey = "k";
     public string skillAttack1 = "x";
 
@@ -54,9 +55,8 @@ public class PlayerAttack : MonoBehaviour
 
         GetComponent<Animator>().SetBool("isAttack", true); //利用isAttack這個bool去判定玩家是否在攻擊而播出動畫!
         Collider2D[] hitEnmies = Physics2D.OverlapCircleAll(_attackPoint.position,attackRange,enemyLayers);
-
         foreach(Collider2D enemy in hitEnmies){
-            enemy.GetComponent<EnemyControllor>().sufferDemage(_normalDemage);      
+            enemy.GetComponent<HpControllor>().sufferDemage(_normalDemage);      
         }
     }
     

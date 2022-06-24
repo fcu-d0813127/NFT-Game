@@ -12,8 +12,7 @@ public class BulletEffectControllor : MonoBehaviour
     [SerializeField] float flyDistance = 5;
     [SerializeField] float bulletSpeed = 0.2f;
     // Start is called before the first frame update
-    void Start()
-    {   
+    void Start() {   
         _bulletDemage = 50;
         _timer = 3; 
         _originDistance = this.gameObject.transform.position;
@@ -29,8 +28,7 @@ public class BulletEffectControllor : MonoBehaviour
           
     }
 
-    void Update()
-    {     
+    void Update() {     
         // move the bullet
         if(_shootDirection){ //角色向左時
             this.gameObject.transform.position += new Vector3(-1 * bulletSpeed * Time.deltaTime * 60, 0 , 0 );
@@ -51,15 +49,15 @@ public class BulletEffectControllor : MonoBehaviour
          
     }
     void OnCollisionEnter2D(Collision2D col) {
-
+        //Debug.Log(col.gameObject.name);
         if(col.gameObject.tag == "Player"){
             return;
         }
         
         if(col.gameObject.tag == "Enemy"){
+            //Debug.Log("子彈集中怪物惹");
             //減少Hp
-            //col.gameObject.GetComponent<EnemyControllor>().hp = col.gameObject.GetComponent<EnemyControllor>().hp - _bulletDemage;         
-            col.gameObject.GetComponent<EnemyControllor>().sufferDemage(_bulletDemage);
+            col.gameObject.GetComponent<HpControllor>().sufferDemage(_bulletDemage);
             Vector3 genaratePos = col.gameObject.transform.position;
 
             //生成碰撞到的特效

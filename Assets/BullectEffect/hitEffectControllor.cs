@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class hitEffectControllor : MonoBehaviour
+public class HitEffectControllor : MonoBehaviour
 {
 
     void destroyThis(){
