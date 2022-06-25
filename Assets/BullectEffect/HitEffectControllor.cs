@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HitEffectControllor : MonoBehaviour {
+    //若沒成功銷毀將回收物件
     private float _timer;
     
     void Start() {
