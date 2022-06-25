@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deathDelayTime: 1
   _searchRadius: 4
-  _attackRadius: 0.5
+  _attackRadius: 0.7
   _enemyStatus: 0
 --- !u!95 &3625441901622608868
 Animator:

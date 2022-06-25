@@ -49,13 +49,11 @@ public class BulletEffectControllor : MonoBehaviour
          
     }
     void OnCollisionEnter2D(Collision2D col) {
-        //Debug.Log(col.gameObject.name);
         if(col.gameObject.tag == "Player"){
             return;
         }
         
         if(col.gameObject.tag == "Enemy"){
-            //Debug.Log("子彈集中怪物惹");
             //減少Hp
             col.gameObject.GetComponent<HpControllor>().sufferDemage(_bulletDemage);
             Vector3 genaratePos = col.gameObject.transform.position;

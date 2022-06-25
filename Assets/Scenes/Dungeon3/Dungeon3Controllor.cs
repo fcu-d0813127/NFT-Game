@@ -12,6 +12,7 @@ public class Dungeon3Controllor : MonoBehaviour {
     [SerializeField] float entryEdge;
     [SerializeField] GameObject camera;
     [SerializeField] GameObject bigHpBar;
+    [SerializeField] GameObject wall;
 
     private float _entryTime;
     private bool _isStart = false;
@@ -33,6 +34,7 @@ public class Dungeon3Controllor : MonoBehaviour {
                 _entryTime = Time.time;
                 _isStart = true;
                 bigHpBar.SetActive(true);
+                wall.SetActive(true);
             }
 
             if(Time.time - _entryTime > 1){
@@ -40,6 +42,7 @@ public class Dungeon3Controllor : MonoBehaviour {
                 camera.GetComponent<CameraFollow>().enabled = true;
                 return;
             }
+            
             camera.GetComponent<CameraFollow>().enabled = false;
             //在切換時可能導致z軸亂掉而無法顯示，故強制改為999;
             Vector3 tempBoss = boss.transform.position;
