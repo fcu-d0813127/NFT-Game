@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InstanceDungeon1.unity
     guid: f3361280e4f9db84791e27104df3cb68
+  - enabled: 1
+    path: Assets/Scenes/MarketScene.unity
+    guid: 3932f9826ad324c4faee32b94f631fed
   m_configObjects: {}
