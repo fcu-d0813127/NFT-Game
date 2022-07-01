@@ -8,12 +8,12 @@ public class BulletEffectControllor : MonoBehaviour
     private bool _shootDirection;
     private float _timer; //銷毀物件所需時間
     private Vector3 _originDistance;
-    [SerializeField] int _bulletDemage;
+    [SerializeField] int _bulletDemage; //傷害計算
     [SerializeField] float flyDistance = 5;
     [SerializeField] float bulletSpeed = 0.2f;
     // Start is called before the first frame update
     void Start() {   
-        _bulletDemage = 50;
+        _bulletDemage = 300;
         _timer = 3; 
         _originDistance = this.gameObject.transform.position;
 

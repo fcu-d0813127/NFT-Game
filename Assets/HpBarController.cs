@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HpBarControllor : MonoBehaviour
+public class HpBarController : MonoBehaviour
 {
     [SerializeField] GameObject obj;
     private int _tempHp;
     private int _tempHpMax;
 
     void Start() {
+        if (obj == null) {
+            obj = GameObject.Find("Player");
+        }
         _tempHp = obj.GetComponent<HpControllor>().getHp();
         _tempHpMax = obj.GetComponent<HpControllor>().getHpMax();
     }

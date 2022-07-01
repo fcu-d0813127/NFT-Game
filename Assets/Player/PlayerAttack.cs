@@ -6,19 +6,8 @@ public class PlayerAttack : MonoBehaviour
 {   
 
     public string normakAttackKey = "k";
-    public string skillAttack1 = "x";
+    public string skillAttack1 = "x"; //波動拳
 
-    // 攻擊傷害
-    [SerializeField] int _normalDemage;
-    
-    // 怪物layer
-    public LayerMask enemyLayers;
-
-    // 普通攻擊範圍判定點 以一個圓心+半徑畫出來
-    public Transform attackPointLeft;
-    public Transform attackPointRight;
-    private Transform _attackPoint;
-    public float attackRange; 
 
     // 特殊技能
     public GameObject skillEffect;
@@ -27,15 +16,12 @@ public class PlayerAttack : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        _normalDemage = 20;
-        attackRange = 0.6f;
         _skillOffsetX = 1.0f;
         _skillOffsetY = 0.5f;
     }
 
     // Update is called once per frame
     void Update() {
-        
         //依據按鍵判定攻擊類型
         if(Input.GetKeyDown(normakAttackKey)) {
             normalAttackControllor();
@@ -47,17 +33,9 @@ public class PlayerAttack : MonoBehaviour
     }
 
     void normalAttackControllor(){
-        if(playerDirection()){
-            _attackPoint = attackPointLeft;
-        }else {
-            _attackPoint = attackPointRight;
-        }
-
-        GetComponent<Animator>().SetBool("isAttack", true); //利用isAttack這個bool去判定玩家是否在攻擊而播出動畫!
-        Collider2D[] hitEnmies = Physics2D.OverlapCircleAll(_attackPoint.position,attackRange,enemyLayers);
-        foreach(Collider2D enemy in hitEnmies){
-            enemy.GetComponent<HpControllor>().sufferDemage(_normalDemage);      
-        }
+        GetComponent<Animator>().SetBool("isAttack", true); 
+        //發出動畫過0.1秒再做出傷害
+        this.Invoke("callAttack", 0.1f);
     }
     
     void specialAttackControllor(){
@@ -71,12 +49,10 @@ public class PlayerAttack : MonoBehaviour
         }
         Instantiate(skillEffect, genaratePos, new Quaternion(0, 0, 0, 1));
     }
-
-    //顯示偵測範圍 debug用
-    void OnDrawGizmosSelected(){
-        if(_attackPoint == null)
-            return;
-        Gizmos.DrawWireSphere(_attackPoint.position, attackRange);
+    
+    //invoke需呼叫function，故建立此區
+    void callAttack(){
+        GetComponent<NormalAttackControllor>().normalAttack(playerDirection());
     }
 
     // true -> 面向左 , false -> 面相右

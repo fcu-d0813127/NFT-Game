@@ -13,18 +13,21 @@ public class Dungeon3Controllor : MonoBehaviour {
     [SerializeField] GameObject camera;
     [SerializeField] GameObject bigHpBar;
     [SerializeField] GameObject wall;
+    [SerializeField] Vector3 spawnPoint = new Vector3(7.77f, 6.68f, 0);
 
     private float _entryTime;
     private bool _isStart = false;
     private bool _isEnd = false;
-    //Todo:目前先用拉的，但日後仍需考慮Boss用生成的狀況
+
+    //Todo:Boss目前先用拉的，但日後仍需考慮Boss用生成的狀況
 
     void Start() {
         player = GameObject.FindWithTag("Player");
+        player.transform.position = spawnPoint;
         entryEdge = -17f;
     }
 
-    // Update is called once per frame
+    // Update is called once per frames
     void Update() {
         
         if((player.transform.position.x < entryEdge) && !_isEnd){

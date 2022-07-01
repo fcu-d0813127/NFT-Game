@@ -16,8 +16,9 @@ public class BossAiControllor : MonoBehaviour {
     private Vector2 playerPos;
     private Vector2 _lastPos;
     private UnityEngine.AI.NavMeshAgent agent;
-    private float  _remoteAttackTime;
-    [SerializeField] float  _remoteAttackInterval;
+
+    private float  _remoteAttackTime; //上一次發動遠程攻擊之時間
+    [SerializeField] float  _remoteAttackInterval; //希望攻擊能夠幾秒(例如5秒到8秒)發動一次
 
   
     void Start() {
@@ -35,6 +36,7 @@ public class BossAiControllor : MonoBehaviour {
     }
 
     void Update() {
+        _remoteAttackInterval = Random.Range(5.0f, 10.0f); 
         EnemyAI();
     }
 
@@ -52,7 +54,6 @@ public class BossAiControllor : MonoBehaviour {
         } else if(isPlayerInThisCricle(_searchRadius)){ 
             //怪物發現玩家
             if(!GetComponent<Animator>().GetBool("isRemoteAttack")){
-
                 //在隨機區間內發動遠程攻擊
                 if(Time.time - _remoteAttackTime > _remoteAttackInterval){
                     _enemyStatus = Status.remoteAttack;
@@ -157,6 +158,7 @@ public class BossAiControllor : MonoBehaviour {
     //受到傷害即將結束了，動畫事件會呼叫這個func
     void EndTakeHit(){
         agent.speed = 1;
+        GetComponent<Animator>().SetBool("isTakeHit", false);
         GetComponent<Animator>().SetBool("isTakeHit", false);
     }
     
