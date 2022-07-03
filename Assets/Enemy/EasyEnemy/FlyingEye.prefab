@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2864662995898169757}
   - component: {fileID: 6186282599371330650}
   - component: {fileID: 3625441901622608868}
-  - component: {fileID: -2473006769592610293}
+  - component: {fileID: 2075362340995620965}
   - component: {fileID: 3366094941223383143}
   m_Layer: 7
   m_Name: FlyingEye
@@ -185,9 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a1f83051d06de4d93e6b93021071b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPointLeft: {fileID: 2881620881864741033}
-  attackPointRight: {fileID: 3616312902141986712}
-  attackRange: 0.4
+  _attackPointLeft: {fileID: 2881620881864741033}
+  _attackPointRight: {fileID: 3616312902141986712}
+  _attackRange: 0.5
   attackLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -212,7 +212,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-2473006769592610293
+--- !u!114 &2075362340995620965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 0
-  _hpMax: 280
+  _hpMax: 250
 --- !u!195 &3366094941223383143
 NavMeshAgent:
   m_ObjectHideFlags: 0

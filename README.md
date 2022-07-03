@@ -1,36 +1,14 @@
 # NFT Game Formal Edition
 
-# 2022/06/24 此次進度大略完成
+# 2022/07/03
 
-所有怪物程式碼重構並新增受傷狀態
-## 副本2
-* 新增三種怪物
-* 新增城堡素材
+* 新增玩家血條
+* 新增怪物攻擊能力
+* 蠻多檔案有改檔名，可能要再注意一下是否能正常運行
+## 攻擊的部分由下方三個處理 (傷害在這調)
+* `/CommonScript/NormalAttackController.cs` : 統一處理玩家/怪物/BOSS的普通攻擊
+* `/BullectEffect/BulletEffectController.cs` : 波動拳
+* `/Enemy/EasyBoss/BringerEffectControllor.cs`:Boss遠程攻擊
 
-## 副本3
-* 沿用副本2怪物及素材
-* 新增Boss1
-
-## 新架構說明
-
-### 普通怪物
-* ```EnemyAiControllor``` : Ai狀態相關
-* ```HpControllor``` : 管理Hp 
-
-### Boss
-* ```BossAiControllor``` : Ai狀態相關，新增了遠程攻擊(run狀態時機率觸發)
-* ```HpControllor``` : 管理Hp
-
-### HpBar
-HpBar(血條顯示)與Hp管理分開了，普通敵人掛載在身上，Boss會掛在UI上
-
-### EnemyCreater / DungeonOEnemyCreater
-* ```EnemyCreater``` : 變成類似函式庫，只是處理生成的邏輯
-* ```Dungeon編號EnemyCreater``` : 指定該場景要生成哪些怪物以及在哪裡
-
-### Dungeon3Controllor
-管理這個場景的特殊行為
-
-處理Boss血條出現的時機以及攝影機拉近特效
 
 

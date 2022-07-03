@@ -168,6 +168,8 @@ MonoBehaviour:
   _attackRadius: 0.6
   _enemyStatus: 0
   _thisAbilityValue: 0
+  _attackTimeRecord: 0
+  _attackFrequency: 0
   _attackInterval:
   - 1
   - 3
@@ -197,13 +199,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a1f83051d06de4d93e6b93021071b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPointLeft: {fileID: 5805559826003987351}
-  attackPointRight: {fileID: 4307475253511319223}
-  attackRange: 0.5
+  _attackPointLeft: {fileID: 5805559826003987351}
+  _attackPointRight: {fileID: 4307475253511319223}
+  _attackRange: 0.5
   attackLayers:
     serializedVersion: 2
     m_Bits: 8
-  _attackDemage: 200
+  _attackDamage: 100
 --- !u!95 &3625441901622608868
 Animator:
   serializedVersion: 4

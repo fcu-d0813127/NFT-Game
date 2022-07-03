@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 6622861486409305937}
   - component: {fileID: 5723951247883399070}
   - component: {fileID: 2502146438241514842}
-  - component: {fileID: 5962058362368569334}
+  - component: {fileID: 5864880856734762210}
   - component: {fileID: 5318874098238247438}
   - component: {fileID: 3625441901622608868}
   - component: {fileID: 3366094941223383143}
@@ -204,7 +204,7 @@ MonoBehaviour:
   _attackInterval:
   - 1
   - 3
---- !u!114 &5962058362368569334
+--- !u!114 &5864880856734762210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 0
-  _hpMax: 500
+  _hpMax: 450
 --- !u!114 &5318874098238247438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,13 +230,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a1f83051d06de4d93e6b93021071b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPointLeft: {fileID: 2031840172764999043}
-  attackPointRight: {fileID: 8480458493320852881}
-  attackRange: 0.55
+  _attackPointLeft: {fileID: 2031840172764999043}
+  _attackPointRight: {fileID: 8480458493320852881}
+  _attackRange: 0.5
   attackLayers:
     serializedVersion: 2
     m_Bits: 8
-  _attackDamage: 200
+  _attackDamage: 150
 --- !u!95 &3625441901622608868
 Animator:
   serializedVersion: 4

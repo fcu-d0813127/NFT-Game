@@ -52,7 +52,7 @@ public class PlayerAttack : MonoBehaviour
     
     //invoke需呼叫function，故建立此區
     void callAttack(){
-        GetComponent<NormalAttackControllor>().normalAttack(playerDirection());
+        GetComponent<NormalAttackController>().normalAttack(playerDirection());
     }
 
     // true -> 面向左 , false -> 面相右
