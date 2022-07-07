@@ -1,24 +1,17 @@
 [System.Serializable]
-public class PlayerPanel {
-  public float Atk;
-  public float Matk;
-  public float Def;
-  public float Mdef;
-  public float Cri;
-  public float CriDmgRatio;
-
-  public PlayerPanel(PlayerAbility playerAbility, int[] equipmentItemAbility) {
+public class PlayerAttribute : Attribute {
+  public PlayerAttribute(PlayerAbility playerAbility, int[] equipmentItemAttribute) {
     int str = playerAbility.Str;
     int intllegence = playerAbility.Intllegence;
     int vit = playerAbility.Vit;
     int dex = playerAbility.Dex;
     int luk = playerAbility.Luk;
-    int eAtk = equipmentItemAbility[0];
-    int eMatk = equipmentItemAbility[1];
-    int eDef = equipmentItemAbility[2];
-    int eMdef = equipmentItemAbility[3];
-    int eCri = equipmentItemAbility[4];
-    int eCriDmgRatio = equipmentItemAbility[5];
+    int eAtk = equipmentItemAttribute[0];
+    int eMatk = equipmentItemAttribute[1];
+    int eDef = equipmentItemAttribute[2];
+    int eMdef = equipmentItemAttribute[3];
+    int eCri = equipmentItemAttribute[4];
+    int eCriDmgRatio = equipmentItemAttribute[5];
     this.Atk = 10000 * str / (str + 250) + (1 + 0.25f * str / (str + 250)) * eAtk;
     this.Matk =
         10000 * intllegence / (intllegence + 250) +

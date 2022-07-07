@@ -23,7 +23,7 @@ public class Initialization : MonoBehaviour {
     string tempName = PlayerInfo.Name;
     PlayerInfo.PlayerStatus = new PlayerStatus(tempName, 1, 1, 5, 1, 1);
     PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
-    PlayerInfo.PlayerPanel = new PlayerPanel(PlayerInfo.PlayerAbility, new int[6]);
+    PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
     StartCoroutine(LoadSceneAsync("Main"));
     StartCoroutine(LoadSceneAsync("HomeMap"));
     StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));

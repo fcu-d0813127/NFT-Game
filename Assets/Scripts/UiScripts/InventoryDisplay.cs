@@ -7,7 +7,14 @@ public abstract class InventoryDisplay : MonoBehaviour {
   public Dictionary<InventorySlotUI, InventorySlot> SlotDictionary => _slotDictionary;
   protected InventorySystem _inventorySystem;
   protected Dictionary<InventorySlotUI, InventorySlot> _slotDictionary;
+  private enum EquipStatus {
+    Equip, UnEquip, Switch
+  }
+  private enum EquipPart {
+    Weapon, Breastplate, Pants, Helmet, Shoes
+  }
   [SerializeField] private MouseItemData _mouseInventoryItem;
+  [SerializeField] private BackpackAttribute _backpackAttribute;
 
   public void SlotClicked(InventorySlotUI clickedUISlot) {
     bool isShiftPressed = Keyboard.current.leftShiftKey.isPressed;
@@ -23,6 +30,7 @@ public abstract class InventoryDisplay : MonoBehaviour {
       }
       // Clicked slot has an item & mouse doesn't have an item -> pick up that item.
       _mouseInventoryItem.UpdateMouseSlot(clickedUISlot.AssignedInventorySlot);
+      UpdateAbility(clickedUISlot, EquipStatus.UnEquip);
       clickedUISlot.ClearSlot();
       return;
     }
@@ -30,8 +38,14 @@ public abstract class InventoryDisplay : MonoBehaviour {
     // ->place the mouse item into the empty slot.
     if (clickedUISlot.AssignedInventorySlot.ItemData == null &&
         _mouseInventoryItem.AssignedInventorySlot.ItemData != null) {
+      // Check correct part
+      if (clickedUISlot.transform.parent.gameObject.name == "PlayerHotBar" &&
+          CheckPart(clickedUISlot) == false) {
+        return;
+      }
       clickedUISlot.AssignedInventorySlot.AssignItem(_mouseInventoryItem.AssignedInventorySlot);
       clickedUISlot.UpdateUISlot();
+      UpdateAbility(clickedUISlot, EquipStatus.Equip);
       _mouseInventoryItem.ClearSlot();
       return;
     }
@@ -44,6 +58,12 @@ public abstract class InventoryDisplay : MonoBehaviour {
         _mouseInventoryItem.AssignedInventorySlot.ItemData != null) {
       bool isSameItem = clickedUISlot.AssignedInventorySlot.ItemData ==
           _mouseInventoryItem.AssignedInventorySlot.ItemData;
+      // Check correct part
+      if (clickedUISlot.transform.parent.gameObject.name == "PlayerHotBar" &&
+          CheckPart(clickedUISlot) == false) {
+        return;
+      }
+      UpdateAbility(clickedUISlot, EquipStatus.Switch);
       if (!isSameItem) {
         SwapSlots(clickedUISlot);
         return;
@@ -101,5 +121,40 @@ public abstract class InventoryDisplay : MonoBehaviour {
     clickedUISlot.ClearSlot();
     clickedUISlot.AssignedInventorySlot.AssignItem(clonedSlot);
     clickedUISlot.UpdateUISlot();
+  }
+
+  private void UpdateAbility(InventorySlotUI clickedUISlot, EquipStatus equipStatus) {
+    if (clickedUISlot.transform.parent.gameObject.name == "PlayerHotBar") {
+      if (equipStatus == EquipStatus.Equip) {
+        InventoryItemData equipment = _mouseInventoryItem.AssignedInventorySlot.ItemData;
+        Attribute equipmentAttribute = EquipmentItems.Find(equipment).Attribute;
+        _backpackAttribute.UpdateAttribute(equipmentAttribute, true);
+      } else if (equipStatus == EquipStatus.UnEquip) {
+        InventoryItemData equipment = clickedUISlot.AssignedInventorySlot.ItemData;
+        Attribute equipmentAttribute = EquipmentItems.Find(equipment).Attribute;
+        _backpackAttribute.UpdateAttribute(equipmentAttribute, false);
+      } else if (equipStatus == EquipStatus.Switch) {
+        InventoryItemData equipment = clickedUISlot.AssignedInventorySlot.ItemData;
+        Attribute equipmentAttribute = EquipmentItems.Find(equipment).Attribute;
+        _backpackAttribute.UpdateAttribute(equipmentAttribute, false);
+        equipment = _mouseInventoryItem.AssignedInventorySlot.ItemData;
+        equipmentAttribute = EquipmentItems.Find(equipment).Attribute;
+        _backpackAttribute.UpdateAttribute(equipmentAttribute, true);
+      }
+    }
+  }
+
+  private bool CheckPart(InventorySlotUI clickedSlot) {
+    InventoryItemData itemData = _mouseInventoryItem.AssignedInventorySlot.ItemData;
+    EquipmentItemData equipment = EquipmentItems.Find(itemData);
+    string clickedSlotName = clickedSlot.gameObject.name;
+    if (equipment.Part == (int)EquipPart.Weapon && clickedSlotName == "Weapon" ||
+        equipment.Part == (int)EquipPart.Helmet && clickedSlotName == "Helmet" ||
+        equipment.Part == (int)EquipPart.Breastplate && clickedSlotName == "Breastplate" ||
+        equipment.Part == (int)EquipPart.Pants && clickedSlotName == "Pants" ||
+        equipment.Part == (int)EquipPart.Shoes && clickedSlotName == "Shoes") {
+      return true;
+    }
+    return false;
   }
 }

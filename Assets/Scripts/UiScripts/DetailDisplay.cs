@@ -16,12 +16,12 @@ public class DetailDisplay : MonoBehaviour {
       return;
     }
     _name.text = equipment.DisplayName;
-    _rarity.text = equipment.Rarity;
-    _atk.text = equipment.Ability[0].ToString();
-    _matk.text = equipment.Ability[1].ToString();
-    _def.text = equipment.Ability[2].ToString();
-    _mdef.text = equipment.Ability[3].ToString();
-    _cri.text = equipment.Ability[4].ToString();
-    _criDmgRatio.text = equipment.Ability[5].ToString();
+    _rarity.text = equipment.Rarity.ToString();
+    _atk.text = equipment.Attribute.Atk.ToString();
+    _matk.text = equipment.Attribute.Matk.ToString();
+    _def.text = equipment.Attribute.Def.ToString();
+    _mdef.text = equipment.Attribute.Mdef.ToString();
+    _cri.text = $"{equipment.Attribute.Cri * 100}%";
+    _criDmgRatio.text = $"{equipment.Attribute.CriDmgRatio * 100}%";
   }
 }

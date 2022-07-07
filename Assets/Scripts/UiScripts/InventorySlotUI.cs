@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
@@ -71,7 +72,17 @@ public class InventorySlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExit
     _detail?.SetActive(false);
   }
 
-  GameObject FindInActiveObjectByName(string name) {
+  private void Update() {
+    if (_assignedInventorySlot.ItemData != null) {
+      Vector3 mousePosition = Mouse.current.position.ReadValue();
+      if (Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()).y < 4) {
+        mousePosition += new Vector3(0, 600, 0);
+      }
+      _detail.transform.position = mousePosition;
+    }
+  }
+
+  private GameObject FindInActiveObjectByName(string name) {
     Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
     for (int i = 0; i < objs.Length; i++) {
       if (objs[i].hideFlags == HideFlags.None) {

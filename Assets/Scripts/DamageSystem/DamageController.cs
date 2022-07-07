@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DamageController {
   public static int RealDamage(EnemyStatus enemyStatus, AttackType attackType, float skillRatio) {
-    PlayerPanel playerPanel = PlayerInfo.PlayerPanel;
+    PlayerAttribute playerPanel = PlayerInfo.PlayerAttribute;
     float baseRatio = 1f;  // 基礎倍率
     float abs;  // 傷害減免
     bool baseCri = Random.Range(0, 100) < playerPanel.Cri * 100 ? true : false;  // 是否暴擊

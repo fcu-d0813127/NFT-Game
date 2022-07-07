@@ -4,5 +4,6 @@ public class PlayerInfo {
   public static int[] PlayerSkills;
   public static PlayerAbility PlayerAbility;
   public static PlayerEquipment PlayerEquipment;
-  public static PlayerPanel PlayerPanel;
+  public static PlayerAttribute PlayerAttribute;
+  public static Attribute EquipAttribute;
 }

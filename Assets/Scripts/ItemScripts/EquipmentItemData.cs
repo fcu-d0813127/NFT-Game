@@ -1,7 +1,7 @@
 public class EquipmentItemData : InventoryItemData {
-  public string Rarity;
-  public int AbilityNum;
-  public int SkillNum;
-  public int AbilityRange;
-  public int[] Ability;
+  public int Rarity;
+  public int Part;
+  public int Level;
+  public Attribute Attribute;
+  public int[] Skills;
 }

@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class InventoryUIController : MonoBehaviour {
   [SerializeField] private GameObject _backpackParent;
+  [SerializeField] private GameObject _attribute;
+  [SerializeField] private GameObject _hotBar;
+  [SerializeField] private GameObject _hotBarName;
   [SerializeField] private DynamicInventoryDisplay _equipmentBackpackPanel;
   [SerializeField] private DynamicInventoryDisplay _materialBackpackPanel;
 
@@ -24,10 +27,16 @@ public class InventoryUIController : MonoBehaviour {
 
   private void CloseBackpackUI() {
     _backpackParent.SetActive(false);
+    _attribute.SetActive(false);
+    _hotBar.SetActive(false);
+    _hotBarName.SetActive(false);
   }
 
   private void OpenBackpackUI() {
     _backpackParent.SetActive(true);
+    _attribute.SetActive(true);
+    _hotBar.SetActive(true);
+    _hotBarName.SetActive(true);
   }
 
   private void DisplayInventory(InventorySystem invToDisplay, bool isDrop) {

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[System.Serializable]
 public class InventoryItemData {
   public int Id;
   public string DisplayName;

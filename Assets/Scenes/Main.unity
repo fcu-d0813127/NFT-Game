@@ -546,7 +546,7 @@ MonoBehaviour:
   - {fileID: 1632414986}
   - {fileID: 1262334491}
   - {fileID: 809894188}
-  _panel:
+  _attribute:
   - {fileID: 750329279}
   - {fileID: 931508801}
   - {fileID: 394992286}
@@ -702,7 +702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 254868285}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Attribute
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
