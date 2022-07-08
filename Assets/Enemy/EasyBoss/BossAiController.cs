@@ -40,7 +40,7 @@ public class BossAiController : MonoBehaviour {
         playerPos = player.transform.position;
         _lastPos = transform.position;
         _remoteAttackTime = Time.time;
-        _remoteAttackFrequency = Random.Range(5.0f, 10.0f); 
+        _remoteAttackFrequency = Random.Range(6.0f, 11.0f); 
         _attackTimeRecord += Time.deltaTime;
 
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();

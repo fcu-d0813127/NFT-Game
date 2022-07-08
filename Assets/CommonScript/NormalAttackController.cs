@@ -13,6 +13,15 @@ public class NormalAttackController : MonoBehaviour
     [SerializeField] LayerMask attackLayers; //指定可以攻擊到的Layer
     [SerializeField] int _attackDamage; //傷害 (for Jimmy)
 
+    void Start() {
+        if (_attackPointLeft == null) 
+            _attackPointLeft = transform.Find("AttackPointLeft");
+        
+        if (_attackPointRight == null) 
+            _attackPointLeft = transform.Find("AttackPointRight");
+        
+    }
+
     // true -> 面向左 , false -> 面相右
     public void normalAttack(bool direction){
 

@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e349823bce8cce04eb047c0becbd492a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathDelayTime: 3
+  _deathDelayTime: 0
   _searchRadius: 10
   _attackRadius: 0.8
   _enemyStatus: 0
