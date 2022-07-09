@@ -509,10 +509,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1465711040}
     m_Modifications:
+    - target: {fileID: 11125458726634233, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_text
+      value: "\u526F\u672C3"
+      objectReference: {fileID: 0}
     - target: {fileID: 2578398500878602862, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_Name
-      value: Button (2)
+      value: Dungeon3
       objectReference: {fileID: 0}
     - target: {fileID: 4464257667298598824, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
@@ -618,6 +623,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_text
+      value: "\u526F\u672C3"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc3f894d0fb2874aa910d392c5edc11, type: 3}
@@ -4072,10 +4082,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1465711040}
     m_Modifications:
+    - target: {fileID: 11125458726634233, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_text
+      value: "\u526F\u672C2"
+      objectReference: {fileID: 0}
     - target: {fileID: 2578398500878602862, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_Name
-      value: Button (1)
+      value: Dungeon2
       objectReference: {fileID: 0}
     - target: {fileID: 4464257667298598824, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
@@ -4181,6 +4196,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961917526055438194, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: m_text
+      value: "\u526F\u672C2"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc3f894d0fb2874aa910d392c5edc11, type: 3}
