@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {   
 
-    public string normakAttackKey = "k";
+    public string normalAttackKey = "k";
     public string skillAttack1 = "x"; //波動拳
 
+    [SerializeField] float _attackTimeRecord; // 距離上次普攻已過多久
+    [SerializeField] float _attackFrequency = 0.4f; // 每次技能間隔
 
     // 特殊技能
     public GameObject skillEffect;
@@ -22,32 +24,40 @@ public class PlayerAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        //依據按鍵判定攻擊類型
-        if(Input.GetKeyDown(normakAttackKey)) {
-            normalAttackControllor();
-        } else if(Input.GetKeyDown(skillAttack1)){
-            specialAttackControllor();
-        } else {
-            GetComponent<Animator>().SetBool("isAttack", false);
+        _attackTimeRecord += Time.deltaTime;
+        
+        if(_attackTimeRecord >= _attackFrequency){
+            if(Input.GetKeyDown(normalAttackKey)) {
+                normalAttackController();
+                _attackTimeRecord = 0;
+            } else if(Input.GetKeyDown(skillAttack1)){
+                specialAttackController();
+                _attackTimeRecord = 0;
+            }
+            return;
         }
+
+         GetComponent<Animator>().SetBool("isAttack", false);
+      
     }
 
-    void normalAttackControllor(){
+    void normalAttackController(){
+        //若目前正在揮擊則不得揮擊
         GetComponent<Animator>().SetBool("isAttack", true); 
         //發出動畫過0.1秒再做出傷害
-        this.Invoke("callAttack", 0.1f);
+        this.Invoke("callAttack", 0.1f);       
     }
     
-    void specialAttackControllor(){
+    void specialAttackController(){
         GetComponent<Animator>().SetBool("isAttack", true);
-        Vector3 genaratePos = this.gameObject.transform.position;
-        genaratePos.y += _skillOffsetY;
+        Vector3 generatePos = this.gameObject.transform.position;
+        generatePos.y += _skillOffsetY;
         if(playerDirection()){
-            genaratePos.x -= _skillOffsetX;
+            generatePos.x -= _skillOffsetX;
         } else {
-            genaratePos.x += _skillOffsetX;
+            generatePos.x += _skillOffsetX;
         }
-        Instantiate(skillEffect, genaratePos, new Quaternion(0, 0, 0, 1));
+        Instantiate(skillEffect, generatePos, new Quaternion(0, 0, 0, 1));
     }
     
     //invoke需呼叫function，故建立此區
