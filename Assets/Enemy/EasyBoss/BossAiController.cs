@@ -161,7 +161,7 @@ public class BossAiController : MonoBehaviour {
         void enemyDead(){
             
             GetComponent<Animator>().SetInteger("isDeath",  GetComponent<Animator>().GetInteger("isDeath") + 1);
-            
+            GetComponent<BoxCollider2D>().enabled = false;
             this.Invoke("DestroyThis", _deathDelayTime);
             
             agent.speed = 0;
