@@ -24,6 +24,11 @@ public class Initialization : MonoBehaviour {
   private static extern void LoadEmerald(string playerAccount);
 
   private void Awake() {
+    PlayerInfo.MaterialNum = new MaterialNum {
+      Ruby = 0,
+      Sapphire = 0,
+      Emerald = 0
+    };
     _playerAccount = PlayerInfo.AccountAddress;
     IsInited(_playerAccount);
     // string name = PlayerInfo.Name;
@@ -68,15 +73,15 @@ public class Initialization : MonoBehaviour {
   }
 
   private void SetRuby(string balanceOfRuby) {
-    Debug.Log("Ruby" + balanceOfRuby);
+    PlayerInfo.MaterialNum.Ruby = int.Parse(balanceOfRuby);
   }
 
   private void SetSapphire(string balanceOfSapphire) {
-    Debug.Log("Sapphire" + balanceOfSapphire);
+    PlayerInfo.MaterialNum.Sapphire = int.Parse(balanceOfSapphire);
   }
 
   private void SetEmerald(string balanceOfEmerald) {
-    Debug.Log("Emerald" + balanceOfEmerald);
+    PlayerInfo.MaterialNum.Emerald = int.Parse(balanceOfEmerald);
   }
 
   private IEnumerator UnLoadSceneAsync(string sceneName) {
