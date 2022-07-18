@@ -1,11 +1,11 @@
 [System.Serializable]
 public class PlayerAttribute : Attribute {
   public PlayerAttribute(PlayerAbility playerAbility, int[] equipmentItemAttribute) {
-    int str = playerAbility.Str;
-    int intllegence = playerAbility.Intllegence;
-    int vit = playerAbility.Vit;
-    int dex = playerAbility.Dex;
-    int luk = playerAbility.Luk;
+    int str = playerAbility.str;
+    int intllegence = playerAbility.intllegence;
+    int vit = playerAbility.vit;
+    int dex = playerAbility.dex;
+    int luk = playerAbility.luk;
     int eAtk = equipmentItemAttribute[0];
     int eMatk = equipmentItemAttribute[1];
     int eDef = equipmentItemAttribute[2];

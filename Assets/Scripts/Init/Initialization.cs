@@ -6,40 +6,49 @@ using UnityEngine.SceneManagement;
 public class Initialization : MonoBehaviour {
   private string _playerAccount;
   [SerializeField] private Animator _fadeOut;
-  // [DllImport("__Internal")]
-  // private static extern void IsInited(string playerAccount);
-  // [DllImport("__Internal")]
-  // private static extern void LoadSkill(string playerAccount);
-  // [DllImport("__Internal")]
-  // private static extern void LoadAbility(string playerAccount);
-  // [DllImport("__Internal")]
-  // private static extern void LoadEquipment(string playerAccount);
-  // [DllImport("__Internal")]
-  // private static extern void LoadPlayerStatus(string playerAccount);
+  [DllImport("__Internal")]
+  private static extern void IsInited(string playerAccount);
+  [DllImport("__Internal")]
+  private static extern void LoadSkill(string playerAccount);
+  [DllImport("__Internal")]
+  private static extern void LoadAbility(string playerAccount);
+  [DllImport("__Internal")]
+  private static extern void LoadEquipment(string playerAccount);
+  [DllImport("__Internal")]
+  private static extern void LoadPlayerStatus(string playerAccount);
+  [DllImport("__Internal")]
+  private static extern void LoadRuby(string playerAccount);
+  [DllImport("__Internal")]
+  private static extern void LoadSapphire(string playerAccount);
+  [DllImport("__Internal")]
+  private static extern void LoadEmerald(string playerAccount);
 
   private void Awake() {
-    // _playerAccount = PlayerPrefs.GetString("account");
-    // IsInited(_playerAccount);
-    string tempName = PlayerInfo.Name;
-    PlayerInfo.PlayerStatus = new PlayerStatus(tempName, 1, 1, 5, 1, 1);
-    PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
-    PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
-    StartCoroutine(LoadSceneAsync("Main"));
-    StartCoroutine(LoadSceneAsync("HomeMap"));
-    StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
-    StartCoroutine(UnLoadSceneAsync("Initialization"));
+    _playerAccount = PlayerInfo.AccountAddress;
+    IsInited(_playerAccount);
+    // string name = PlayerInfo.Name;
+    // PlayerInfo.PlayerStatus = new PlayerStatus(name, 1, 1, 5, 1, 1);
+    // PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
+    // PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
+    // StartCoroutine(LoadSceneAsync("Main"));
+    // StartCoroutine(LoadSceneAsync("HomeMap"));
+    // StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
+    // StartCoroutine(UnLoadSceneAsync("Initialization"));
   }
 
   private void CheckInited(int isInited) {
-    // if (isInited == 0) {
-    //   // Not inited -> Create
-    //   SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    // } else {
-    //   LoadSkill(_playerAccount);
-    //   LoadAbility(_playerAccount);
-    //   LoadEquipment(_playerAccount);
-    //   LoadPlayerStatus(_playerAccount);
-    // }
+    if (isInited == 0) {
+      // Not inited -> Create
+      StartCoroutine(LoadSceneAsync("CreateCharacter"));
+    } else {
+      // LoadSkill(_playerAccount);
+      LoadAbility(_playerAccount);
+      LoadEquipment(_playerAccount);
+      LoadPlayerStatus(_playerAccount);
+      LoadRuby(_playerAccount);
+      LoadSapphire(_playerAccount);
+      LoadEmerald(_playerAccount);
+    }
   }
 
   private void SetSkill(string skill) {
@@ -56,6 +65,18 @@ public class Initialization : MonoBehaviour {
 
   private void SetPlayerStatus(string playerStatus) {
     PlayerInfo.PlayerStatus = PlayerStatus.CreateStatus(playerStatus);
+  }
+
+  private void SetRuby(string balanceOfRuby) {
+    Debug.Log("Ruby" + balanceOfRuby);
+  }
+
+  private void SetSapphire(string balanceOfSapphire) {
+    Debug.Log("Sapphire" + balanceOfSapphire);
+  }
+
+  private void SetEmerald(string balanceOfEmerald) {
+    Debug.Log("Emerald" + balanceOfEmerald);
   }
 
   private IEnumerator UnLoadSceneAsync(string sceneName) {

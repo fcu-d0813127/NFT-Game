@@ -47,9 +47,9 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
     if (Keyboard.current.sKey.isPressed && PopUpWindowController.IsBackpackOpen == false) {
       PopUpWindowController.IsPlayerStatusOpen = true;
       _playerStatus.gameObject.SetActive(true);
-      _name.text = PlayerInfo.PlayerStatus.Name;
-      _level.text = PlayerInfo.PlayerStatus.Level.ToString();
-      _exp.text = PlayerInfo.PlayerStatus.Experience.ToString();
+      _name.text = PlayerInfo.PlayerStatus.name;
+      _level.text = PlayerInfo.PlayerStatus.level.ToString();
+      _exp.text = PlayerInfo.PlayerStatus.experience.ToString();
       LoadAbility();
       DisplayAbility();
       UpdateAttribute();
@@ -60,12 +60,12 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
   }
 
   private void LoadAbility() {
-    _tmpDistributableAbility = PlayerInfo.PlayerStatus.DistributableAbility;
-    _tmpAbility[0] = PlayerInfo.PlayerAbility.Str;
-    _tmpAbility[1] = PlayerInfo.PlayerAbility.Intllegence;
-    _tmpAbility[2] = PlayerInfo.PlayerAbility.Dex;
-    _tmpAbility[3] = PlayerInfo.PlayerAbility.Vit;
-    _tmpAbility[4] = PlayerInfo.PlayerAbility.Luk;
+    _tmpDistributableAbility = PlayerInfo.PlayerStatus.distributableAbility;
+    _tmpAbility[0] = PlayerInfo.PlayerAbility.str;
+    _tmpAbility[1] = PlayerInfo.PlayerAbility.intllegence;
+    _tmpAbility[2] = PlayerInfo.PlayerAbility.dex;
+    _tmpAbility[3] = PlayerInfo.PlayerAbility.vit;
+    _tmpAbility[4] = PlayerInfo.PlayerAbility.luk;
     Array.Copy(_tmpAbility, _originAbility, 5);
   }
 
@@ -100,7 +100,7 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
   }
 
   private void Save() {
-    PlayerInfo.PlayerStatus.DistributableAbility = _tmpDistributableAbility;
+    PlayerInfo.PlayerStatus.distributableAbility = _tmpDistributableAbility;
     PlayerAbility playerAbility = new PlayerAbility(
       _tmpAbility[0], _tmpAbility[1], _tmpAbility[2], _tmpAbility[3], _tmpAbility[4]
     );
