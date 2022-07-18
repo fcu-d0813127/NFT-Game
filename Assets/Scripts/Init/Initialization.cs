@@ -24,21 +24,29 @@ public class Initialization : MonoBehaviour {
   private static extern void LoadEmerald(string playerAccount);
 
   private void Awake() {
-    PlayerInfo.MaterialNum = new MaterialNum {
-      Ruby = 0,
-      Sapphire = 0,
-      Emerald = 0
+    // Editor 測試用
+    string a = "{\"equipments\":[{\"tokenId\":\"1\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}}]}";
+    PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(a);
+    PlayerInfo.PlayerStatus = new PlayerStatus{
+      name = "111"
     };
-    _playerAccount = PlayerInfo.AccountAddress;
-    IsInited(_playerAccount);
-    // string name = PlayerInfo.Name;
-    // PlayerInfo.PlayerStatus = new PlayerStatus(name, 1, 1, 5, 1, 1);
-    // PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
-    // PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
-    // StartCoroutine(LoadSceneAsync("Main"));
-    // StartCoroutine(LoadSceneAsync("HomeMap"));
-    // StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
-    // StartCoroutine(UnLoadSceneAsync("Initialization"));
+    PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
+    PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
+    StartCoroutine(LoadSceneAsync("PlayerInit"));
+    StartCoroutine(LoadSceneAsync("Main"));
+    StartCoroutine(LoadSceneAsync("HomeMap"));
+    StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
+    StartCoroutine(UnLoadSceneAsync("Initialization"));
+    StartCoroutine(UnLoadSceneAsync("PlayerInit"));
+
+    // WebGL 用
+    // PlayerInfo.MaterialNum = new MaterialNum {
+    //   Ruby = 0,
+    //   Sapphire = 0,
+    //   Emerald = 0
+    // };
+    // _playerAccount = PlayerInfo.AccountAddress;
+    // IsInited(_playerAccount);
   }
 
   private void CheckInited(int isInited) {
@@ -53,6 +61,13 @@ public class Initialization : MonoBehaviour {
       LoadRuby(_playerAccount);
       LoadSapphire(_playerAccount);
       LoadEmerald(_playerAccount);
+
+      StartCoroutine(LoadSceneAsync("PlayerInit"));
+      StartCoroutine(LoadSceneAsync("Main"));
+      StartCoroutine(LoadSceneAsync("HomeMap"));
+      StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
+      StartCoroutine(UnLoadSceneAsync("Initialization"));
+      StartCoroutine(UnLoadSceneAsync("PlayerInit"));
     }
   }
 
@@ -62,6 +77,7 @@ public class Initialization : MonoBehaviour {
 
   private void SetAbility(string ability) {
     PlayerInfo.PlayerAbility = PlayerAbility.CreateAbility(ability);
+    PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
   }
 
   private void SetEquipment(string equipment) {

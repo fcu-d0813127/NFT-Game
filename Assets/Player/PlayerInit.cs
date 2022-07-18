@@ -10,7 +10,7 @@ public class PlayerInit : MonoBehaviour
     void Start()
     {
         //直接載入下個場景，並讓玩家不被摧毀
-        SceneManager.LoadScene(nextScene);
+        // SceneManager.LoadScene(nextScene);
         DontDestroyOnLoad(Player);
     }
 }

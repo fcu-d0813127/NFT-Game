@@ -14,8 +14,8 @@ public class WalletLogin : MonoBehaviour {
 
   private void Awake() {
     _loginButton = GetComponent<Button>();
-    _loginButton.onClick.AddListener(OnLogin);  // WebGL 用
-    // _loginButton.onClick.AddListener(Load);  // Editor 測試用
+    // _loginButton.onClick.AddListener(OnLogin);  // WebGL 用
+    _loginButton.onClick.AddListener(Load);  // Editor 測試用
   }
 
   // WebGL 用
@@ -33,12 +33,12 @@ public class WalletLogin : MonoBehaviour {
   private IEnumerator ChangeScene() {
     _loginAnimation.SetTrigger("Create");
     yield return new WaitForSeconds(1f);
-    yield return StartCoroutine(LoadSceneAsync());
+    yield return StartCoroutine(LoadSceneAsync("Initialization"));
   }
 
-  private IEnumerator LoadSceneAsync() {
+  private IEnumerator LoadSceneAsync(string sceneName) {
     AsyncOperation asyncLoad =
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadSceneAsync(sceneName);
     while (!asyncLoad.isDone) {
       yield return null;
     }

@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour {
   private void FixedUpdate() {
     if (Keyboard.current.bKey.isPressed || Keyboard.current.sKey.isPressed) {
       _playerMove = false;
-    } else if (Keyboard.current.escapeKey.isPressed) {
+    } else if (Keyboard.current.qKey.isPressed) {
       _playerMove = true;
     }
     if (_playerMove == false) {

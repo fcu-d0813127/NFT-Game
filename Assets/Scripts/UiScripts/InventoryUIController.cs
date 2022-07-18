@@ -19,7 +19,7 @@ public class InventoryUIController : MonoBehaviour {
 
   private void Update() {
     if (_backpackParent.activeInHierarchy &&
-        Keyboard.current.escapeKey.wasPressedThisFrame) {
+        Keyboard.current.qKey.wasPressedThisFrame) {
       PopUpWindowController.IsBackpackOpen = false;
       CloseBackpackUI();
     }

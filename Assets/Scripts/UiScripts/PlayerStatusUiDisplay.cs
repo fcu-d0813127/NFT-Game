@@ -53,7 +53,7 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
       LoadAbility();
       DisplayAbility();
       UpdateAttribute();
-    } else if (Keyboard.current.escapeKey.isPressed) {
+    } else if (Keyboard.current.qKey.isPressed) {
       PopUpWindowController.IsPlayerStatusOpen = false;
       _playerStatus.gameObject.SetActive(false);
     }
