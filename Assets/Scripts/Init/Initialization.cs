@@ -25,28 +25,37 @@ public class Initialization : MonoBehaviour {
 
   private void Awake() {
     // Editor 測試用
-    string a = "{\"equipments\":[{\"tokenId\":\"1\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}}]}";
-    PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(a);
-    PlayerInfo.PlayerStatus = new PlayerStatus{
-      name = "111"
-    };
-    PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
-    PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
-    StartCoroutine(LoadSceneAsync("PlayerInit"));
-    StartCoroutine(LoadSceneAsync("Main"));
-    StartCoroutine(LoadSceneAsync("HomeMap"));
-    StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
-    StartCoroutine(UnLoadSceneAsync("Initialization"));
-    StartCoroutine(UnLoadSceneAsync("PlayerInit"));
+    #if UNITY_EDITOR
+      PlayerInfo.MaterialNum = new MaterialNum {
+        Ruby = 0,
+        Sapphire = 0,
+        Emerald = 0
+      };
+      string a = "{\"equipments\":[{\"tokenId\":\"1\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}}]}";
+      PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(a);
+      PlayerInfo.PlayerStatus = new PlayerStatus{
+        name = "111"
+      };
+      PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
+      PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
+      StartCoroutine(LoadSceneAsync("PlayerInit"));
+      StartCoroutine(LoadSceneAsync("Main"));
+      StartCoroutine(LoadSceneAsync("HomeMap"));
+      StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
+      StartCoroutine(UnLoadSceneAsync("Initialization"));
+      StartCoroutine(UnLoadSceneAsync("PlayerInit"));
+    #endif
 
     // WebGL 用
-    // PlayerInfo.MaterialNum = new MaterialNum {
-    //   Ruby = 0,
-    //   Sapphire = 0,
-    //   Emerald = 0
-    // };
-    // _playerAccount = PlayerInfo.AccountAddress;
-    // IsInited(_playerAccount);
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      PlayerInfo.MaterialNum = new MaterialNum {
+        Ruby = 0,
+        Sapphire = 0,
+        Emerald = 0
+      };
+      _playerAccount = PlayerInfo.AccountAddress;
+      IsInited(_playerAccount);
+    #endif
   }
 
   private void CheckInited(int isInited) {

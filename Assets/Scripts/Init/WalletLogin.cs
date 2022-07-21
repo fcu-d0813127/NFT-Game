@@ -14,8 +14,13 @@ public class WalletLogin : MonoBehaviour {
 
   private void Awake() {
     _loginButton = GetComponent<Button>();
-    // _loginButton.onClick.AddListener(OnLogin);  // WebGL 用
-    _loginButton.onClick.AddListener(Load);  // Editor 測試用
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      _loginButton.onClick.AddListener(OnLogin);  // WebGL 用
+    #endif
+    
+    #if UNITY_EDITOR
+      _loginButton.onClick.AddListener(Load);  // Editor 測試用
+    #endif
   }
 
   // WebGL 用
