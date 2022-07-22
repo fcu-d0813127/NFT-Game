@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Initialization : MonoBehaviour {
+  private int _checkLoad = 0;
   private string _playerAccount;
   [SerializeField] private Animator _fadeOut;
   [DllImport("__Internal")]
@@ -71,12 +72,7 @@ public class Initialization : MonoBehaviour {
       LoadSapphire(_playerAccount);
       LoadEmerald(_playerAccount);
 
-      StartCoroutine(LoadSceneAsync("PlayerInit"));
-      StartCoroutine(LoadSceneAsync("Main"));
-      StartCoroutine(LoadSceneAsync("HomeMap"));
-      StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
-      StartCoroutine(UnLoadSceneAsync("Initialization"));
-      StartCoroutine(UnLoadSceneAsync("PlayerInit"));
+      StartCoroutine(WaitDataLoad());
     }
   }
 
@@ -87,26 +83,48 @@ public class Initialization : MonoBehaviour {
   private void SetAbility(string ability) {
     PlayerInfo.PlayerAbility = PlayerAbility.CreateAbility(ability);
     PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
+    Debug.Log("ability");
+    _checkLoad++;
   }
 
   private void SetEquipment(string equipment) {
     PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(equipment);
+    Debug.Log("Equipment");
+    _checkLoad++;
   }
 
   private void SetPlayerStatus(string playerStatus) {
     PlayerInfo.PlayerStatus = PlayerStatus.CreateStatus(playerStatus);
+    Debug.Log("PlayerStatus");
+    _checkLoad++;
   }
 
   private void SetRuby(string balanceOfRuby) {
     PlayerInfo.MaterialNum.Ruby = int.Parse(balanceOfRuby);
+    Debug.Log("Ruby");
+    _checkLoad++;
   }
 
   private void SetSapphire(string balanceOfSapphire) {
     PlayerInfo.MaterialNum.Sapphire = int.Parse(balanceOfSapphire);
+    Debug.Log("Sapphire");
+    _checkLoad++;
   }
 
   private void SetEmerald(string balanceOfEmerald) {
     PlayerInfo.MaterialNum.Emerald = int.Parse(balanceOfEmerald);
+    Debug.Log("Emerald");
+    _checkLoad++;
+  }
+
+  private IEnumerator WaitDataLoad() {
+    yield return new WaitUntil(() => _checkLoad >= 6);
+    StartCoroutine(LoadSceneAsync("PlayerInit"));
+    StartCoroutine(LoadSceneAsync("Main"));
+    StartCoroutine(LoadSceneAsync("HomeMap"));
+    StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
+    StartCoroutine(UnLoadSceneAsync("Initialization"));
+    StartCoroutine(UnLoadSceneAsync("PlayerInit"));
   }
 
   private IEnumerator UnLoadSceneAsync(string sceneName) {

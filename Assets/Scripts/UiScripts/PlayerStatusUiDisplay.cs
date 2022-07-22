@@ -85,9 +85,10 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
     _tmpAttribute[1] = (int)(playerAttribute.Matk + PlayerInfo.EquipAttribute.Matk);
     _tmpAttribute[2] = (int)(playerAttribute.Def + PlayerInfo.EquipAttribute.Def);
     _tmpAttribute[3] = (int)(playerAttribute.Mdef + PlayerInfo.EquipAttribute.Mdef);
-    _tmpAttribute[4] = (int)((playerAttribute.Cri + PlayerInfo.EquipAttribute.Cri) * 100);
-    _tmpAttribute[5] = (int)((playerAttribute.CriDmgRatio + PlayerInfo.EquipAttribute.CriDmgRatio) *
-        100);
+    _tmpAttribute[4] = Mathf.FloorToInt(
+        (playerAttribute.Cri + PlayerInfo.EquipAttribute.Cri) * 100);
+    _tmpAttribute[5] = Mathf.FloorToInt(
+        (playerAttribute.CriDmgRatio + PlayerInfo.EquipAttribute.CriDmgRatio) * 100);
     DisplayAttribute();
   }
 
