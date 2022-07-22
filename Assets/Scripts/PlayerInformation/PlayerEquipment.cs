@@ -2,12 +2,13 @@ using UnityEngine;
 
 [System.Serializable]
 public class PlayerEquipment {
-  public int Helmet;
-  public int Chestplate;
-  public int Leggings;
-  public int Boots;
-  public int Weapon;
+  public Equipment[] equipments;
 
+  [System.Serializable]
+  public class Equipment {
+    public int tokenId;
+    public EquipmentStatus equipmentStatus;
+  }
   public static PlayerEquipment CreateEquipment(string equipmentJson) {
     return JsonUtility.FromJson<PlayerEquipment>(equipmentJson);
   }

@@ -47,25 +47,25 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
     if (Keyboard.current.sKey.isPressed && PopUpWindowController.IsBackpackOpen == false) {
       PopUpWindowController.IsPlayerStatusOpen = true;
       _playerStatus.gameObject.SetActive(true);
-      _name.text = PlayerInfo.PlayerStatus.Name;
-      _level.text = PlayerInfo.PlayerStatus.Level.ToString();
-      _exp.text = PlayerInfo.PlayerStatus.Experience.ToString();
+      _name.text = PlayerInfo.PlayerStatus.name;
+      _level.text = PlayerInfo.PlayerStatus.level.ToString();
+      _exp.text = PlayerInfo.PlayerStatus.experience.ToString();
       LoadAbility();
       DisplayAbility();
       UpdateAttribute();
-    } else if (Keyboard.current.escapeKey.isPressed) {
+    } else if (Keyboard.current.qKey.isPressed) {
       PopUpWindowController.IsPlayerStatusOpen = false;
       _playerStatus.gameObject.SetActive(false);
     }
   }
 
   private void LoadAbility() {
-    _tmpDistributableAbility = PlayerInfo.PlayerStatus.DistributableAbility;
-    _tmpAbility[0] = PlayerInfo.PlayerAbility.Str;
-    _tmpAbility[1] = PlayerInfo.PlayerAbility.Intllegence;
-    _tmpAbility[2] = PlayerInfo.PlayerAbility.Dex;
-    _tmpAbility[3] = PlayerInfo.PlayerAbility.Vit;
-    _tmpAbility[4] = PlayerInfo.PlayerAbility.Luk;
+    _tmpDistributableAbility = PlayerInfo.PlayerStatus.distributableAbility;
+    _tmpAbility[0] = PlayerInfo.PlayerAbility.str;
+    _tmpAbility[1] = PlayerInfo.PlayerAbility.intllegence;
+    _tmpAbility[2] = PlayerInfo.PlayerAbility.dex;
+    _tmpAbility[3] = PlayerInfo.PlayerAbility.vit;
+    _tmpAbility[4] = PlayerInfo.PlayerAbility.luk;
     Array.Copy(_tmpAbility, _originAbility, 5);
   }
 
@@ -85,9 +85,10 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
     _tmpAttribute[1] = (int)(playerAttribute.Matk + PlayerInfo.EquipAttribute.Matk);
     _tmpAttribute[2] = (int)(playerAttribute.Def + PlayerInfo.EquipAttribute.Def);
     _tmpAttribute[3] = (int)(playerAttribute.Mdef + PlayerInfo.EquipAttribute.Mdef);
-    _tmpAttribute[4] = (int)((playerAttribute.Cri + PlayerInfo.EquipAttribute.Cri) * 100);
-    _tmpAttribute[5] = (int)((playerAttribute.CriDmgRatio + PlayerInfo.EquipAttribute.CriDmgRatio) *
-        100);
+    _tmpAttribute[4] = Mathf.FloorToInt(
+        (playerAttribute.Cri + PlayerInfo.EquipAttribute.Cri) * 100);
+    _tmpAttribute[5] = Mathf.FloorToInt(
+        (playerAttribute.CriDmgRatio + PlayerInfo.EquipAttribute.CriDmgRatio) * 100);
     DisplayAttribute();
   }
 
@@ -100,7 +101,7 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
   }
 
   private void Save() {
-    PlayerInfo.PlayerStatus.DistributableAbility = _tmpDistributableAbility;
+    PlayerInfo.PlayerStatus.distributableAbility = _tmpDistributableAbility;
     PlayerAbility playerAbility = new PlayerAbility(
       _tmpAbility[0], _tmpAbility[1], _tmpAbility[2], _tmpAbility[3], _tmpAbility[4]
     );

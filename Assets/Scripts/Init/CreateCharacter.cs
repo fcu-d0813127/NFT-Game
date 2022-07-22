@@ -9,8 +9,8 @@ public class CreateCharacter : MonoBehaviour {
   private Button _myselfButton;
   [SerializeField] private GameObject _initAnimation;
   [SerializeField] private TMP_InputField _name;
-  // [DllImport("__Internal")]
-  // private static extern void Init(string name, int career);
+  [DllImport("__Internal")]
+  private static extern void Init(string name);
 
   private void Awake() {
     _initAnimation.SetActive(false);
@@ -19,26 +19,24 @@ public class CreateCharacter : MonoBehaviour {
   }
 
   private void InitPlayer() {
-    // Init(_name.text, 0);
-    PlayerInfo.Name = _name.text;
-    StartCoroutine(PlayAnimation());
+    Init(_name.text);
   }
 
   private void LoadInitScene() {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    StartCoroutine(ChangeScene());
   }
 
-  private IEnumerator PlayAnimation() {
+  private IEnumerator ChangeScene() {
     _initAnimation.SetActive(true);
     Animator animator = _initAnimation.GetComponent<Animator>();
     animator.SetTrigger("Init");
     yield return new WaitForSeconds(1f);
-    yield return StartCoroutine(LoadSceneAsync());
+    yield return StartCoroutine(LoadSceneAsync("Initialization"));
   }
 
-  private IEnumerator LoadSceneAsync() {
+  private IEnumerator LoadSceneAsync(string sceneName) {
     AsyncOperation asyncLoad =
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadSceneAsync(sceneName);
     while (!asyncLoad.isDone) {
       yield return null;
     }

@@ -7,7 +7,6 @@ public class InventoryUIController : MonoBehaviour {
   [SerializeField] private GameObject _hotBar;
   [SerializeField] private GameObject _hotBarName;
   [SerializeField] private DynamicInventoryDisplay _equipmentBackpackPanel;
-  [SerializeField] private DynamicInventoryDisplay _materialBackpackPanel;
 
   private void OnEnable() {
     InventoryHolder.OnDynamicInventoryDisplayRequested += DisplayInventory;
@@ -19,7 +18,7 @@ public class InventoryUIController : MonoBehaviour {
 
   private void Update() {
     if (_backpackParent.activeInHierarchy &&
-        Keyboard.current.escapeKey.wasPressedThisFrame) {
+        Keyboard.current.qKey.wasPressedThisFrame) {
       PopUpWindowController.IsBackpackOpen = false;
       CloseBackpackUI();
     }
@@ -41,9 +40,7 @@ public class InventoryUIController : MonoBehaviour {
 
   private void DisplayInventory(InventorySystem invToDisplay, bool isDrop) {
     OpenBackpackUI();
-    if (isDrop) {
-      _materialBackpackPanel.RefreshDyncmicInventory(invToDisplay);
-    } else {
+    if (!isDrop) {
       _equipmentBackpackPanel.RefreshDyncmicInventory(invToDisplay);
     }
   }
