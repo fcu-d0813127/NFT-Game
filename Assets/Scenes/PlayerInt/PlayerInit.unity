@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &151039447 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9041419289048365877, guid: f53b3f934b106c34ba2639edf2fb3d27,
+    type: 3}
+  m_PrefabInstance: {fileID: 5869242670350091195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &825779329
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +178,12 @@ MonoBehaviour:
 --- !u!1 &1613267224 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5869242670888567459, guid: f53b3f934b106c34ba2639edf2fb3d27,
+    type: 3}
+  m_PrefabInstance: {fileID: 5869242670350091195}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2106058495 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1972262924866377560, guid: f53b3f934b106c34ba2639edf2fb3d27,
     type: 3}
   m_PrefabInstance: {fileID: 5869242670350091195}
   m_PrefabAsset: {fileID: 0}
@@ -303,6 +315,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8474544435042052898, guid: f53b3f934b106c34ba2639edf2fb3d27,
+        type: 3}
+      propertyPath: _attackPointLeft
+      value: 
+      objectReference: {fileID: 151039447}
+    - target: {fileID: 8474544435042052898, guid: f53b3f934b106c34ba2639edf2fb3d27,
+        type: 3}
+      propertyPath: _attackPointRight
+      value: 
+      objectReference: {fileID: 2106058495}
     - target: {fileID: 9041419289048365877, guid: f53b3f934b106c34ba2639edf2fb3d27,
         type: 3}
       propertyPath: m_LocalPosition.x

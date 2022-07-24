@@ -13,12 +13,12 @@ public class EnemyCreater : MonoBehaviour
         int whileCount = 0; //第幾次嘗試生成
 
         while (tempCount < enemyNum) {
-            //Vector2 genaratePos = new Vector2(Random.Range(-12.0f, 10.0f), Random.Range(6.8f, -5f));
-            Vector2 genaratePos = new Vector2(Random.Range(range[0], range[1]), Random.Range(range[2], range[3]));
+            //Vector2 generatePos = new Vector2(Random.Range(-12.0f, 10.0f), Random.Range(6.8f, -5f));
+            Vector2 generatePos = new Vector2(Random.Range(range[0], range[1]), Random.Range(range[2], range[3]));
             
             //查看該矩形區域是否有任何碰撞體
-            if (!Physics2D.OverlapBox(genaratePos, enemy.transform.localScale / 2, 0.0f, dontTouchLayermask)) {
-                Instantiate(enemy, genaratePos, new Quaternion(0, 0, 0, 1));
+            if (!Physics2D.OverlapBox(generatePos, enemy.transform.localScale / 2, 0.0f, dontTouchLayermask)) {
+                Instantiate(enemy, generatePos, new Quaternion(0, 0, 0, 1));
 
                 tempCount++;
             }

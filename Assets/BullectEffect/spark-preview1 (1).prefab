@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b46d8328b62e56d45ba519c153a8d5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 4255779335125939622, guid: 6bc7f82c64b19e040997e53454071d2c,
+  _hitEffect: {fileID: 4255779335125939622, guid: 6bc7f82c64b19e040997e53454071d2c,
     type: 3}
-  _bulletDemage: 0
+  _bulletDamage: 500
   flyDistance: 5
   bulletSpeed: 0.2
 --- !u!60 &5848434020962593766

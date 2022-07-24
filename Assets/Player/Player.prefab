@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1972262924866377560}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttackPointRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,8 +45,10 @@ GameObject:
   - component: {fileID: 4636762431947580512}
   - component: {fileID: 5869242670888567460}
   - component: {fileID: 5869242670888567461}
-  - component: {fileID: -1263481776654916849}
-  m_Layer: 0
+  - component: {fileID: 3098439100755784376}
+  - component: {fileID: 8474544435042052898}
+  - component: {fileID: -1609794027231304710}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -202,7 +204,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 6
---- !u!114 &-1263481776654916849
+--- !u!114 &3098439100755784376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5869242670888567459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034e0ef0767f1ef47a63b5a10b4227aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 0
+  _hpMax: 3000
+--- !u!114 &8474544435042052898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5869242670888567459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a1f83051d06de4d93e6b93021071b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPointLeft: {fileID: 9041419289048365877}
+  attackPointRight: {fileID: 1972262924866377560}
+  attackRange: 0.6
+  attackLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  _attackDamage: 150
+--- !u!114 &-1609794027231304710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,13 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b28685808adec4bb11794d48735a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalDemage: 0
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  attackPointLeft: {fileID: 9041419289048365877}
-  attackPointRight: {fileID: 1972262924866377560}
-  attackRange: 0.5
+  normakAttackKey: k
+  skillAttack1: x
   skillEffect: {fileID: 5294572246900308109, guid: c8c3cfe5099c4cb489914048204d489f,
     type: 3}
   _skillOffsetX: 0
@@ -234,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9041419289048365877}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AttackPointLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
