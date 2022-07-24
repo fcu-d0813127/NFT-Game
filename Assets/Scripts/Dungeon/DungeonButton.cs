@@ -23,6 +23,8 @@ public class DungeonButton : MonoBehaviour {
   private void ButtonHandler() {
     string name = this.gameObject.name;
     if (name == "Exit") {
+      GameObject player = GameObject.FindGameObjectWithTag("Player");
+      Destroy(player);
       StartCoroutine(LoadSceneAsync("Initialization"));
     } else if (name == "Entry") {
       if (_name.text == "Dungeon1") {

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6404725430429715013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2881620881864741033}
+  m_Layer: 0
+  m_Name: AttackPointLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2881620881864741033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6404725430429715013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.124, y: -0.043, z: 0}
+  m_LocalScale: {x: 0.34188032, y: 0.4038025, z: 0.911681}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3503331970684381047}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7053220199202796345
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,8 +43,9 @@ GameObject:
   - component: {fileID: 6622861486409305937}
   - component: {fileID: 5723951247883399070}
   - component: {fileID: 2864662995898169757}
+  - component: {fileID: 6186282599371330650}
   - component: {fileID: 3625441901622608868}
-  - component: {fileID: -2473006769592610293}
+  - component: {fileID: 2075362340995620965}
   - component: {fileID: 3366094941223383143}
   m_Layer: 7
   m_Name: FlyingEye
@@ -35,6 +67,8 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5654295820478791345}
+  - {fileID: 2881620881864741033}
+  - {fileID: 3616312902141986712}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -131,8 +165,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deathDelayTime: 1
   _searchRadius: 4
-  _attackRadius: 0.7
+  _attackRadius: 0.45
   _enemyStatus: 0
+  _thisAbilityValue: 1
+  _attackTimeRecord: 0
+  _attackFrequency: 0
+  _attackInterval:
+  - 0.9
+  - 1.8
+--- !u!114 &6186282599371330650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7053220199202796345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a1f83051d06de4d93e6b93021071b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPointLeft: {fileID: 2881620881864741033}
+  _attackPointRight: {fileID: 3616312902141986712}
+  _attackRange: 0.5
+  attackLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  _attackDamage: 100
 --- !u!95 &3625441901622608868
 Animator:
   serializedVersion: 4
@@ -153,7 +212,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-2473006769592610293
+--- !u!114 &2075362340995620965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 0
-  _hpMax: 80
+  _hpMax: 250
 --- !u!195 &3366094941223383143
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -181,7 +240,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.85
+  m_StoppingDistance: 0.7
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -189,6 +248,37 @@ NavMeshAgent:
   m_BaseOffset: 0.27
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1 &8786660906689769043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3616312902141986712}
+  m_Layer: 0
+  m_Name: AttackPointRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3616312902141986712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8786660906689769043}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.157, y: -0.02, z: 0}
+  m_LocalScale: {x: 0.34188032, y: 0.4038025, z: 0.911681}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3503331970684381047}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1944428496138712917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,7 +299,7 @@ PrefabInstance:
     - target: {fileID: 6089965645223660004, guid: 125f7ffe08e41364990f5a9aac1c572f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.112
+      value: -0.117
       objectReference: {fileID: 0}
     - target: {fileID: 6089965645223660004, guid: 125f7ffe08e41364990f5a9aac1c572f,
         type: 3}
