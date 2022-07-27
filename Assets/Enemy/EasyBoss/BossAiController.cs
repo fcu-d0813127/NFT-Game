@@ -29,6 +29,8 @@ public class BossAiController : MonoBehaviour {
     // 開發用
     [SerializeField] GameObject remoteEffect;
     [SerializeField] GameObject bigHpBar;
+
+    [SerializeField] GameObject wall;
     private GameObject player;
     private Vector2 playerPos;
     private Vector2 _lastPos;
@@ -165,6 +167,7 @@ public class BossAiController : MonoBehaviour {
             this.Invoke("DestroyThis", _deathDelayTime);
             
             agent.speed = 0;
+            wall.SetActive(false);
         }
 
         void enemyTakeHit(){ 

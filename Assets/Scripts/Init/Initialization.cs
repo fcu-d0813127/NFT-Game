@@ -39,6 +39,7 @@ public class Initialization : MonoBehaviour {
       };
       PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
       PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
+      PlayerInfo.EquipAttribute = new Attribute();
       StartCoroutine(LoadSceneAsync("PlayerInit"));
       StartCoroutine(LoadSceneAsync("Main"));
       StartCoroutine(LoadSceneAsync("HomeMap"));
@@ -49,6 +50,7 @@ public class Initialization : MonoBehaviour {
 
     // WebGL 用
     #if UNITY_WEBGL && !UNITY_EDITOR
+      PlayerInfo.EquipAttribute = new Attribute();
       PlayerInfo.MaterialNum = new MaterialNum {
         Ruby = 0,
         Sapphire = 0,
