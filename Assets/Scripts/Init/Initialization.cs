@@ -6,20 +6,20 @@ using UnityEngine.SceneManagement;
 public class Initialization : MonoBehaviour {
   private string _playerAccount;
   [SerializeField] private Animator _fadeOut;
-  // [DllImport("__Internal")]
-  // private static extern void IsInited(string playerAccount);
-  // [DllImport("__Internal")]
-  // private static extern void LoadSkill(string playerAccount);
-  // [DllImport("__Internal")]
-  // private static extern void LoadAbility(string playerAccount);
-  // [DllImport("__Internal")]
-  // private static extern void LoadEquipment(string playerAccount);
-  // [DllImport("__Internal")]
-  // private static extern void LoadPlayerStatus(string playerAccount);
+   [DllImport("__Internal")]
+   private static extern void IsInited(string playerAccount);
+   [DllImport("__Internal")]
+   private static extern void LoadSkill(string playerAccount);
+   [DllImport("__Internal")]
+   private static extern void LoadAbility(string playerAccount);
+   [DllImport("__Internal")]
+   private static extern void LoadEquipment(string playerAccount);
+   [DllImport("__Internal")]
+   private static extern void LoadPlayerStatus(string playerAccount);
 
   private void Awake() {
-    // _playerAccount = PlayerPrefs.GetString("account");
-    // IsInited(_playerAccount);
+     _playerAccount = PlayerPrefs.GetString("account");
+     IsInited(_playerAccount);
     string tempName = PlayerInfo.Name;
     PlayerInfo.PlayerStatus = new PlayerStatus(tempName, 1, 1, 5, 1, 1);
     PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
@@ -31,15 +31,15 @@ public class Initialization : MonoBehaviour {
   }
 
   private void CheckInited(int isInited) {
-    // if (isInited == 0) {
-    //   // Not inited -> Create
-    //   SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    // } else {
-    //   LoadSkill(_playerAccount);
-    //   LoadAbility(_playerAccount);
-    //   LoadEquipment(_playerAccount);
-    //   LoadPlayerStatus(_playerAccount);
-    // }
+     if (isInited == 0) {
+       // Not inited -> Create
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+     } else {
+       LoadSkill(_playerAccount);
+       LoadAbility(_playerAccount);
+       LoadEquipment(_playerAccount);
+       LoadPlayerStatus(_playerAccount);
+     }
   }
 
   private void SetSkill(string skill) {

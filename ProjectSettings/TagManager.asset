@@ -8,6 +8,7 @@ TagManager:
   - Checkmenu
   - ErrorMessage
   - InputUi
+  - ApproveUi
   layers:
   - Default
   - TransparentFX

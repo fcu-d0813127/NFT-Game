@@ -536,6 +536,10 @@ MonoBehaviour:
     type: 3}
   prefebOfErrorMessage: {fileID: 4496603137590265115, guid: d97b2c6ab97cc1e4fbbab0af7f880536,
     type: 3}
+  prefebOfApprove: {fileID: 5929764887656638360, guid: 02717e39d42668b46a20ddd4189d7ed1,
+    type: 3}
+  prefebOfResponse: {fileID: 8061510394422273419, guid: 39147676e7278f741bda6ef7ad619e2b,
+    type: 3}
 --- !u!114 &786270579
 MonoBehaviour:
   m_ObjectHideFlags: 0

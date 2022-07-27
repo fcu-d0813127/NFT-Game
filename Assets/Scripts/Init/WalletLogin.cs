@@ -7,22 +7,22 @@ using UnityEngine.SceneManagement;
 public class WalletLogin : MonoBehaviour {
   private Button _loginButton;
   [SerializeField] private Animator _loginAnimation;
-  // [DllImport("__Internal")]
-  // private static extern void OnLogin();
-  // [DllImport("__Internal")]
-  // private static extern void EnableChangeAccountReload();
+   [DllImport("__Internal")]
+   private static extern void OnLogin();
+   [DllImport("__Internal")]
+   private static extern void EnableChangeAccountReload();
 
   private void Awake() {
     _loginButton = GetComponent<Button>();
-    // LoginButton.onClick.AddListener(OnLogin);
+    _loginButton.onClick.AddListener(OnLogin);
     _loginButton.onClick.AddListener(Load);
   }
 
-  // private void SetPlayerAccount(string account) {
-  //   PlayerPrefs.SetString("account", account);
-  //   StartCoroutine(LoadSceneAsync());
-  //   EnableChangeAccountReload();
-  // }
+   private void SetPlayerAccount(string account) {
+     PlayerPrefs.SetString("account", account);
+     StartCoroutine(LoadSceneAsync());
+     EnableChangeAccountReload();
+   }
 
   private void Load() {
     StartCoroutine(PlayAnimation());
