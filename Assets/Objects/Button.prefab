@@ -282,4 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3abaeef16eb2a1429cb92275560511b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3234031377862646106, guid: 8992761df44e2694d8a2bc0d2c68ade0, type: 3}
+  prefabOfCheckMenu: {fileID: 3234031377862646106, guid: 8992761df44e2694d8a2bc0d2c68ade0,
+    type: 3}
+  prefabOfInputUI: {fileID: 8854296257770209757, guid: b5cc5da1ae166f74596eb708337e6ac4,
+    type: 3}

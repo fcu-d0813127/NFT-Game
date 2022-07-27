@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Checkmenu
+  - ErrorMessage
+  - InputUi
+  - ApproveUi
   layers:
   - Default
   - TransparentFX
