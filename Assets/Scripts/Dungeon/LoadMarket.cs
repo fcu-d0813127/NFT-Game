@@ -13,6 +13,8 @@ public class LoadMarket : MonoBehaviour {
 
   private void Load() {
     StartCoroutine(LoadSceneAsync());
+    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    Destroy(player);
   }
 
   IEnumerator LoadSceneAsync() {
