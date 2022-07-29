@@ -9,6 +9,7 @@ TagManager:
   - ErrorMessage
   - InputUi
   - ApproveUi
+  - Block
   layers:
   - Default
   - TransparentFX
