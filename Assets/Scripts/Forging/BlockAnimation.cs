@@ -1,23 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BlockAnimation : MonoBehaviour {
   public float MoveDistance = 112.0f;
-  [SerializeField] Button _cancelButton;
 
-  private void Start() {
-    Button[] buttons = GetComponentsInChildren<Button>();
-    foreach (Button button in buttons) {
-      if (button.gameObject.name == "Cancel") {
-        _cancelButton = button;
-      }
-    }
-    _cancelButton.onClick.AddListener(CancelAnimation);
-    FallDownAnimation();
-  }
-
-  private void FallDownAnimation() {
+  public void FallDownAnimation() {
     float startValue = GetComponent<RectTransform>().anchoredPosition.y;
     float endValue = startValue - MoveDistance;
 
@@ -44,7 +30,7 @@ public class BlockAnimation : MonoBehaviour {
     anim.Play(clip.name);
   }
 
-  private void CancelAnimation() {
+  public void CancelAnimation() {
     float startValue = GetComponent<RectTransform>().anchoredPosition.x;
     float endValue = startValue + 1000.0f;
 
@@ -73,28 +59,5 @@ public class BlockAnimation : MonoBehaviour {
     CreateBlock createBlock =
         GameObject.Find("CreateSelectedBlock").GetComponentInParent<CreateBlock>();
     createBlock.UpdateGeneratePositionY(MoveDistance);
-    
-    StartCoroutine(DelayDestroy(1.0f));
-    StartCoroutine(UpdateBlockList(1.0f));
-  }
-
-  private IEnumerator DelayDestroy(float delayTime) {
-    yield return new WaitForSeconds(delayTime);
-    Destroy(this.gameObject);
-  }
-
-  private IEnumerator UpdateBlockList(float delayTime) {
-    yield return new WaitForSeconds(delayTime);
-    GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
-    float myY = GetComponent<RectTransform>().anchoredPosition.y;
-    foreach (GameObject block in blocks) {
-      float targetY = block.GetComponent<RectTransform>().anchoredPosition.y;
-      if (targetY > myY) {
-        CreateBlock createBlock =
-            GameObject.Find("CreateSelectedBlock").GetComponentInParent<CreateBlock>();
-        createBlock.Create(block);
-        Destroy(block);
-      }
-    }
   }
 }
