@@ -2,10 +2,21 @@ using UnityEngine;
 
 public class BlockAnimation : MonoBehaviour {
   public float MoveDistance = 112.0f;
+  public float NowPositionY;
+  [SerializeField] private Animation _updateNumAnimation; 
+  private float _generatePositionY;
+
+  public void SetPosition(float generateY) {
+    _generatePositionY = generateY;
+  }
+
+  public void AddEndPosition(float nowPositionY) {
+    NowPositionY = nowPositionY - MoveDistance;
+  }
 
   public void FallDownAnimation() {
-    float startValue = GetComponent<RectTransform>().anchoredPosition.y;
-    float endValue = startValue - MoveDistance;
+    float startValue = _generatePositionY;
+    float endValue = NowPositionY;
 
     Animation anim = GetComponent<Animation>();
     AnimationCurve curve;
@@ -59,5 +70,9 @@ public class BlockAnimation : MonoBehaviour {
     CreateBlock createBlock =
         GameObject.Find("CreateSelectedBlock").GetComponentInParent<CreateBlock>();
     createBlock.UpdateGeneratePositionY(MoveDistance);
+  }
+
+  public void UpdateNumAnimation() {
+    _updateNumAnimation.Play("UpdateNumAnimation");
   }
 }

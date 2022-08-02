@@ -1,45 +1,45 @@
 using UnityEngine;
-using TMPro;
 
 public class CreateBlock : MonoBehaviour {
-  private float GeneratePositionY = -45.0f;
+  private float _generatePositionY = -45.0f;
 
   [SerializeField] private GameObject _parentCanvas;
   [SerializeField] private GameObject _block;
 
   public void UpdateGeneratePositionY(float moveDistance) {
-    GeneratePositionY -= moveDistance;
+    _generatePositionY -= moveDistance;
   }
 
   public void Create(GameObject block) {
     GameObject newBlock = Instantiate(_block);
     newBlock.transform.SetParent(_parentCanvas.transform, false);
-    float blockX = block.GetComponent<RectTransform>().anchoredPosition.x;
-    float blockY = block.GetComponent<RectTransform>().anchoredPosition.y;
-    Vector2 originPosition = new Vector2(blockX, blockY);
-    newBlock.GetComponent<RectTransform>().anchoredPosition = originPosition;
+
+    // Set name and number
+    BlockDataController oldBlockData = block.GetComponent<BlockDataController>();
+    BlockDataController newBlockData = newBlock.GetComponent<BlockDataController>();
+    newBlockData.Name.text = oldBlockData.Name.text;
+    newBlockData.Num.text = oldBlockData.Num.text;
+
+    BlockAnimation newBlockAnimation = newBlock.GetComponent<BlockAnimation>();
+
+    // Set position y
+    float originY = block.GetComponent<RectTransform>().anchoredPosition.y;
+    newBlockAnimation.SetPosition(originY);
+    newBlockAnimation.AddEndPosition(originY);
+
+    // Play
+    newBlock.GetComponent<BlockAnimation>().FallDownAnimation();
   }
 
-  private void Update() {
-    if (Input.GetKeyUp(KeyCode.Tab)) {
-      BlockDataController block = FindList("Ruby");
-      if (block != null) {
-        block.AddNum(20);
-        return;
-      }
-      Create("Ruby", 20);
-    }
-  }
-
-  private void Create(string materialName, int materialNum) {
+  public void Create(string materialName, int materialNum) {
     // Create block
     GameObject block = Instantiate(_block);
     block.transform.SetParent(_parentCanvas.transform, false);
 
     // Set create position
-    float positionX = 255.0f;
-    block.GetComponent<RectTransform>().anchoredPosition =
-        new Vector2(positionX, GeneratePositionY);
+    BlockAnimation blockAnimation = block.GetComponent<BlockAnimation>();
+    blockAnimation.SetPosition(_generatePositionY);
+    blockAnimation.AddEndPosition(_generatePositionY);
 
     // Set name and number
     BlockDataController blockData = block.GetComponent<BlockDataController>();
@@ -47,10 +47,13 @@ public class CreateBlock : MonoBehaviour {
     blockData.Num.text = materialNum.ToString();
 
     // Update next generate y
-    GeneratePositionY += block.GetComponent<BlockAnimation>().MoveDistance;
+    _generatePositionY += block.GetComponent<BlockAnimation>().MoveDistance;
+
+    // Play animation
+    blockAnimation.FallDownAnimation();
   }
 
-  private BlockDataController FindList(string materialName) {
+  public BlockDataController FindList(string materialName) {
     // Get all block
     BlockDataController[] blocks = GameObject.FindObjectsOfType<BlockDataController>();
 
@@ -61,5 +64,11 @@ public class CreateBlock : MonoBehaviour {
       }
     }
     return null;
+  }
+
+  private void Update() {
+    if (Input.GetKeyUp(KeyCode.Tab)) {
+      Create("Ruby", 20);
+    }
   }
 }
