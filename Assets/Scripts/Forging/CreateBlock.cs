@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class CreateBlock : MonoBehaviour {
+  public static CreateBlock Instance {get; private set;}
   private float _generatePositionY = -45.0f;
 
   [SerializeField] private GameObject _parentCanvas;
@@ -10,28 +11,9 @@ public class CreateBlock : MonoBehaviour {
     _generatePositionY -= moveDistance;
   }
 
-  public void Create(GameObject block) {
-    GameObject newBlock = Instantiate(_block);
-    newBlock.transform.SetParent(_parentCanvas.transform, false);
-
-    // Set name and number
-    BlockDataController oldBlockData = block.GetComponent<BlockDataController>();
-    BlockDataController newBlockData = newBlock.GetComponent<BlockDataController>();
-    newBlockData.Name.text = oldBlockData.Name.text;
-    newBlockData.Num.text = oldBlockData.Num.text;
-
-    BlockAnimation newBlockAnimation = newBlock.GetComponent<BlockAnimation>();
-
-    // Set position y
-    float originY = block.GetComponent<RectTransform>().anchoredPosition.y;
-    newBlockAnimation.SetPosition(originY);
-    newBlockAnimation.AddEndPosition(originY);
-
-    // Play
-    newBlock.GetComponent<BlockAnimation>().FallDownAnimation();
-  }
-
-  public void Create(string materialName, int materialNum) {
+  public void Create(string materialName,
+                     int materialNum,
+                     MaterialBlockDataController materialBlockDataController) {
     // Create block
     GameObject block = Instantiate(_block);
     block.transform.SetParent(_parentCanvas.transform, false);
@@ -41,10 +23,11 @@ public class CreateBlock : MonoBehaviour {
     blockAnimation.SetPosition(_generatePositionY);
     blockAnimation.AddEndPosition(_generatePositionY);
 
-    // Set name and number
+    // Set name, number and cancel reference
     BlockDataController blockData = block.GetComponent<BlockDataController>();
     blockData.Name.text = materialName;
     blockData.Num.text = materialNum.ToString();
+    blockData.SetMaterialBlockDataController(materialBlockDataController);
 
     // Update next generate y
     _generatePositionY += block.GetComponent<BlockAnimation>().MoveDistance;
@@ -66,9 +49,7 @@ public class CreateBlock : MonoBehaviour {
     return null;
   }
 
-  private void Update() {
-    if (Input.GetKeyUp(KeyCode.Tab)) {
-      Create("Ruby", 20);
-    }
+  private void Awake() {
+    Instance = this;
   }
 }

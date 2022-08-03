@@ -40,15 +40,24 @@ public class BlockListController : MonoBehaviour {
     _readyUpdateList = true;
     yield return new WaitUntil(() => _onCancelNum == 0);
     _readyUpdateList = false;
-    UpdateListAnimation();
+    StartCoroutine(UpdateListAnimation());
   }
 
-  private void UpdateListAnimation() {
+  private IEnumerator UpdateListAnimation() {
+    List<BlockButtonController> blockButtons = new List<BlockButtonController>();
     foreach (BlockAnimation blockAnimation in _blockAnimationPlayQueue) {
       if (blockAnimation == null) {
         continue;
       }
+      BlockButtonController blockButton =
+          blockAnimation.gameObject.GetComponent<BlockButtonController>();
+      blockButton.DisableButton();
+      blockButtons.Add(blockButton);
       blockAnimation.FallDownAnimation();
+    }
+    yield return new WaitForSeconds(1.0f);
+    foreach (BlockButtonController blockButton in blockButtons) {
+      blockButton.EnableButton();
     }
     ClearQueue();
   }

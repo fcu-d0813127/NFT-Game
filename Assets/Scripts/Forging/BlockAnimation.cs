@@ -67,9 +67,7 @@ public class BlockAnimation : MonoBehaviour {
     anim.AddClip(clip, clip.name);
     anim.Play(clip.name);
 
-    CreateBlock createBlock =
-        GameObject.Find("CreateSelectedBlock").GetComponentInParent<CreateBlock>();
-    createBlock.UpdateGeneratePositionY(MoveDistance);
+    CreateBlock.Instance.UpdateGeneratePositionY(MoveDistance);
   }
 
   public void UpdateNumAnimation() {

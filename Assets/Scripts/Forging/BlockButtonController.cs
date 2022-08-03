@@ -9,12 +9,21 @@ public class BlockButtonController : MonoBehaviour {
   private BlockListController _blockListController;
   private BlockAnimation _blockAnimation;
 
+  public void EnableButton() {
+    _editButton.onClick.AddListener(Edit);
+    _cancelButton.onClick.AddListener(Cancel);
+  }
+
+  public void DisableButton() {
+    _editButton.onClick.RemoveAllListeners();
+    _cancelButton.onClick.RemoveAllListeners();
+  }
+
   private void Awake() {
     _blockListController =
         GameObject.Find("BlockListController").GetComponent<BlockListController>();
     _blockAnimation = GetComponent<BlockAnimation>();
-    _editButton.onClick.AddListener(Edit);
-    _cancelButton.onClick.AddListener(Cancel);
+    EnableButton();
   }
 
   private void Edit() {
@@ -30,8 +39,13 @@ public class BlockButtonController : MonoBehaviour {
   }
 
   private IEnumerator DelayDestroy() {
+    BlockDataController block = GetComponent<BlockDataController>();
+    string name = block.Name.text;
+    int value = int.Parse(block.Num.text);
+    UpdateMaterialNumValue(name, value);
     yield return new WaitForSeconds(1.0f);
     _blockListController.SubOnCancelNum();
+    block.MaterialBlockDataController.UpdateNum();
     Destroy(this.gameObject);
   }
 
@@ -46,5 +60,12 @@ public class BlockButtonController : MonoBehaviour {
       }
     }
     return needUpdateBlocks;
+  }
+
+  private void UpdateMaterialNumValue(string name, int addBack) {
+    MaterialNum materialNum = PlayerInfo.MaterialNum;
+    int nowValue = (int)typeof(MaterialNum).GetProperty(name).GetValue(materialNum);
+    int finalValue = nowValue + addBack;
+    typeof(MaterialNum).GetProperty(name).SetValue(materialNum, finalValue);
   }
 }

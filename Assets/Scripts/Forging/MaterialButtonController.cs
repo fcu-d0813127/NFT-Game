@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MaterialButtonController : MonoBehaviour {
-  [SerializeField] private InputFieldController _inputFieldController;
   private Button _myselfButton;
 
   private void Awake() {
@@ -11,7 +10,8 @@ public class MaterialButtonController : MonoBehaviour {
   }
 
   private void OpenInputFieldObject() {
-    _inputFieldController.SetMaterialName(this.gameObject.name);
-    _inputFieldController.OpenInputField();
+    MaterialBlockDataController material = GetComponent<MaterialBlockDataController>();
+    InputFieldController.Instance.SetMaterial(material);
+    InputFieldController.Instance.OpenInputField();
   }
 }
