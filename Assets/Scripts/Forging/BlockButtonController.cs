@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class BlockButtonController : MonoBehaviour {
   [SerializeField] private Button _editButton;
   [SerializeField] private Button _cancelButton;
-  private BlockListController _blockListController;
   private BlockAnimation _blockAnimation;
 
   public void EnableButton() {
@@ -19,32 +18,34 @@ public class BlockButtonController : MonoBehaviour {
     _cancelButton.onClick.RemoveAllListeners();
   }
 
+  public void Cancel() {
+    _blockAnimation.CancelAnimation();
+    BlockListController.Instance.AddOnCancelNum();
+    List<BlockAnimation> needUpdateBlocks = FindNeedUpdateBlock();
+    BlockListController.Instance.UpdateList(needUpdateBlocks);
+    StartCoroutine(DelayDestroy());
+  }
+
   private void Awake() {
-    _blockListController =
-        GameObject.Find("BlockListController").GetComponent<BlockListController>();
     _blockAnimation = GetComponent<BlockAnimation>();
     EnableButton();
   }
 
   private void Edit() {
-
-  }
-
-  private void Cancel() {
-    _blockAnimation.CancelAnimation();
-    _blockListController.AddOnCancelNum();
-    List<BlockAnimation> needUpdateBlocks = FindNeedUpdateBlock();
-    _blockListController.UpdateList(needUpdateBlocks);
-    StartCoroutine(DelayDestroy());
+    InputFieldController.Instance.OpenInputField();
+    InputFieldController.Instance.SetIsEdit(true);
+    BlockDataController block = GetComponent<BlockDataController>();
+    InputFieldController.Instance.SetBlockData(block);
+    InputFieldController.Instance.SetMaterial(block.MaterialBlockDataController);
   }
 
   private IEnumerator DelayDestroy() {
     BlockDataController block = GetComponent<BlockDataController>();
     string name = block.Name.text;
     int value = int.Parse(block.Num.text);
-    UpdateMaterialNumValue(name, value);
+    block.UpdateMaterialNumValue(name, value);
     yield return new WaitForSeconds(1.0f);
-    _blockListController.SubOnCancelNum();
+    BlockListController.Instance.SubOnCancelNum();
     block.MaterialBlockDataController.UpdateNum();
     Destroy(this.gameObject);
   }
@@ -60,12 +61,5 @@ public class BlockButtonController : MonoBehaviour {
       }
     }
     return needUpdateBlocks;
-  }
-
-  private void UpdateMaterialNumValue(string name, int addBack) {
-    MaterialNum materialNum = PlayerInfo.MaterialNum;
-    int nowValue = (int)typeof(MaterialNum).GetProperty(name).GetValue(materialNum);
-    int finalValue = nowValue + addBack;
-    typeof(MaterialNum).GetProperty(name).SetValue(materialNum, finalValue);
   }
 }

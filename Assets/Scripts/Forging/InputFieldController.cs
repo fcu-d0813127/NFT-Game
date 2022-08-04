@@ -10,11 +10,21 @@ public class InputFieldController : MonoBehaviour {
   private Button _yesButton;
   private GameObject _myselfGameObject = null;
   private MaterialBlockDataController _onSelectedMaterial;
+  private BlockDataController _onSelectedBlock;
   private string _onSelectedMaterialName;
+  private bool _isEdit = false;
 
   public void SetMaterial(MaterialBlockDataController material) {
     _onSelectedMaterial = material;
     _onSelectedMaterialName = material.Name.text;
+  }
+  
+  public void SetBlockData(BlockDataController block) {
+    _onSelectedBlock = block;
+  }
+
+  public void SetIsEdit(bool isEdit) {
+    _isEdit = isEdit;
   }
 
   public void OpenInputField() {
@@ -38,18 +48,37 @@ public class InputFieldController : MonoBehaviour {
   }
 
   private void PressYes() {
-    int num = int.Parse(GameObject.Find("InputField").GetComponent<TMP_InputField>().text);
-    
-    // Check is already exit
+    string inputValue = GameObject.Find("InputField").GetComponent<TMP_InputField>().text;
+
+    // Check is empty
+    if (inputValue == "") {
+      return;
+    }
+
+    int num = int.Parse(inputValue);
+    if (num == 0) {
+      return;
+    }
     BlockDataController block = CreateBlock.Instance.FindList(_onSelectedMaterialName);
-    if (block != null) {
-      block.AddNum(num);
+    if (_isEdit) {
+      int nowNum = int.Parse(block.Num.text);
+      int diffValue = nowNum - num;
+      SetIsEdit(false);
+      string name = block.Name.text;
+      block.UpdateMaterialNumValue(name, diffValue);
+      block.MaterialBlockDataController.UpdateNum();
+      block.SetNum(num);
     } else {
-      CreateBlock.Instance.Create(_onSelectedMaterialName, num, _onSelectedMaterial);
+      // Check is already exit
+      if (block != null) {
+        block.AddNum(num);
+      } else {
+        CreateBlock.Instance.Create(_onSelectedMaterialName, num, _onSelectedMaterial);
+      }
+      UpdateMaterialValue(num);
     }
     Destroy(_myselfGameObject);
     _myselfGameObject = null;
-    UpdateMaterialValue(num);
   }
 
   private void PressNo() {
@@ -64,6 +93,10 @@ public class InputFieldController : MonoBehaviour {
     TMP_InputField inputField = GameObject.Find("InputField").GetComponent<TMP_InputField>();
     if (inputField.text == "") {
       return;
+    }
+    if (_isEdit) {
+      int onSelectedNum = int.Parse(_onSelectedBlock.Num.text);
+      maxValue += onSelectedNum;
     }
     int nowValue = int.Parse(inputField.text);
     if (nowValue > maxValue) {

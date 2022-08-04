@@ -17,4 +17,16 @@ public class BlockDataController : MonoBehaviour {
       MaterialBlockDataController materialBlockDataController) {
     MaterialBlockDataController = materialBlockDataController;
   }
+
+  public void UpdateMaterialNumValue(string name, int addBack) {
+    MaterialNum materialNum = PlayerInfo.MaterialNum;
+    int nowValue = (int)typeof(MaterialNum).GetProperty(name).GetValue(materialNum);
+    int finalValue = nowValue + addBack;
+    typeof(MaterialNum).GetProperty(name).SetValue(materialNum, finalValue);
+  }
+
+  public void SetNum(int num) {
+    Num.text = num.ToString();
+    GetComponent<BlockAnimation>().UpdateNumAnimation();
+  }
 }

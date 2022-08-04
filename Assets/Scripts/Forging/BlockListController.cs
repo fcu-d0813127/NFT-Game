@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockListController : MonoBehaviour {
+  public static BlockListController Instance {get; private set;}
   private int _onCancelNum = 0;
   private bool _readyUpdateList = false;
   private List<BlockAnimation> _blockAnimationPlayQueue = new List<BlockAnimation>();
@@ -34,6 +35,10 @@ public class BlockListController : MonoBehaviour {
         _blockAnimationPlayQueue.Add(blockAnimation);
       }
     }
+  }
+
+  private void Awake() {
+    Instance = this;
   }
 
   private IEnumerator DelayUpdateList() {
