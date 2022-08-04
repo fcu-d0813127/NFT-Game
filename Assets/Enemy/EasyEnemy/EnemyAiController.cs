@@ -29,9 +29,9 @@ public class EnemyAiController : MonoBehaviour {
 
     /*怪物數據參考 副本1哥布林  
     _searchRadius = 3.5f;
-     _attackRadius = 0.8f;
+    _attackRadius = 0.8f;
     _deathDelayTime = 1.0f;*/
-  
+
     void Start() {
 
         player = GameObject.FindWithTag("Player");
@@ -66,7 +66,6 @@ public class EnemyAiController : MonoBehaviour {
         } else { //怪物未發現玩家
             _enemyStatus = Status.idle;  
         }
-           
 
         //using the status to control
         switch(_enemyStatus){

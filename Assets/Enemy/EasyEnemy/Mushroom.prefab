@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _hpMax: 400
+  popup: {fileID: 6226771424332417222, guid: 9ade5f6e8a1deef47b41b2ee8b0b4563, type: 3}
 --- !u!1 &7937616349341860335
 GameObject:
   m_ObjectHideFlags: 0

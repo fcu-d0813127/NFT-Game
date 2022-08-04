@@ -120,6 +120,7 @@ MonoBehaviour:
     type: 3}
   bigHpBar: {fileID: 4104098345359351690, guid: af921df419485a042b5878d5d4410be9,
     type: 3}
+  wall: {fileID: 0}
 --- !u!114 &6413626148949244370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _hpMax: 4000
+  popup: {fileID: 6226771424332417222, guid: 9ade5f6e8a1deef47b41b2ee8b0b4563, type: 3}
 --- !u!114 &8211758816646793168
 MonoBehaviour:
   m_ObjectHideFlags: 0
