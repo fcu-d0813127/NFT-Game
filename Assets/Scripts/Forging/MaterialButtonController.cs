@@ -13,5 +13,9 @@ public class MaterialButtonController : MonoBehaviour {
     MaterialBlockDataController material = GetComponent<MaterialBlockDataController>();
     InputFieldController.Instance.SetMaterial(material);
     InputFieldController.Instance.OpenInputField();
+    BlockDataController block = CreateBlock.Instance.FindList(material.Name.text);
+    if (block != null) {
+      InputFieldController.Instance.SetBlockData(block);
+    }
   }
 }

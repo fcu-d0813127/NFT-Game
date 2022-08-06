@@ -46,6 +46,7 @@ public class BlockListController : MonoBehaviour {
     yield return new WaitUntil(() => _onCancelNum == 0);
     _readyUpdateList = false;
     StartCoroutine(UpdateListAnimation());
+    ProbabilityController.Instance.UpdateProbability();
   }
 
   private IEnumerator UpdateListAnimation() {

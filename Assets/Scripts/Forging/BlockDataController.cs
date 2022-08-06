@@ -6,11 +6,16 @@ public class BlockDataController : MonoBehaviour {
   public TMP_Text Num;
   public MaterialBlockDataController MaterialBlockDataController {get; private set;}
 
-  public void AddNum(int num) {
+  public int AddNum(int num) {
     int nowNum = int.Parse(Num.text);
     nowNum += num;
+    int remaining = nowNum - 200;
+    if (remaining >= 0) {
+      nowNum = 200;
+    }
     Num.text = nowNum.ToString();
     GetComponent<BlockAnimation>().UpdateNumAnimation();
+    return remaining;
   }
 
   public void SetMaterialBlockDataController(

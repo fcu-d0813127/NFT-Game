@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BlockButtonController : MonoBehaviour {
+  public bool IsButtonEnable = true;
   [SerializeField] private Button _editButton;
   [SerializeField] private Button _cancelButton;
   private BlockAnimation _blockAnimation;
@@ -32,6 +33,8 @@ public class BlockButtonController : MonoBehaviour {
   }
 
   private void Edit() {
+    DisableButton();
+    IsButtonEnable = false;
     InputFieldController.Instance.OpenInputField();
     InputFieldController.Instance.SetIsEdit(true);
     BlockDataController block = GetComponent<BlockDataController>();

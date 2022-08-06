@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class CreateBlock : MonoBehaviour {
   public static CreateBlock Instance {get; private set;}
-  private float _generatePositionY = -45.0f;
+  private const float _originGeneratePositionY = -45.0f;
+  private float _generatePositionY = _originGeneratePositionY;
 
   [SerializeField] private GameObject _parentCanvas;
   [SerializeField] private GameObject _block;
@@ -47,6 +48,10 @@ public class CreateBlock : MonoBehaviour {
       }
     }
     return null;
+  }
+
+  public void ResetGeneratePositionY() {
+    _generatePositionY = _originGeneratePositionY;
   }
 
   private void Awake() {

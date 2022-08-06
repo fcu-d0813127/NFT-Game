@@ -11,9 +11,9 @@ public class MaterialBlockCreate : MonoBehaviour {
   private void Awake() {
     Instance = this;
     PlayerInfo.MaterialNum = new MaterialNum {
-      Ruby = 100,
-      Sapphire = 100,
-      Emerald = 100
+      Ruby = 250,
+      Sapphire = 250,
+      Emerald = 250
     };
     Create();
   }

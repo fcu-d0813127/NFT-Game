@@ -14,14 +14,23 @@ public class ForgingButtonController : MonoBehaviour {
   }
 
   private void Confirm() {
-    BlockButtonController[] blockButtons = HasBlock();
-    if (blockButtons.Length == 0) {
+    BlockDataController[] blocks = HasBlock();
+    if (blocks.Length == 0) {
       return;
     }
-    foreach (BlockButtonController blockButton in blockButtons) {
-      Destroy(blockButton.gameObject);
+    int totalNum = 0;
+    foreach (BlockDataController block in blocks) {
+      totalNum += int.Parse(block.Num.text);
+    }
+    if (totalNum < 300) {
+      return;
+    }
+    foreach (BlockDataController block in blocks) {
+      Destroy(block.gameObject);
     }
     _generateItmeIcon.color = Color.gray;
+    ProbabilityController.Instance.ClearProbabilityValue();
+    CreateBlock.Instance.ResetGeneratePositionY();
 
     Attribute attribute = new Attribute {
       Atk = 100.0f,
@@ -45,17 +54,17 @@ public class ForgingButtonController : MonoBehaviour {
   }
 
   private void Clear() {
-    BlockButtonController[] blockButtons = HasBlock();
-    if (blockButtons.Length == 0) {
+    BlockDataController[] blocks = HasBlock();
+    if (blocks.Length == 0) {
       return;
     }
-    foreach (BlockButtonController blockButton in blockButtons) {
-      blockButton.Cancel();
+    foreach (BlockDataController block in blocks) {
+      block.GetComponent<BlockButtonController>().Cancel();
     }
   }
 
-  private BlockButtonController[] HasBlock() {
-    BlockButtonController[] blocks = GameObject.FindObjectsOfType<BlockButtonController>();
+  private BlockDataController[] HasBlock() {
+    BlockDataController[] blocks = GameObject.FindObjectsOfType<BlockDataController>();
     return blocks == null ? null : blocks;
   }
 }

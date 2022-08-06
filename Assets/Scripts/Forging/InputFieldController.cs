@@ -59,19 +59,27 @@ public class InputFieldController : MonoBehaviour {
     if (num == 0) {
       return;
     }
-    BlockDataController block = CreateBlock.Instance.FindList(_onSelectedMaterialName);
     if (_isEdit) {
-      int nowNum = int.Parse(block.Num.text);
+      int nowNum = int.Parse(_onSelectedBlock.Num.text);
       int diffValue = nowNum - num;
       SetIsEdit(false);
-      string name = block.Name.text;
-      block.UpdateMaterialNumValue(name, diffValue);
-      block.MaterialBlockDataController.UpdateNum();
-      block.SetNum(num);
+      string name = _onSelectedBlock.Name.text;
+      _onSelectedBlock.UpdateMaterialNumValue(name, diffValue);
+      _onSelectedBlock.MaterialBlockDataController.UpdateNum();
+      _onSelectedBlock.SetNum(num);
+      _onSelectedBlock.GetComponent<BlockButtonController>().EnableButton();
+      _onSelectedBlock.GetComponent<BlockButtonController>().IsButtonEnable = true;
     } else {
       // Check is already exit
-      if (block != null) {
-        block.AddNum(num);
+      if (_onSelectedBlock != null &&
+          _onSelectedBlock.MaterialBlockDataController == _onSelectedMaterial) {
+        if (_onSelectedBlock.Num.text == "200") {
+          return;
+        }
+        int remaining = _onSelectedBlock.AddNum(num);
+        if (remaining > 0) {
+          num -= remaining;
+        }
       } else {
         CreateBlock.Instance.Create(_onSelectedMaterialName, num, _onSelectedMaterial);
       }
@@ -79,11 +87,16 @@ public class InputFieldController : MonoBehaviour {
     }
     Destroy(_myselfGameObject);
     _myselfGameObject = null;
+    ProbabilityController.Instance.UpdateProbability();
   }
 
   private void PressNo() {
     Destroy(_myselfGameObject);
     _myselfGameObject = null;
+    BlockDataController block = CreateBlock.Instance.FindList(_onSelectedMaterialName);
+    if (block != null && block.GetComponent<BlockButtonController>().IsButtonEnable == false) {
+      block.GetComponent<BlockButtonController>().EnableButton();
+    }
   }
 
   private void ConstraintInValidValue() {
@@ -94,13 +107,23 @@ public class InputFieldController : MonoBehaviour {
     if (inputField.text == "") {
       return;
     }
+    int onSelectedNum = 0;
+    if (_onSelectedBlock) {
+      onSelectedNum = int.Parse(_onSelectedBlock.Num.text);
+    }
     if (_isEdit) {
-      int onSelectedNum = int.Parse(_onSelectedBlock.Num.text);
       maxValue += onSelectedNum;
     }
     int nowValue = int.Parse(inputField.text);
-    if (nowValue > maxValue) {
+    if (nowValue > maxValue && maxValue <= 200) {
       inputField.text = maxValue.ToString();
+    } else if (nowValue > 200 - onSelectedNum &&
+               !_isEdit &&
+               _onSelectedBlock != null &&
+               _onSelectedBlock.MaterialBlockDataController == _onSelectedMaterial) {
+      inputField.text = (200 - onSelectedNum).ToString();
+    } else if (nowValue > 200) {
+      inputField.text = "200";
     }
   }
 
