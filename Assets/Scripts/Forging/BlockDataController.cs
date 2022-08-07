@@ -23,11 +23,13 @@ public class BlockDataController : MonoBehaviour {
     MaterialBlockDataController = materialBlockDataController;
   }
 
-  public void UpdateMaterialNumValue(string name, int addBack) {
+  public void UpdateMaterialNumValue(int addBack) {
+    string name = Name.text;
     MaterialNum materialNum = PlayerInfo.MaterialNum;
     int nowValue = (int)typeof(MaterialNum).GetProperty(name).GetValue(materialNum);
     int finalValue = nowValue + addBack;
     typeof(MaterialNum).GetProperty(name).SetValue(materialNum, finalValue);
+    MaterialBlockDataController.UpdateNum();
   }
 
   public void SetNum(int num) {

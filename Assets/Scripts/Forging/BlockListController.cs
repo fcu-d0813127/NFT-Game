@@ -8,10 +8,6 @@ public class BlockListController : MonoBehaviour {
   private bool _readyUpdateList = false;
   private List<BlockAnimation> _blockAnimationPlayQueue = new List<BlockAnimation>();
 
-  public int GetOnCancelNum() {
-    return _onCancelNum;
-  }
-
   public void AddOnCancelNum() {
     _onCancelNum++;
     if (!_readyUpdateList) {

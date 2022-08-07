@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +9,6 @@ public class MaterialBlockCreate : MonoBehaviour {
 
   private void Awake() {
     Instance = this;
-    PlayerInfo.MaterialNum = new MaterialNum {
-      Ruby = 250,
-      Sapphire = 250,
-      Emerald = 250
-    };
     Create();
   }
 

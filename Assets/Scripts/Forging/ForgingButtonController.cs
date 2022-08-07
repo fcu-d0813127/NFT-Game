@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ForgingButtonController : MonoBehaviour {
-  public static EquipmentItemData NowEquipmentItemData;
+  public static EquipmentItemData NowEquipmentItemData {get; private set;}
   [SerializeField] private Button _confirmButton;
   [SerializeField] private Button _clearButton;
   [SerializeField] private Image _generateItmeIcon;
@@ -28,7 +28,7 @@ public class ForgingButtonController : MonoBehaviour {
     foreach (BlockDataController block in blocks) {
       Destroy(block.gameObject);
     }
-    _generateItmeIcon.color = Color.gray;
+    _generateItmeIcon.color = Color.cyan;
     ProbabilityController.Instance.ClearProbabilityValue();
     CreateBlock.Instance.ResetGeneratePositionY();
 

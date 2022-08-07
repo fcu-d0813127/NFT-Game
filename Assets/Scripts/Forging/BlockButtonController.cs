@@ -46,7 +46,7 @@ public class BlockButtonController : MonoBehaviour {
     BlockDataController block = GetComponent<BlockDataController>();
     string name = block.Name.text;
     int value = int.Parse(block.Num.text);
-    block.UpdateMaterialNumValue(name, value);
+    block.UpdateMaterialNumValue(value);
     yield return new WaitForSeconds(1.0f);
     BlockListController.Instance.SubOnCancelNum();
     block.MaterialBlockDataController.UpdateNum();

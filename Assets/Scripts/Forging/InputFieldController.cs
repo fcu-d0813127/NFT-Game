@@ -63,9 +63,7 @@ public class InputFieldController : MonoBehaviour {
       int nowNum = int.Parse(_onSelectedBlock.Num.text);
       int diffValue = nowNum - num;
       SetIsEdit(false);
-      string name = _onSelectedBlock.Name.text;
-      _onSelectedBlock.UpdateMaterialNumValue(name, diffValue);
-      _onSelectedBlock.MaterialBlockDataController.UpdateNum();
+      _onSelectedBlock.UpdateMaterialNumValue(diffValue);
       _onSelectedBlock.SetNum(num);
       _onSelectedBlock.GetComponent<BlockButtonController>().EnableButton();
       _onSelectedBlock.GetComponent<BlockButtonController>().IsButtonEnable = true;
@@ -91,6 +89,7 @@ public class InputFieldController : MonoBehaviour {
   }
 
   private void PressNo() {
+    SetIsEdit(false);
     Destroy(_myselfGameObject);
     _myselfGameObject = null;
     BlockDataController block = CreateBlock.Instance.FindList(_onSelectedMaterialName);
