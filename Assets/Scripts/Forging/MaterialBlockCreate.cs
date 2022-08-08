@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MaterialBlockCreate : MonoBehaviour {
-  public MaterialBlockCreate Instance {get; private set;}
+  public static MaterialBlockCreate Instance {get; private set;}
   [SerializeField] private GameObject _canvas;
   [SerializeField] private GameObject _materialBlockPrefab;
   private float _generatePositionY = 100.0f;

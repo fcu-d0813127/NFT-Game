@@ -3,6 +3,10 @@ using TMPro;
 
 public class ProbabilityController : MonoBehaviour {
   public static ProbabilityController Instance {get; private set;}
+  private const float _lagendary = 5.0f * 20.0f;
+  private const float _rare = 10.0f * 20.0f;
+  private const float _uncommon = 30.0f * 20.0f;
+  private const float _common = 55.0f * 20.0f;
   [SerializeField] private TMP_Text _lagendaryProbabilityPhysic;
   [SerializeField] private TMP_Text _rareProbabilityPhysic;
   [SerializeField] private TMP_Text _uncommonProbabilityPhysic;
@@ -11,10 +15,10 @@ public class ProbabilityController : MonoBehaviour {
   [SerializeField] private TMP_Text _rareProbabilityMagic;
   [SerializeField] private TMP_Text _uncommonProbabilityMagic;
   [SerializeField] private TMP_Text _commonProbabilityMagic;
-  private float _lagendaryProbability = 5.0f * 20.0f;
-  private float _rareProbability = 10.0f * 20.0f;
-  private float _uncommonProbability = 30.0f * 20.0f;
-  private float _commonProbability = 55.0f * 20.0f;
+  private float _lagendaryProbability;
+  private float _rareProbability;
+  private float _uncommonProbability;
+  private float _commonProbability;
 
   public void UpdateProbability() {
     int totalNum = GetTotalMaterialNum();
@@ -26,12 +30,13 @@ public class ProbabilityController : MonoBehaviour {
       return;
     }
     int offset = totalNum - 300;
-    _commonProbability -= offset << 1;
-    _uncommonProbability +=
+    _commonProbability = _common - (offset << 1);
+    _uncommonProbability =
+        _uncommon +
         (offset > 100 ? 10.0f * 20.0f : offset << 1) +
         (offset > 200 ? 5.0f * 20.0f : (offset > 100 ? offset - 100 : 0.0f));
-    _rareProbability += offset <= 100 ? 0.0f : offset - 100;
-    _lagendaryProbability += offset <= 200 ? 0.0f : offset - 200;
+    _rareProbability = _rare + (offset <= 100 ? 0.0f : offset - 100);
+    _lagendaryProbability = _lagendary + (offset <= 200 ? 0.0f : offset - 200);
     UpdateUiText(defaultDivide);
   }
 
@@ -50,6 +55,12 @@ public class ProbabilityController : MonoBehaviour {
     Instance = this;
   }
 
+  private void Update() {
+    if (Input.GetKeyUp(KeyCode.Space)) {
+      UpdateProbability();
+    }
+  }
+
   private void UpdateUiText(float defaultDivide) {
     float _lagendaryPhysic = _lagendaryProbability / 20.0f * (1.0f - defaultDivide);
     float _rarePhysic = _rareProbability / 20.0f * (1.0f - defaultDivide);
@@ -59,14 +70,14 @@ public class ProbabilityController : MonoBehaviour {
     float _rareMagic = _rareProbability / 20.0f * defaultDivide;
     float _uncommonMagic = _uncommonProbability / 20.0f * defaultDivide;
     float _commonMagic = _commonProbability / 20.0f * defaultDivide;
-    _lagendaryProbabilityPhysic.text = _lagendaryPhysic.ToString("0.0");
-    _rareProbabilityPhysic.text = _rarePhysic.ToString("0.0");
-    _uncommonProbabilityPhysic.text = _uncommonPhysic.ToString("0.0");
-    _commonProbabilityPhysic.text = _commonPhysic.ToString("0.0");
-    _lagendaryProbabilityMagic.text = _lagendaryMagic.ToString("0.0");
-    _rareProbabilityMagic.text = _rareMagic.ToString("0.0");
-    _uncommonProbabilityMagic.text = _uncommonMagic.ToString("0.0");
-    _commonProbabilityMagic.text = _commonMagic.ToString("0.0");
+    _lagendaryProbabilityPhysic.text = _lagendaryPhysic.ToString("0.00");
+    _rareProbabilityPhysic.text = _rarePhysic.ToString("0.00");
+    _uncommonProbabilityPhysic.text = _uncommonPhysic.ToString("0.00");
+    _commonProbabilityPhysic.text = _commonPhysic.ToString("0.00");
+    _lagendaryProbabilityMagic.text = _lagendaryMagic.ToString("0.00");
+    _rareProbabilityMagic.text = _rareMagic.ToString("0.00");
+    _uncommonProbabilityMagic.text = _uncommonMagic.ToString("0.00");
+    _commonProbabilityMagic.text = _commonMagic.ToString("0.00");
   }
 
   private int GetTotalMaterialNum() {

@@ -64,6 +64,7 @@ public class InputFieldController : MonoBehaviour {
       int diffValue = nowNum - num;
       SetIsEdit(false);
       _onSelectedBlock.UpdateMaterialNumValue(diffValue);
+      _onSelectedBlock.MaterialBlockDataController.UpdateNum();
       _onSelectedBlock.SetNum(num);
       _onSelectedBlock.GetComponent<BlockButtonController>().EnableButton();
       _onSelectedBlock.GetComponent<BlockButtonController>().IsButtonEnable = true;

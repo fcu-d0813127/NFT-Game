@@ -29,7 +29,6 @@ public class BlockDataController : MonoBehaviour {
     int nowValue = (int)typeof(MaterialNum).GetProperty(name).GetValue(materialNum);
     int finalValue = nowValue + addBack;
     typeof(MaterialNum).GetProperty(name).SetValue(materialNum, finalValue);
-    MaterialBlockDataController.UpdateNum();
   }
 
   public void SetNum(int num) {
