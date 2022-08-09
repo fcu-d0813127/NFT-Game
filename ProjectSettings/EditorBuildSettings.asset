@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon3/Dungeon3.unity
     guid: 06c15ca49b54bad4dad839cd5033c532
+  - enabled: 1
+    path: Assets/Scenes/Forging.unity
+    guid: e661bf181163968448fdd15fcd4a20e0
   m_configObjects: {}

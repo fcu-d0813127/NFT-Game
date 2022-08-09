@@ -28,9 +28,9 @@ public class Initialization : MonoBehaviour {
     // Editor 測試用
     #if UNITY_EDITOR
       PlayerInfo.MaterialNum = new MaterialNum {
-        Ruby = 0,
-        Sapphire = 0,
-        Emerald = 0
+        Ruby = 250,
+        Sapphire = 250,
+        Emerald = 250
       };
       string a = "{\"equipments\":[{\"tokenId\":\"1\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}}]}";
       PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(a);

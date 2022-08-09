@@ -1,5 +1,5 @@
 public class MaterialNum {
-  public int Ruby;
-  public int Sapphire;
-  public int Emerald;
+  public int Ruby {get; set;}
+  public int Sapphire {get; set;}
+  public int Emerald {get; set;}
 }
