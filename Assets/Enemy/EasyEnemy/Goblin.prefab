@@ -187,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _hpMax: 1000
+  popup: {fileID: 6226771424332417222, guid: 9ade5f6e8a1deef47b41b2ee8b0b4563, type: 3}
 --- !u!114 &2579381657142466437
 MonoBehaviour:
   m_ObjectHideFlags: 0
