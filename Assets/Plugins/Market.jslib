@@ -65,7 +65,7 @@ mergeInto(LibraryManager.library, {
     }
   },
   ERC721approve: async function(_tokenId) {
-    await window.ERC721_Contract.methods.approve(window.data.MARKET_ADDRESS, UTF8ToString(_tokenId)).send({from: window.data.PLAYER_ACCOUNT}, (err, txnHash) =>{
+    await window.equipmentContract.methods.approve(window.data.MARKET_ADDRESS, UTF8ToString(_tokenId)).send({from: window.data.PLAYER_ACCOUNT}, (err, txnHash) =>{
       if(err){
         console.log(err);
         return;
@@ -106,33 +106,11 @@ mergeInto(LibraryManager.library, {
           response.toString());
       });
   },
-  ERC721balanceOf: async function() {
-    await window.ERC721_Contract.methods.balanceOf(window.data.PLAYER_ACCOUNT).call()
-    .then((response) => {
-      myGameInstance.SendMessage(
-        'MarketCanvas',
-        'getERC721balanceOf',
-        response.toString());
-    });
-  },
-  tokenOfOwnerByIndex: async function(_boundary) {
-    var outputString = [];
-    for(var i = 0; i < _boundary; i++){
-      await window.ERC721_Contract.methods.tokenOfOwnerByIndex(window.data.PLAYER_ACCOUNT, i).call()
-      .then((response) =>{
-        outputString.push(response.toString());
-      })
-    }
-    myGameInstance.SendMessage(
-      'MarketCanvas',
-      'getListTokenId',
-      outputString.toString());
-  },
   tokenStatOf: async function(_tokenId, _pagemode){
     const TokenId = UTF8ToString(_tokenId).split(',');
     var outputString = [];
     for(var i = 0; i < TokenId.length - 1; i++){
-      await window.ERC721_Contract.methods.tokenStatOf(TokenId[i]).call()
+      await window.equipmentContract.methods.tokenStatOf(TokenId[i]).call()
       .then((response) =>{
         outputString.push(JSON.stringify(response));
       })
@@ -141,12 +119,6 @@ mergeInto(LibraryManager.library, {
       myGameInstance.SendMessage(
       'MarketCanvas',
       'SetProductTokenStatList',
-      outputString.toString());
-    }
-    else if(_pagemode == 2){
-      myGameInstance.SendMessage(
-      'MarketCanvas',
-      'SetListProductTokenStatList',
       outputString.toString());
     }
     else if(_pagemode == 3){
@@ -158,7 +130,7 @@ mergeInto(LibraryManager.library, {
   },
   getApproved: async function(_tokenId){
     const tokenId = UTF8ToString(_tokenId);
-    await window.ERC721_Contract.methods.getApproved(tokenId).call()
+    await window.equipmentContract.methods.getApproved(tokenId).call()
     .then((response) =>{
       console.log(response);
       if(response === window.data.MARKET_ADDRESS){
@@ -172,5 +144,43 @@ mergeInto(LibraryManager.library, {
           'GetPlayerApprove');
       }
     })
+  },
+  ForMarketLoadEquipment: async function(playerAccount) {
+    let account = UTF8ToString(playerAccount);
+    let balanceOf = await window.equipmentContract.methods.balanceOf(
+        account).call()
+            .then((response) => {
+              return response;
+            });
+    let tokenIds = [];
+    for (let i = 0; i < balanceOf; i++) {
+      await window.equipmentContract.methods.tokenOfOwnerByIndex(
+          account, i).call()
+              .then((response) => {
+                tokenIds.push(response);
+              });
+    }
+    let equipments = [];
+    for (let i = 0; i < balanceOf; i++) {
+      await window.equipmentContract.methods.tokenStatOf(
+          tokenIds[i]).call()
+              .then((response) => {
+                for (let i = 0; i < 5; i++) {
+                  response[i] = undefined;
+                }
+                const newResponse = {
+                  "tokenId": tokenIds[i],
+                  "equipmentStatus": response
+                };
+                equipments.push(newResponse);
+              });
+    };
+    const newResponse = {
+      "equipments": equipments
+    };
+    myGameInstance.SendMessage(
+        'MarketCanvas',
+        'SetEquipment',
+        JSON.stringify(newResponse));
   }
 });

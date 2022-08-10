@@ -29,20 +29,16 @@ public class MarketController : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void ProductListFromOwnerOf();
     [DllImport("__Internal")]
-    private static extern void ERC721balanceOf();
-    [DllImport("__Internal")]
-    private static extern void tokenOfOwnerByIndex(ulong _boundary);
-    [DllImport("__Internal")]
     private static extern void tokenStatOf(string _productTokenId, UInt32 _pagemode);
     [DllImport("__Internal")]
     private static extern void getApproved(string _getApprovedtokenId);
+    [DllImport("__Internal")]
+    private static extern void ForMarketLoadEquipment(string playerAccount);
     internal int page = 0;
     internal string balance;
     internal uint ClickProduct = 0;
     internal uint PageMode;
     internal string ERC721balance;
-    internal string[] TokenIdTemp;
-    internal ProductTokenStat[] TokenStatTemp;
     internal string listPrice;
     [SerializeField]private GameObject prefebOfProduct;
     [SerializeField]private GameObject prefebOfErrorMessage;
@@ -60,6 +56,9 @@ public class MarketController : MonoBehaviour
     internal GameObject _refreshButton;
     internal GameObject _approveUI;
     private GameObject _responseUI;
+    private Sprite _purchaseUI;
+    private Sprite _listUI;
+    private Sprite _unlistUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,8 +72,10 @@ public class MarketController : MonoBehaviour
         _listPageButton = GameObject.Find("ListPage");
         _unlistPageButton = GameObject.Find("UnlistPage");
         _refreshButton = GameObject.Find("Refresh");
+        _purchaseUI = Resources.Load<Sprite>("MarketUI/add-to-cart 1");
+        _listUI = Resources.Load<Sprite>("MarketUI/marketUp 2");
+        _unlistUI = Resources.Load<Sprite>("MarketUI/marketDown 1");
         ERC20balanceOf();
-        ERC721balanceOf();
         ProductListFromOwnerOf();
         ProductList();
     }
@@ -119,6 +120,7 @@ public class MarketController : MonoBehaviour
                 Product[i].transform.SetParent(ProductManager.transform, false);
                 Product[i].name = "Product" + (i + 1).ToString();
                 Product[i].transform.GetChild(0).gameObject.name = "Button" + (i + 1).ToString();
+                Product[i].transform.GetChild(0).gameObject.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = _purchaseUI;
             }
             if(ProductLength < 6){
                 ProductManager.GetComponent<RectTransform>().sizeDelta = new Vector2(103f, 575f);
@@ -148,7 +150,7 @@ public class MarketController : MonoBehaviour
             }
         }
         else if(PageMode == 2){
-            ProductLength = TokenIdTemp.Length - page * 10;
+            ProductLength = PlayerInfo.PlayerEquipment.equipments.Length - page * 10;
             if(ProductLength > 10){
                 ProductLength = 10;
             }
@@ -158,6 +160,7 @@ public class MarketController : MonoBehaviour
                 Product[i].transform.SetParent(ProductManager.transform, false);
                 Product[i].name = "Product" + (i + 1).ToString();
                 Product[i].transform.GetChild(0).gameObject.name = "Button" + (i + 1).ToString();
+                Product[i].transform.GetChild(0).gameObject.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = _listUI;
             }
             if(ProductLength < 6){
                 ProductManager.GetComponent<RectTransform>().sizeDelta = new Vector2(103f, 575f);
@@ -171,15 +174,15 @@ public class MarketController : MonoBehaviour
                 var productPosition = Product[i].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.position;
                 productPosition.x = 550f;
                 Product[i].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.transform.position = productPosition;
-                Product[i].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>" + TokenIdTemp[i + page * 10] + "</mspace>";
+                Product[i].transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>" + PlayerInfo.PlayerEquipment.equipments[i].tokenId + "</mspace>";
                 productPosition = Product[i].transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.transform.position;
                 productPosition.x = 912f;
                 Product[i].transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.transform.position = productPosition;
-                Product[i].transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>" + TokenStatTemp[i + page * 10].rarity + "</mspace>";
+                Product[i].transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>" + PlayerInfo.PlayerEquipment.equipments[i].equipmentStatus.rarity + "</mspace>";
                 productPosition = Product[i].transform.GetChild(0).gameObject.transform.GetChild(2).gameObject.transform.position;
                 productPosition.x = 1274f;
                 Product[i].transform.GetChild(0).gameObject.transform.GetChild(2).gameObject.transform.position = productPosition;
-                Product[i].transform.GetChild(0).gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>" + TokenStatTemp[i + page * 10].level + "</mspace>";
+                Product[i].transform.GetChild(0).gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>" + PlayerInfo.PlayerEquipment.equipments[i].equipmentStatus.level + "</mspace>";
                 Product[i].transform.GetChild(0).gameObject.transform.GetChild(3).gameObject.GetComponent<TextMeshProUGUI>().text = "";
             }
         }
@@ -194,6 +197,7 @@ public class MarketController : MonoBehaviour
                 Product[i].transform.SetParent(ProductManager.transform, false);
                 Product[i].name = "Product" + (i + 1).ToString();
                 Product[i].transform.GetChild(0).gameObject.name = "Button" + (i + 1).ToString();
+                Product[i].transform.GetChild(0).gameObject.transform.GetChild(4).gameObject.GetComponent<Image>().sprite = _unlistUI;
             }
             if(ProductLength < 6){
                 ProductManager.GetComponent<RectTransform>().sizeDelta = new Vector2(103f, 575f);
@@ -255,18 +259,6 @@ public class MarketController : MonoBehaviour
         page = 0;
         RefreshPage();
     }
-    private void getERC721balanceOf(string balance){
-        tokenOfOwnerByIndex(Convert.ToUInt64(balance));
-    }
-    private void getListTokenId(string outputstring){
-        TokenIdTemp = outputstring.Split(',');
-        outputstring = outputstring + ',';
-        tokenStatOf(outputstring, 2);
-    }
-    private void SetListProductTokenStatList(string TokenStatList){
-        TokenStatTemp = UnlistProductInfo.CreateUnlistProductTokenStatList(TokenStatList);
-        BrowseProduct();
-    }
     private void ListProduct(){
         listProduct(getProductTokenId(), listPrice);
     }
@@ -275,7 +267,6 @@ public class MarketController : MonoBehaviour
     }
     
     private void ListMessage(){
-        ERC721balanceOf();
         page = 0;
         RefreshPage();
     }
@@ -284,7 +275,7 @@ public class MarketController : MonoBehaviour
             return ProductInfo.Product[page * 10 + ClickProduct].tokenId;
         }
         else if(PageMode == 2){
-            return TokenIdTemp[page * 10 + ClickProduct];
+            return PlayerInfo.PlayerEquipment.equipments[page * 10 + ClickProduct].tokenId.ToString();
         }
         else{
             return UnlistProductInfo.UnlistProduct[page * 10 + ClickProduct].tokenId;
@@ -324,7 +315,7 @@ public class MarketController : MonoBehaviour
             else{
                 PreviousButton.GetComponent<Button>().interactable = true;
             }
-            if((TokenIdTemp.Length - page * 10) <= 10){
+            if((PlayerInfo.PlayerEquipment.equipments.Length - page * 10) <= 10){
                 NextButton.GetComponent<Button>().interactable = false;
             }
             else{
@@ -351,16 +342,18 @@ public class MarketController : MonoBehaviour
         ClickProduct = a;
     }
     internal void ErrorMessage(int ErrorEvent){
+        GameObject ErrorBox = Instantiate(prefebOfErrorMessage, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+        ErrorBox.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
         if(ErrorEvent == 1){
-            GameObject ErrorBox = Instantiate(prefebOfErrorMessage, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
-            ErrorBox.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
             ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You don't have enough money!";
             UnlockButton();
         }
         else if(ErrorEvent == 2){
-            GameObject ErrorBox = Instantiate(prefebOfErrorMessage, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
-            ErrorBox.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
             ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You don't input any number!";
+            UnlockButton();
+        }
+        else if(ErrorEvent == 3){
+            ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Your backsack is full!";
             UnlockButton();
         }
     }
@@ -370,7 +363,7 @@ public class MarketController : MonoBehaviour
             ProductList();
         }
         else if(PageMode == 2){
-            ERC721balanceOf();
+            ForMarketLoadEquipment(PlayerInfo.AccountAddress);
         }
         else if(PageMode == 3){
             ProductListFromOwnerOf();
@@ -426,7 +419,8 @@ public class MarketController : MonoBehaviour
     internal void GetPlayerApprove(){
         _approveUI = Instantiate(prefebOfApprove,  new Vector3(85, 0, 0), Quaternion.Euler(0, 0, 0));
         _approveUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-        _approveUI.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "You need to allow us to operate your ERC20/ERC721";
+        _approveUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You need to allow us to operate your ERC20/ERC721";
+        Debug.Log("GetApprove");
     }
 
     internal void DestroyApporveUI(){
@@ -441,31 +435,90 @@ public class MarketController : MonoBehaviour
         if(signEvent == 1){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you sign ERC20 approve suecessfully!\nYou can sign the purchase!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you sign ERC20 approve suecessfully!\nYou can sign the purchase!";
         }
         else if(signEvent == 2){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you purchase product suecessfully!\nNow, you can check item in backpack!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you purchase product suecessfully!\nNow, you can check item in backpack!";
         }
         else if(signEvent == 3){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you sign ERC721 approve suecessfully!\nYou can sign the list!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you sign ERC721 approve suecessfully!\nYou can sign the list!";
         }
         else if(signEvent == 4){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you list product suecessfully!\nYou can check the product in Unlist page!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you list product suecessfully!\nYou can check the product in Unlist page!";
         }
         else if(signEvent == 5){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you unlist product suecessfully!\nYou can check the item in backpack!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you unlist product suecessfully!\nYou can check the item in backpack!";
         }
     }
 
     internal void DestroyResponseUI(){
         Destroy(_responseUI);
     }
+    internal int GetProductRarity(){
+        if(PageMode == 1){
+            return Convert.ToInt32(ProductInfo.ProductStat[page * 10 + ClickProduct].rarity);
+        }
+        else if(PageMode == 2){
+            return PlayerInfo.PlayerEquipment.equipments[page * 10 + ClickProduct].equipmentStatus.rarity;
+        }
+        else{
+            return Convert.ToInt32(UnlistProductInfo.UnlistProductStat[page * 10 + ClickProduct].rarity);
+        }
+    }
+    internal int GetProductPart(){
+        if(PageMode == 1){
+            return Convert.ToInt32(ProductInfo.ProductStat[page * 10 + ClickProduct].part);
+        }
+        else if(PageMode == 2){
+            return PlayerInfo.PlayerEquipment.equipments[page * 10 + ClickProduct].equipmentStatus.part;
+        }
+        else{
+            return Convert.ToInt32(UnlistProductInfo.UnlistProductStat[page * 10 + ClickProduct].part);
+        }
+    }
+    internal int GetProductLevel(){
+        if(PageMode == 1){
+            return Convert.ToInt32(ProductInfo.ProductStat[page * 10 + ClickProduct].level);
+        }
+        else if(PageMode == 2){
+            return PlayerInfo.PlayerEquipment.equipments[page * 10 + ClickProduct].equipmentStatus.level;
+        }
+        else{
+            return Convert.ToInt32(UnlistProductInfo.UnlistProductStat[page * 10 + ClickProduct].level);
+        }
+    }
+    internal int[] GetProductAttribute(){
+        if(PageMode == 1){
+            return ProductInfo.ProductStat[page * 10 + ClickProduct].attribute;
+        }
+        else if(PageMode == 2){
+            return PlayerInfo.PlayerEquipment.equipments[page * 10 + ClickProduct].equipmentStatus.attribute;
+        }
+        else{
+            return UnlistProductInfo.UnlistProductStat[page * 10 + ClickProduct].attribute;
+        }
+    }
+    internal int[] GetProductSkill(){
+        if(PageMode == 1){
+            return ProductInfo.ProductStat[page * 10 + ClickProduct].skills;
+        }
+        else if(PageMode == 2){
+            return PlayerInfo.PlayerEquipment.equipments[page * 10 + ClickProduct].equipmentStatus.skills;
+        }
+        else{
+            return UnlistProductInfo.UnlistProductStat[page * 10 + ClickProduct].skills;
+        }
+    }
+    private void SetEquipment(string equipment) {
+    PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(equipment);
+    Debug.Log("Equipment");
+  }
 }

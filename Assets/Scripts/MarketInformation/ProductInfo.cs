@@ -32,9 +32,8 @@ public class ProductInfo{
         ProductTokenStat[] ProductTokenStatList = new ProductTokenStat[TokenStat.Length / 2];
         for(uint i = 0; i < TokenStat.Length; i++){
             if(string.Compare(TokenStat[i], "") != 0 && string.Compare(TokenStat[i], ",") != 0){
-                Debug.Log(TokenStat[i]);
                 string TokenStatTemp = "{" + TokenStat[i] + "}";
-                Debug.Log(TokenStatTemp);
+                Debug.Log(TokenStatJson);
                 ProductTokenStatList[count++] = JsonUtility.FromJson<ProductTokenStat>(TokenStatTemp);
             }
         }
