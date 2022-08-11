@@ -26,7 +26,13 @@ public class MarketButtonController : MonoBehaviour
             uint pagemode = marketcanvas.GetComponent<MarketController>().getPageMode();
             if(pagemode == 1){
                 Destroy(GameObject.FindWithTag("Checkmenu"));
-                marketcanvas.GetComponent<MarketController>().getAllowanceOf();
+                if(PlayerInfo.PlayerEquipment.equipments.Length >= 30){
+                    marketcanvas.GetComponent<MarketController>().ErrorMessage(3);
+                }
+                else{
+                    marketcanvas.GetComponent<MarketController>().getAllowanceOf();
+                }
+                
             }
             else if(pagemode == 2){
                 Destroy(GameObject.FindWithTag("InputUi"));
@@ -41,7 +47,12 @@ public class MarketButtonController : MonoBehaviour
             }
             else if(pagemode == 3){
                 Destroy(GameObject.FindWithTag("Checkmenu"));
-                marketcanvas.GetComponent<MarketController>().Unlist();
+                if(PlayerInfo.PlayerEquipment.equipments.Length >= 30){
+                    marketcanvas.GetComponent<MarketController>().ErrorMessage(3);
+                }
+                else{
+                    marketcanvas.GetComponent<MarketController>().Unlist();
+                }
             }
             marketcanvas.GetComponent<MarketController>().UnlockButton();
         }
@@ -108,8 +119,15 @@ public class MarketButtonController : MonoBehaviour
                 GameObject Marketcanvas = GameObject.Find("MarketCanvas");
                 name = this.gameObject.name.Substring(6);
                 Marketcanvas.GetComponent<MarketController>().setClickProduct(Convert.ToUInt32(name) - 1);
+                var attributeTemp = Marketcanvas.GetComponent<MarketController>().GetProductAttribute();
+                var skillTemp = Marketcanvas.GetComponent<MarketController>().GetProductSkill();
                 GameObject.Find("ProductWantToBuyTMP").GetComponent<TextMeshProUGUI>().text = ("You want to buy" + '\n' 
-                + "TokenId" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n' + "Price" + Marketcanvas.GetComponent<MarketController>().getProductPrice());
+                + "TokenId:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n' + "Price:" + Marketcanvas.GetComponent<MarketController>().getProductPrice() + '\n'
+                + "Rarity:" + Marketcanvas.GetComponent<MarketController>().GetProductRarity() + '\n'
+                + "Part:" + Marketcanvas.GetComponent<MarketController>().GetProductPart() + '\n'
+                + "Level:" + Marketcanvas.GetComponent<MarketController>().GetProductLevel() + '\n'
+                + "Skills:" + skillTemp[0] + "," + skillTemp[1] + "," + skillTemp[2]  + '\n'
+                + "Attribute:" + attributeTemp[0] + "," + attributeTemp[1] + "," + attributeTemp[2] + "," + attributeTemp[3] + "," + attributeTemp[4] + "," + attributeTemp[5]);
             }
             else if(pagemode == 2){
                 string name = ("Product" + this.gameObject.name.Substring(6));
@@ -119,7 +137,7 @@ public class MarketButtonController : MonoBehaviour
                 name = this.gameObject.name.Substring(6);
                 Marketcanvas.GetComponent<MarketController>().setClickProduct(Convert.ToUInt32(name) - 1);
                 GameObject.Find("ListTMP").GetComponent<TextMeshProUGUI>().text = ("You want to list" + '\n' 
-                + "TokenId" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n' + 
+                + "TokenId:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n' + 
                 "Please input positive integer");
             }
             else if(pagemode == 3){
@@ -130,7 +148,7 @@ public class MarketButtonController : MonoBehaviour
                 name = this.gameObject.name.Substring(6);
                 Marketcanvas.GetComponent<MarketController>().setClickProduct(Convert.ToUInt32(name) - 1);
                 GameObject.Find("ProductWantToBuyTMP").GetComponent<TextMeshProUGUI>().text = ("You want to Unlist" + '\n' 
-                + "TokenId" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n'+  "Price" + Marketcanvas.GetComponent<MarketController>().getProductPrice());
+                + "TokenId:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n'+  "Price" + Marketcanvas.GetComponent<MarketController>().getProductPrice());
             }
             marketcanvas.GetComponent<MarketController>().LockButton();
         }
