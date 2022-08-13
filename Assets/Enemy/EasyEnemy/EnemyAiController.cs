@@ -9,7 +9,7 @@ public class EnemyAiController : MonoBehaviour {
     [SerializeField] float _attackRadius ; //怪物會開始攻擊玩家的距離
 
     //管理敵人現在要做什麼
-    [SerializeField] enum Status{idle, run, attack, takeHit, dead};
+    [SerializeField] enum Status{idle, run, attack, takeHit, dead, AfterDead};
     [SerializeField] Status _enemyStatus = Status.idle; //公開方便在外觀察狀態
 
     //用於傷害計算 (for Jimmy)
@@ -56,10 +56,16 @@ public class EnemyAiController : MonoBehaviour {
 
         // 依據條件轉換狀態
         if(GetComponent<HpController>().getHp() <= 0){ //怪物死亡
-            _enemyStatus = Status.dead;
-        }else if(GetComponent<Animator>().GetBool("isTakeHit")){
+            if (_enemyStatus != Status.dead && _enemyStatus != Status.AfterDead){
+							Debug.Log("Dead");
+              _enemyStatus = Status.dead;
+            } else {
+							Debug.Log("AfterDead");
+							_enemyStatus = Status.AfterDead;
+						}
+        } else if(GetComponent<Animator>().GetBool("isTakeHit")){
             _enemyStatus = Status.takeHit;
-        }else if(isPlayerInThisCircle(_attackRadius)){ //怪物發現玩家
+        } else if(isPlayerInThisCircle(_attackRadius)){ //怪物發現玩家
             _enemyStatus = Status.attack;
         } else if(isPlayerInThisCircle(_searchRadius)){ //怪物即將攻擊玩家
             _enemyStatus = Status.run;
@@ -84,6 +90,8 @@ public class EnemyAiController : MonoBehaviour {
             case Status.takeHit:
                 enemyTakeHit();
                 break;
+						case Status.AfterDead:
+								break;
             default:
                 Debug.Log("此怪物目前無狀態，請注意程式碼");
                 break;
@@ -142,6 +150,21 @@ public class EnemyAiController : MonoBehaviour {
             GetComponent<BoxCollider2D>().enabled = false;
             this.Invoke("DestroyThis", _deathDelayTime);
             agent.speed = 0;
+            Debug.Log("Enemy is dead.");
+            Debug.Log(this.gameObject.name);
+            if (this.gameObject.name.Substring(0, 6) == "Goblin"){
+              EnemyInformation.SetGoblin();
+              Debug.Log(EnemyInformation.GetGoblin());
+            } else if (this.gameObject.name.Substring(0, 8) == "Mushroom"){
+              EnemyInformation.SetMushroom();
+              Debug.Log(EnemyInformation.GetMushroom());
+            } else if (this.gameObject.name.Substring(0, 8) == "Skeleton"){
+              EnemyInformation.SetSkeleton();
+              Debug.Log(EnemyInformation.GetSkeleton());
+            } else if (this.gameObject.name.Substring(0, 9) == "FlyingEye"){
+              EnemyInformation.SetFlyingEye();
+              Debug.Log(EnemyInformation.GetFlyingEye());
+            }
         }
 
 

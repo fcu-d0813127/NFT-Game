@@ -34,6 +34,7 @@ public class DungeonButton : MonoBehaviour {
       } else if (_name.text == "Dungeon3") {
         SceneManager.LoadScene("Dungeon3");
       }
+      EnemyInformation.InitEnemyInformation();
       Debug.Log("You entry " + _nowSelectDungeon.text);
     } else {
       GameObject outline = transform.Find("Outline").gameObject;
