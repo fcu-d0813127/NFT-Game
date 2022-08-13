@@ -8,6 +8,16 @@ public class MaterialBlockCreate : MonoBehaviour {
   private float _generatePositionY = 100.0f;
 
   private void Awake() {
+    // 正式用
+    TempMaterialNum.MaterialNum = PlayerInfo.MaterialNum;
+    
+    // 鍛造 scene 測試用
+    // TempMaterialNum.MaterialNum = new MaterialNum {
+    //   Ruby = 250,
+    //   Sapphire = 250,
+    //   Emerald = 250
+    // };
+
     Instance = this;
     Create();
   }
@@ -19,7 +29,8 @@ public class MaterialBlockCreate : MonoBehaviour {
       newBlock.transform.SetParent(_canvas.transform, false);
       MaterialBlockDataController materialData =
           newBlock.GetComponent<MaterialBlockDataController>();
-      materialData.SetNameAndNum(i.Key, i.Value);
+      string materialName = MaterialChineseMapping.Chinese[i.Key];
+      materialData.SetNameAndNum(materialName, i.Value);
       SetPosition(newBlock);
     }
   }
@@ -27,7 +38,7 @@ public class MaterialBlockCreate : MonoBehaviour {
   private Dictionary<string, int> GetAllMaterials() {
     Dictionary<string, int> materialList = new Dictionary<string, int>();
     var allMaterialValue = typeof(MaterialNum).GetProperties();
-    MaterialNum materialNum = PlayerInfo.MaterialNum;
+    MaterialNum materialNum = TempMaterialNum.MaterialNum;
     foreach (var i in allMaterialValue) {
       string name = i.Name;
       var value = typeof(MaterialNum).GetProperty(name).GetValue(materialNum);

@@ -24,8 +24,8 @@ public class BlockDataController : MonoBehaviour {
   }
 
   public void UpdateMaterialNumValue(int addBack) {
-    string name = Name.text;
-    MaterialNum materialNum = PlayerInfo.MaterialNum;
+    string name = MaterialChineseMapping.English[Name.text];
+    MaterialNum materialNum = TempMaterialNum.MaterialNum;
     int nowValue = (int)typeof(MaterialNum).GetProperty(name).GetValue(materialNum);
     int finalValue = nowValue + addBack;
     typeof(MaterialNum).GetProperty(name).SetValue(materialNum, finalValue);

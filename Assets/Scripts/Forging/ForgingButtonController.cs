@@ -51,6 +51,7 @@ public class ForgingButtonController : MonoBehaviour {
       Skills = new int[0]
     };
     EquipmentItems.Add(NowEquipmentItemData);
+    PlayerInfo.MaterialNum = TempMaterialNum.MaterialNum;
   }
 
   private void Clear() {
