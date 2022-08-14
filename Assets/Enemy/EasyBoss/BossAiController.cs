@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BossAiController : MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class BossAiController : MonoBehaviour {
     [SerializeField] float _attackRadius ; //怪物會開始攻擊玩家的距離
 
     // 管理敵人現在要做什麼
-    [SerializeField] enum Status{idle, run, attack, remoteAttack, takeHit, dead, AfterDead};
+    [SerializeField] enum Status{idle, run, attack, remoteAttack, takeHit, dead};
     [SerializeField] Status _enemyStatus = Status.idle; //公開方便在外觀察狀態
 
     // 用於傷害計算 (for Jimmy)
@@ -35,6 +36,7 @@ public class BossAiController : MonoBehaviour {
     private Vector2 playerPos;
     private Vector2 _lastPos;
     private UnityEngine.AI.NavMeshAgent agent;
+    private bool _isDead;
 
     void Start() {
 
@@ -48,6 +50,7 @@ public class BossAiController : MonoBehaviour {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        _isDead = false;
 
     }
 
@@ -64,11 +67,7 @@ public class BossAiController : MonoBehaviour {
         
         // 依據條件轉換狀態
         if(GetComponent<HpController>().getHp() <= 0){ //怪物死亡
-            if (_enemyStatus != Status.dead && _enemyStatus != Status.AfterDead){
-              _enemyStatus = Status.dead;
-            } else {
-              _enemyStatus = Status.AfterDead;
-            }
+            _enemyStatus = Status.dead;
         } else if(GetComponent<Animator>().GetBool("isTakeHit")){
             _enemyStatus = Status.takeHit;
         } else if(isPlayerInThisCircle(_attackRadius)){    
@@ -110,8 +109,6 @@ public class BossAiController : MonoBehaviour {
                 break;
             case Status.remoteAttack:
                 enemyRemoteAttack();
-                break;
-            case Status.AfterDead:
                 break;
             default:
                 Debug.Log("此怪物目前無狀態，請注意程式碼");
@@ -174,9 +171,13 @@ public class BossAiController : MonoBehaviour {
             
             agent.speed = 0;
             wall.SetActive(false);
-            if (this.gameObject.name.Substring(0, 14) == "BringerOfDeath"){
-           	  EnemyInformation.SetBringerOfDeath();
-            	Debug.Log(EnemyInformation.GetBringerOfDeath());
+            if(_isDead == false){
+                _isDead = true;
+                var enemyList = GameObject.Find("EnemyList");
+                if (this.gameObject.name.Substring(0, 14) == "BringerOfDeath"){
+                    EnemyInformation.SetBringerOfDeath();
+                    enemyList.transform.GetChild(4).gameObject.GetComponent<TextMeshProUGUI>().text = "BringerOfDeath:" + EnemyInformation.GetBringerOfDeath();
+                }
             }
         }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyAiController : MonoBehaviour {
 
@@ -9,7 +10,7 @@ public class EnemyAiController : MonoBehaviour {
     [SerializeField] float _attackRadius ; //怪物會開始攻擊玩家的距離
 
     //管理敵人現在要做什麼
-    [SerializeField] enum Status{idle, run, attack, takeHit, dead, AfterDead};
+    [SerializeField] enum Status{idle, run, attack, takeHit, dead};
     [SerializeField] Status _enemyStatus = Status.idle; //公開方便在外觀察狀態
 
     //用於傷害計算 (for Jimmy)
@@ -26,6 +27,7 @@ public class EnemyAiController : MonoBehaviour {
     private Vector2 playerPos;
     private Vector2 _lastPos;
     private UnityEngine.AI.NavMeshAgent agent;
+    private bool _isDead;
 
     /*怪物數據參考 副本1哥布林  
     _searchRadius = 3.5f;
@@ -43,6 +45,7 @@ public class EnemyAiController : MonoBehaviour {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        _isDead = false;
 
     }
 
@@ -56,13 +59,7 @@ public class EnemyAiController : MonoBehaviour {
 
         // 依據條件轉換狀態
         if(GetComponent<HpController>().getHp() <= 0){ //怪物死亡
-            if (_enemyStatus != Status.dead && _enemyStatus != Status.AfterDead){
-							Debug.Log("Dead");
-              _enemyStatus = Status.dead;
-            } else {
-							Debug.Log("AfterDead");
-							_enemyStatus = Status.AfterDead;
-						}
+            _enemyStatus = Status.dead;
         } else if(GetComponent<Animator>().GetBool("isTakeHit")){
             _enemyStatus = Status.takeHit;
         } else if(isPlayerInThisCircle(_attackRadius)){ //怪物發現玩家
@@ -90,8 +87,6 @@ public class EnemyAiController : MonoBehaviour {
             case Status.takeHit:
                 enemyTakeHit();
                 break;
-						case Status.AfterDead:
-								break;
             default:
                 Debug.Log("此怪物目前無狀態，請注意程式碼");
                 break;
@@ -150,20 +145,22 @@ public class EnemyAiController : MonoBehaviour {
             GetComponent<BoxCollider2D>().enabled = false;
             this.Invoke("DestroyThis", _deathDelayTime);
             agent.speed = 0;
-            Debug.Log("Enemy is dead.");
-            Debug.Log(this.gameObject.name);
-            if (this.gameObject.name.Substring(0, 6) == "Goblin"){
-              EnemyInformation.SetGoblin();
-              Debug.Log(EnemyInformation.GetGoblin());
-            } else if (this.gameObject.name.Substring(0, 8) == "Mushroom"){
-              EnemyInformation.SetMushroom();
-              Debug.Log(EnemyInformation.GetMushroom());
-            } else if (this.gameObject.name.Substring(0, 8) == "Skeleton"){
-              EnemyInformation.SetSkeleton();
-              Debug.Log(EnemyInformation.GetSkeleton());
-            } else if (this.gameObject.name.Substring(0, 9) == "FlyingEye"){
-              EnemyInformation.SetFlyingEye();
-              Debug.Log(EnemyInformation.GetFlyingEye());
+            if (_isDead == false) {
+                _isDead = true;
+                var enemyList = GameObject.Find("EnemyList");
+                if (this.gameObject.name.Substring(0, 6) == "Goblin") {
+                    EnemyInformation.SetGoblin();
+                    enemyList.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Goblin:" + EnemyInformation.GetGoblin();
+                } else if (this.gameObject.name.Substring(0, 8) == "Mushroom") {
+                    EnemyInformation.SetMushroom();
+                    enemyList.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "Mushroom:" + EnemyInformation.GetMushroom();
+                } else if (this.gameObject.name.Substring(0, 8) == "Skeleton") {
+                    EnemyInformation.SetSkeleton();
+                    enemyList.transform.GetChild(3).gameObject.GetComponent<TextMeshProUGUI>().text = "Skeleton:" + EnemyInformation.GetSkeleton();
+                } else if (this.gameObject.name.Substring(0, 9) == "FlyingEye") {
+                    EnemyInformation.SetFlyingEye();
+                    enemyList.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "FlyingEye:" + EnemyInformation.GetFlyingEye();
+                }
             }
         }
 
