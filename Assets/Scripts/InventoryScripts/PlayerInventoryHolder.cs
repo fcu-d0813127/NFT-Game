@@ -91,7 +91,6 @@ public class PlayerInventoryHolder : InventoryHolder {
       EquipmentItems.Add(equipment);
     }
     foreach (var i in EquipmentItems.Equipments) {
-      Debug.Log(i.Id);
       _equipmentBackpackInventorySystem.AddToInventory(i, 1);
     }
   }

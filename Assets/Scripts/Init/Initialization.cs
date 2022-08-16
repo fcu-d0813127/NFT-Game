@@ -85,37 +85,31 @@ public class Initialization : MonoBehaviour {
   private void SetAbility(string ability) {
     PlayerInfo.PlayerAbility = PlayerAbility.CreateAbility(ability);
     PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
-    Debug.Log("ability");
     _checkLoad++;
   }
 
   private void SetEquipment(string equipment) {
     PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(equipment);
-    Debug.Log("Equipment");
     _checkLoad++;
   }
 
   private void SetPlayerStatus(string playerStatus) {
     PlayerInfo.PlayerStatus = PlayerStatus.CreateStatus(playerStatus);
-    Debug.Log("PlayerStatus");
     _checkLoad++;
   }
 
   private void SetRuby(string balanceOfRuby) {
     PlayerInfo.MaterialNum.Ruby = int.Parse(balanceOfRuby);
-    Debug.Log("Ruby");
     _checkLoad++;
   }
 
   private void SetSapphire(string balanceOfSapphire) {
     PlayerInfo.MaterialNum.Sapphire = int.Parse(balanceOfSapphire);
-    Debug.Log("Sapphire");
     _checkLoad++;
   }
 
   private void SetEmerald(string balanceOfEmerald) {
     PlayerInfo.MaterialNum.Emerald = int.Parse(balanceOfEmerald);
-    Debug.Log("Emerald");
     _checkLoad++;
   }
 
