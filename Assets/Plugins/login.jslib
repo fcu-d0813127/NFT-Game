@@ -68,7 +68,7 @@ mergeInto(LibraryManager.library, {
                 };
                 equipments.push(newResponse);
               });
-    };
+    }
     const newResponse = {
       "equipments": equipments
     };

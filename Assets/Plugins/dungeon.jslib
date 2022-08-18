@@ -5,19 +5,16 @@ mergeInto(LibraryManager.library, {
             .then((response) => {
               return window.web3.utils.fromWei(response.cost);
             });
-    console.log('Dungeon cost: ' + dungeonCost);
     const myBalanceOf = await window.ERC20_Contract.methods.balanceOf(
         window.data.PLAYER_ACCOUNT).call()
             .then((response) => {
               return window.web3.utils.fromWei(response);
             });
-    console.log('My balance of: ' + myBalanceOf);
     const canUseBalanceOf = await window.ERC20_Contract.methods.allowance(
         window.data.PLAYER_ACCOUNT, window.data.MAJOR_ADDRESS).call()
             .then((response) => {
               return window.web3.utils.fromWei(response);
             });
-    console.log('Can use balance of: ' + canUseBalanceOf);
     if (canUseBalanceOf < dungeonCost) {
       if (myBalanceOf < dungeonCost) {
         console.log('Your money not enough!');
