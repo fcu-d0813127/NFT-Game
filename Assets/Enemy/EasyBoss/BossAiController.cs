@@ -173,11 +173,9 @@ public class BossAiController : MonoBehaviour {
             wall.SetActive(false);
             if(_isDead == false){
                 _isDead = true;
-                var enemyList = GameObject.Find("EnemyList");
-                if (this.gameObject.name.Substring(0, 14) == "BringerOfDeath"){
-                    EnemyInformation.SetBringerOfDeath();
-                    enemyList.transform.GetChild(4).gameObject.GetComponent<TextMeshProUGUI>().text = "BringerOfDeath:" + EnemyInformation.GetBringerOfDeath();
-                }
+                var index = EnemyInformation.AddBooty(this.gameObject.name);
+                if (index != -1)
+                    GameObject.Find("EnemyList").transform.GetChild(index).gameObject.GetComponent<TextMeshProUGUI>().text = EnemyInformation.NameOfEnemyList[index] + ":" + EnemyInformation.GetOneEnemyBooty(index);
             }
         }
 

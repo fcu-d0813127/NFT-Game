@@ -2,46 +2,27 @@ using UnityEngine;
 
 [System.Serializable]
 public class EnemyInformation{
-    internal static int _flyingEye;
-    internal static int _goblin;
-    internal static int _mushroom;
-    internal static int _skeleton;
-    internal static int _bringerOfDeath;
-    internal static void InitEnemyInformation(){
-        _flyingEye = 0;
-        _goblin = 0;
-        _mushroom = 0;
-        _skeleton = 0;
-        _bringerOfDeath = 0;
+    private static int[] EnemyBooty = new int[5];
+    internal static string[] NameOfEnemyList = new string[] {"Goblin", "FlyingEye", "Mushroom", "Skeleton", "BringerOfDeath"};
+    internal static void InitEnemyInformation () {
+        for (int i = 0; i < EnemyBooty.Length; i++) {
+            EnemyBooty[i] = 0;
+        }
     }
-    internal static void SetFlyingEye(){
-        _flyingEye+=1;
+
+    internal static int AddBooty (string name) {
+        for (int i = 0; i < NameOfEnemyList.Length; i++){
+            if (NameOfEnemyList[i] == name.Substring(0, NameOfEnemyList[i].Length)) {
+                EnemyBooty[i] += 1;
+                return i;
+            }
+        }
+        return -1;//錯誤，暫時無例外處理
     }
-    internal static int GetFlyingEye(){
-        return _flyingEye;
+    internal static int GetOneEnemyBooty (int index) {//螢幕顯示使用，不用就砍
+        return EnemyBooty[index];
     }
-    internal static void SetGoblin(){
-        _goblin+=1;
-    }
-    internal static int GetGoblin(){
-        return _goblin;
-    }
-    internal static void SetMushroom(){
-        _mushroom+=1;
-    }
-    internal static int GetMushroom(){
-        return _mushroom;
-    }
-    internal static void SetSkeleton(){
-        _skeleton+=1;
-    }
-    internal static int GetSkeleton(){
-        return _skeleton;
-    }
-    internal static void SetBringerOfDeath(){
-        _bringerOfDeath+=1;
-    }
-    internal static int GetBringerOfDeath(){
-        return _bringerOfDeath;
+    internal static int[] GetEnemyBooty () {//exchangeMatrial使用
+        return EnemyBooty;
     }
 }

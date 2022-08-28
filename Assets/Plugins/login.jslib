@@ -125,5 +125,33 @@ mergeInto(LibraryManager.library, {
         'Initialization',
         'SetEmerald',
         result);
+  },
+  exchangeMaterial: async function(enemyBooty) {
+    var exchange = UTF8ToString(enemyBooty).split(',');
+    for(let i = 0; i < exchange.length; i++){
+      console.log(exchange[i]);
+    }
+    var material = [0, 0, 0];
+    await window.majorContract.methods.exchangeMaterial(exchange).send({from: window.playerAccount})
+    .on('transactionHash', function(hash){
+      console.log(hash);
+    })
+    .on('receipt', function(receipt){
+      var decimalNumber = 0;
+      for (var key in receipt.events) {
+        decimalNumber = parseInt(receipt.events[key].raw.data, 16);
+        if(receipt.events[key].address === window.data.RUBY_ADDRESS) {
+          material[0] += decimalNumber / Math.pow(10, 18);
+        }
+        else if(receipt.events[key].address === window.data.SAPPHIRE_ADDRESS) {
+          material[1] += decimalNumber / Math.pow(10, 18);
+        }
+        else if(receipt.events[key].address === window.data.EMERALD_ADDRESS) {
+          material[2] += decimalNumber / Math.pow(10, 18);
+        }
+      }
+    });
+    var materialTemp = material[0] + ',' + material[1] + ',' + material[2];
+    myGameInstance.SendMessage('FireTraderNPC', 'ShowRewardMaterial', materialTemp);
   }
 });

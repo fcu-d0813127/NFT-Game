@@ -27,7 +27,7 @@ public class EnemyAiController : MonoBehaviour {
     private Vector2 playerPos;
     private Vector2 _lastPos;
     private UnityEngine.AI.NavMeshAgent agent;
-    private bool _isDead;
+    private bool _isDead;//避免怪物死亡重複呼叫特定程式
 
     /*怪物數據參考 副本1哥布林  
     _searchRadius = 3.5f;
@@ -147,20 +147,9 @@ public class EnemyAiController : MonoBehaviour {
             agent.speed = 0;
             if (_isDead == false) {
                 _isDead = true;
-                var enemyList = GameObject.Find("EnemyList");
-                if (this.gameObject.name.Substring(0, 6) == "Goblin") {
-                    EnemyInformation.SetGoblin();
-                    enemyList.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Goblin:" + EnemyInformation.GetGoblin();
-                } else if (this.gameObject.name.Substring(0, 8) == "Mushroom") {
-                    EnemyInformation.SetMushroom();
-                    enemyList.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "Mushroom:" + EnemyInformation.GetMushroom();
-                } else if (this.gameObject.name.Substring(0, 8) == "Skeleton") {
-                    EnemyInformation.SetSkeleton();
-                    enemyList.transform.GetChild(3).gameObject.GetComponent<TextMeshProUGUI>().text = "Skeleton:" + EnemyInformation.GetSkeleton();
-                } else if (this.gameObject.name.Substring(0, 9) == "FlyingEye") {
-                    EnemyInformation.SetFlyingEye();
-                    enemyList.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "FlyingEye:" + EnemyInformation.GetFlyingEye();
-                }
+                var index = EnemyInformation.AddBooty(this.gameObject.name);
+                if(index != -1)
+                    GameObject.Find("EnemyList").transform.GetChild(index).gameObject.GetComponent<TextMeshProUGUI>().text = (EnemyInformation.NameOfEnemyList[index] + ":" + EnemyInformation.GetOneEnemyBooty(index));
             }
         }
 
