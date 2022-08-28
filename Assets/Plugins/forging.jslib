@@ -3,10 +3,7 @@ mergeInto(LibraryManager.library, {
       part,
       amountOfRuby,
       amountOfSapphire,
-      amountOfEmerald,
-      myAmountOfRuby,
-      myAmountOfSapphire,
-      myAmountOfEmerald) {
+      amountOfEmerald) {
     const canUseRubyBalanceOf = await window.rubyContract.methods.allowance(
         window.data.PLAYER_ACCOUNT, window.data.MAJOR_ADDRESS).call()
             .then((responce) => {
@@ -24,44 +21,42 @@ mergeInto(LibraryManager.library, {
                 .then((responce) => {
                   return responce;
                 });
+    let isApprove = false;
+    if (canUseRubyBalanceOf < amountOfRuby ||
+        canUseSapphireBalanceOf < amountOfSapphire ||
+        canUseSapphireBalanceOf < amountOfSapphire) {
+      myGameInstance.SendMessage(
+          'ApproveResponseController',
+          'Open');
+    }
     if (canUseRubyBalanceOf < amountOfRuby) {
-      let approveNum;
-      if (myAmountOfRuby < 10000) {
-        approveNum = myAmountOfRuby;
-      } else {
-        approveNum = '10000';
-      }
+      isApprove = true;
       await window.rubyContract.methods.approve(
-          window.data.MAJOR_ADDRESS, window.web3.utils.toWei(approveNum))
+          window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
               });
     }
     if (canUseSapphireBalanceOf < amountOfSapphire) {
-      let approveNum;
-      if (myAmountOfSapphire < 10000) {
-        approveNum = myAmountOfSapphire;
-      } else {
-        approveNum = '10000';
-      }
+      isApprove = true;
       await window.sapphireContract.methods.approve(
-          window.data.MAJOR_ADDRESS, window.web3.utils.toWei(approveNum))
+          window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
               });
     }
     if (canUseEmeraldBalanceOf < amountOfEmerald) {
-      let approveNum;
-      if (myAmountOfEmerald < 10000) {
-        approveNum = myAmountOfEmerald;
-      } else {
-        approveNum = '10000';
-      }
+      isApprove = true;
       await window.emeraldContract.methods.approve(
-          window.data.MAJOR_ADDRESS, window.web3.utils.toWei(approveNum))
+          window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
               });
+    }
+    if (isApprove) {
+      myGameInstance.SendMessage(
+          'ApproveResponseController',
+          'Cancel');
     }
     const tokenId = await window.majorContract.methods.forge(
         part, amountOfRuby, amountOfSapphire, amountOfEmerald).send({
