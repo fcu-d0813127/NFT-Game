@@ -12,7 +12,7 @@ mergeInto(LibraryManager.library, {
   Init: async function(name) {
     await window.majorContract.methods.init(
         UTF8ToString(name)).send({
-          from: window.playerAccount
+          from: window.data.PLAYER_ACCOUNT
         });
     myGameInstance.SendMessage('CreateButton', 'LoadInitScene');
   },
@@ -68,7 +68,7 @@ mergeInto(LibraryManager.library, {
                 };
                 equipments.push(newResponse);
               });
-    };
+    }
     const newResponse = {
       "equipments": equipments
     };

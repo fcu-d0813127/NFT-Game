@@ -72,8 +72,8 @@ public class PlayerInventoryHolder : InventoryHolder {
     foreach (var i in PlayerInfo.PlayerEquipment.equipments) {
       Attribute attribute = new Attribute {
         Atk = i.equipmentStatus.attribute[0],
-        Matk = i.equipmentStatus.attribute[2],
-        Def = i.equipmentStatus.attribute[1],
+        Matk = i.equipmentStatus.attribute[1],
+        Def = i.equipmentStatus.attribute[2],
         Mdef = i.equipmentStatus.attribute[3],
         Cri = (float)i.equipmentStatus.attribute[4] / 10000,
         CriDmgRatio = (float)i.equipmentStatus.attribute[5] / 100
@@ -91,7 +91,6 @@ public class PlayerInventoryHolder : InventoryHolder {
       EquipmentItems.Add(equipment);
     }
     foreach (var i in EquipmentItems.Equipments) {
-      Debug.Log(i.Id);
       _equipmentBackpackInventorySystem.AddToInventory(i, 1);
     }
   }
