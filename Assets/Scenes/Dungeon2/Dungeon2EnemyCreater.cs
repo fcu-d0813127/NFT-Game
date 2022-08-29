@@ -17,8 +17,7 @@ public class Dungeon2EnemyCreater : MonoBehaviour
     [SerializeField] float[] mushroomGenerateRange;
     [SerializeField] float[] flyingEyeGenerateRange;
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         //設定生成數量
         skeletonNum1 = 10;
         skeletonNum2 = 3;
