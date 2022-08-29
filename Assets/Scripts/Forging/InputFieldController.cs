@@ -100,9 +100,10 @@ public class InputFieldController : MonoBehaviour {
   }
 
   private void ConstraintInValidValue() {
-    MaterialNum materialNum = PlayerInfo.MaterialNum;
+    MaterialNum materialNum = TempMaterialNum.MaterialNum;
+    string onSelectedName = MaterialChineseMapping.English[_onSelectedMaterialName];
     int maxValue =
-        (int)typeof(MaterialNum).GetProperty(_onSelectedMaterialName).GetValue(materialNum);
+        (int)typeof(MaterialNum).GetProperty(onSelectedName).GetValue(materialNum);
     TMP_InputField inputField = GameObject.Find("InputField").GetComponent<TMP_InputField>();
     if (inputField.text == "") {
       return;
@@ -128,11 +129,12 @@ public class InputFieldController : MonoBehaviour {
   }
 
   private void UpdateMaterialValue(int onSelectedNum) {
-    MaterialNum materialNum = PlayerInfo.MaterialNum;
+    MaterialNum materialNum = TempMaterialNum.MaterialNum;
+    string onSelectedName = MaterialChineseMapping.English[_onSelectedMaterialName];
     int nowValue =
-        (int)typeof(MaterialNum).GetProperty(_onSelectedMaterialName).GetValue(materialNum);
+        (int)typeof(MaterialNum).GetProperty(onSelectedName).GetValue(materialNum);
     int finalValue = nowValue - onSelectedNum;
-    typeof(MaterialNum).GetProperty(_onSelectedMaterialName).SetValue(materialNum, finalValue);
+    typeof(MaterialNum).GetProperty(onSelectedName).SetValue(materialNum, finalValue);
     _onSelectedMaterial.UpdateNum();
   }
 }
