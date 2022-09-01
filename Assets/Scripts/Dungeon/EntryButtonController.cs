@@ -21,7 +21,15 @@ public class EntryButtonController : MonoBehaviour {
     }
     string numbersOnly = Regex.Replace(dungeonName, "[^0-9]", "");
     int dungeonIndexOf = int.Parse(numbersOnly) - 1;
-    EntryDungeonSmartContract(dungeonIndexOf);
+    // WebGL 用
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      EntryDungeonSmartContract(dungeonIndexOf);
+    #endif
+
+    // Editor 測試用
+    #if UNITY_EDITOR
+      EntryDungeonScene();
+    #endif
   }
 
   private void EntryDungeonScene() {
