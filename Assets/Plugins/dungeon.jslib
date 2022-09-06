@@ -20,17 +20,17 @@ mergeInto(LibraryManager.library, {
         console.log('Your money not enough!');
         return;
       }
-      let approveNum;
-      if (myBalanceOf < 1000) {
-        approveNum = myBalanceOf;
-      } else {
-        approveNum = '1000';
-      }
+      myGameInstance.SendMessage(
+          'ApproveResponseController',
+          'Open');
       await window.ERC20_Contract.methods.approve(
-          window.data.MAJOR_ADDRESS, window.web3.utils.toWei(approveNum))
+          window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
               });
+      myGameInstance.SendMessage(
+          'ApproveResponseController',
+          'Cancel');
     }
     await window.majorContract.methods.enterDungeon(indexOfDungeon).send({
       from: window.data.PLAYER_ACCOUNT
