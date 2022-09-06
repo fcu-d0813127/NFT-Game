@@ -6,6 +6,7 @@ public class InventoryUIController : MonoBehaviour {
   [SerializeField] private GameObject _attribute;
   [SerializeField] private GameObject _hotBar;
   [SerializeField] private GameObject _hotBarName;
+  [SerializeField] private GameObject _destroyField;
   [SerializeField] private DynamicInventoryDisplay _equipmentBackpackPanel;
 
   private void OnEnable() {
@@ -29,6 +30,7 @@ public class InventoryUIController : MonoBehaviour {
     _attribute.SetActive(false);
     _hotBar.SetActive(false);
     _hotBarName.SetActive(false);
+    _destroyField.SetActive(false);
   }
 
   private void OpenBackpackUI() {
@@ -36,6 +38,7 @@ public class InventoryUIController : MonoBehaviour {
     _attribute.SetActive(true);
     _hotBar.SetActive(true);
     _hotBarName.SetActive(true);
+    _destroyField.SetActive(true);
   }
 
   private void DisplayInventory(InventorySystem invToDisplay, bool isDrop) {

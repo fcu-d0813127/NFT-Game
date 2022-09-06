@@ -43,14 +43,49 @@ public class ForgingButtonController : MonoBehaviour {
       return;
     }
     int part = _selectPart.value;
-    ForgingSmartContract(
-        part,
-        _sendMaterialNum.Ruby,
-        _sendMaterialNum.Sapphire,
-        _sendMaterialNum.Emerald,
-        PlayerInfo.MaterialNum.Ruby,
-        PlayerInfo.MaterialNum.Sapphire,
-        PlayerInfo.MaterialNum.Emerald);
+    // WebGL 用
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      ForgingSmartContract(
+          part,
+          _sendMaterialNum.Ruby,
+          _sendMaterialNum.Sapphire,
+          _sendMaterialNum.Emerald,
+          PlayerInfo.MaterialNum.Ruby,
+          PlayerInfo.MaterialNum.Sapphire,
+          PlayerInfo.MaterialNum.Emerald);
+    #endif
+
+    // Editor 測試用
+    #if UNITY_EDITOR
+      Attribute attribute = new Attribute {
+        Atk = 100.0f,
+        Matk = 100.0f,
+        Def = 100.0f,
+        Mdef = 100.0f,
+        Cri = 0.01f,
+        CriDmgRatio = 0.01f
+      };
+      NowEquipmentItemData = new EquipmentItemData {
+        Id = 0,
+        DisplayName = "Test",
+        MaxStackSize = 1,
+        Rarity = 0,
+        Part = part,
+        Level = 1,
+        Attribute = attribute,
+        Skills = new int[3]
+      };
+      EquipmentItems.Add(NowEquipmentItemData);
+      // 清除已經鍛造的素材
+      foreach (BlockDataController block in blocks) {
+        Destroy(block.gameObject);
+      }
+      _generateItmeIcon.color = Color.cyan;
+      ProbabilityController.Instance.ClearProbabilityValue();
+      CreateBlock.Instance.ResetGeneratePositionY();
+      PlayerInfo.MaterialNum = TempMaterialNum.MaterialNum;
+      _sendMaterialNum = new MaterialNum();
+    #endif
   }
 
   private void Clear() {

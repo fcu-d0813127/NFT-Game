@@ -10,8 +10,6 @@ public class HpController : MonoBehaviour {
     // Update is called once per frame
     void Start() {
         _hp = _hpMax;
-
-        
     }
 
     public void sufferDamage(int damage) {

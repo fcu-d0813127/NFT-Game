@@ -10,8 +10,7 @@ public class Dungeon3EnemyCreater : MonoBehaviour
 
     [SerializeField] float[] rightGenerateRange;
     [SerializeField] float[] leftGenerateRange;
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         rightGenerateRange = new float[4] {-16, 4, 0.9f, -1.6f};
         leftGenerateRange = new float[4] {-29, -22, 6, -7};
         GetComponent<EnemyCreater>().createEnemy(skeleton, 1, rightGenerateRange);
