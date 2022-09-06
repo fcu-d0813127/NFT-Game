@@ -35,5 +35,6 @@ public class EntryButtonController : MonoBehaviour {
   private void EntryDungeonScene() {
     string dungeonName = OnSelectedDungeon.Name;
     SceneManager.LoadScene(dungeonName);
+    SceneManager.LoadScene("AttackUiPanel", LoadSceneMode.Additive);
   }
 }

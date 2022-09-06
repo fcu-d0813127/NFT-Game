@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Forging.unity
     guid: e661bf181163968448fdd15fcd4a20e0
+  - enabled: 1
+    path: Assets/Scenes/AttackUiPanel.unity
+    guid: 0205662ca655e70468e447fcd5c7f0bb
   m_configObjects: {}
