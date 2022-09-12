@@ -148,8 +148,24 @@ public class EnemyAiController : MonoBehaviour {
             if (_isDead == false) {
                 _isDead = true;
                 var index = EnemyInformation.AddBooty(this.gameObject.name);
-                if(index != -1)
-                    GameObject.Find("EnemyList").transform.GetChild(index).gameObject.GetComponent<TextMeshProUGUI>().text = (EnemyInformation.NameOfEnemyList[index] + ":" + EnemyInformation.GetOneEnemyBooty(index));
+                string[] nameOfEnemyList = EnemyInformation.NameOfEnemyList;
+                string thisEnemyName= "";
+                for (int i = 0; i < EnemyInformation.NameOfEnemyList.Length; i++) {
+                    if (nameOfEnemyList[i] == this.gameObject.name.Substring(0, nameOfEnemyList[i].Length)) {
+                        thisEnemyName = nameOfEnemyList[i];
+                        break;
+                    }
+                }
+                if (index != -1) {
+                    GameObject enemyList = GameObject.Find("EnemyList");
+                    for (int i = 0; i < enemyList.transform.GetChild(0).gameObject.transform.childCount; i++) {
+                        if (thisEnemyName == enemyList.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.transform.name) {
+                            enemyList.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = EnemyInformation.GetOneEnemyBooty(index).ToString();
+                            break;
+                        }
+                    }
+                }
+                    
             }
         }
 

@@ -31,14 +31,21 @@ public class NpcController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         #if UNITY_EDITOR
-            var enemyBootyTemp = EnemyInformation.GetEnemyBooty();
+            int[] enemyBootyTemp = new int[5];//這邊數字(怪物種類數量)寫死
+            for (int i = 0; i < 5; i++) {//這邊數字(怪物種類數量)寫死
+                enemyBootyTemp[i] = EnemyInformation.GetOneEnemyBooty(i);
+            }
             PlayerInfo.MaterialNum.Ruby = PlayerInfo.MaterialNum.Ruby + enemyBootyTemp[0] * 10 + enemyBootyTemp[1] * 10 + enemyBootyTemp[2] * 10 + enemyBootyTemp[3] * 20 + enemyBootyTemp[4] * 100;
             PlayerInfo.MaterialNum.Sapphire = PlayerInfo.MaterialNum.Sapphire + enemyBootyTemp[1] * 10 + enemyBootyTemp[2] * 10 + enemyBootyTemp[3] * 20 + enemyBootyTemp[4] * 100;
             PlayerInfo.MaterialNum.Emerald = PlayerInfo.MaterialNum.Emerald + enemyBootyTemp[2] * 10 + enemyBootyTemp[3] * 20 + enemyBootyTemp[4] * 100;
-            LeaveDungeonScene();
+            string useForFollowFuntion = PlayerInfo.MaterialNum.Ruby.ToString() + ',' + PlayerInfo.MaterialNum.Sapphire.ToString() + ',' + PlayerInfo.MaterialNum.Emerald.ToString();
+            ShowRewardMaterial(useForFollowFuntion);
         #endif
         #if UNITY_WEBGL && !UNITY_EDITOR//這邊會先字串處理後再丟到jslib使用，避免一些麻煩
-            int[] enemyBootyTemp = EnemyInformation.GetEnemyBooty();
+            int[] enemyBootyTemp  = new int[5];//這邊數字(怪物種類數量)寫死
+            for (int i = 0; i < 5; i++) {//這邊數字(怪物種類數量)寫死
+                enemyBootyTemp[i] = EnemyInformation.GetOneEnemyBooty(i);
+            }
             string exchangeTemp = "";
             for (int i = 0; i < enemyBootyTemp.Length; i++){
                 exchangeTemp = exchangeTemp + enemyBootyTemp[i] + ',';
