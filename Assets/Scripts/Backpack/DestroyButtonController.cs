@@ -1,7 +1,10 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DestroyButtonController : MonoBehaviour {
+  [DllImport("__Internal")]
+  private static extern void DestroyEquipmentSmartContract(int tokenId);
   [SerializeField] private MouseItemData _mouseItemData;
   private Button _myselfButton;
 
@@ -14,8 +17,17 @@ public class DestroyButtonController : MonoBehaviour {
     if (_mouseItemData.AssignedInventorySlot.ItemData != null) {
       int tokenId = _mouseItemData.AssignedInventorySlot.ItemData.Id;
       Debug.Log(tokenId);
+      #if UNITY_WEBGL && !UNITY_EDITOR
+        DestroyEquipmentSmartContract(tokenId);
+      #endif
       // 消除裝備
-      _mouseItemData.ClearSlot();
+      #if UNITY_EDITOR
+        ClearMouse();
+      #endif
     }
+  }
+
+  private void ClearMouse() {
+    _mouseItemData.ClearSlot();
   }
 }

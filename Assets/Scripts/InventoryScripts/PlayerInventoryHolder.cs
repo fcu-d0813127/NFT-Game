@@ -17,6 +17,7 @@ public class PlayerInventoryHolder : InventoryHolder {
   [SerializeField] private GameObject _detail;
   [SerializeField] private GameObject _materialBackpackAttribute;
   [SerializeField] private GameObject _destroyField;
+  [SerializeField] private GameObject _saveEquip;
   [SerializeField] private DynamicInventoryDisplay _equipmentBackpackAttribute;
 
   public bool AddToInventory(InventoryItemData data, int amount) {
@@ -37,6 +38,7 @@ public class PlayerInventoryHolder : InventoryHolder {
     _hotBar.SetActive(false);
     _hotBarName.SetActive(false);
     _destroyField.SetActive(false);
+    _saveEquip.SetActive(false);
     _equipment?.onClick.AddListener(ChangeBackpackToEquipment);
     _material?.onClick.AddListener(ChangeBackpackToMaterial);
     AddItem();

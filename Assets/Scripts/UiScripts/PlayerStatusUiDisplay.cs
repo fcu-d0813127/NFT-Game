@@ -1,10 +1,14 @@
 using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 
 public class PlayerStatusUiDisplay : MonoBehaviour {
+  [DllImport("__Internal")]
+  private static extern void AbilitySave(
+      int str, int intllegence, int dex, int vit, int luk);
   private int _tmpDistributableAbility;
   private int[] _originAbility = new int[5];
   private int[] _tmpAbility = new int[5];
@@ -101,10 +105,21 @@ public class PlayerStatusUiDisplay : MonoBehaviour {
   }
 
   private void Save() {
+    if (PlayerInfo.PlayerStatus.distributableAbility == 0) {
+      return;
+    }
     PlayerInfo.PlayerStatus.distributableAbility = _tmpDistributableAbility;
     PlayerAbility playerAbility = new PlayerAbility(
       _tmpAbility[0], _tmpAbility[1], _tmpAbility[2], _tmpAbility[3], _tmpAbility[4]
     );
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      AbilitySave(
+          playerAbility.str,
+          playerAbility.intllegence,
+          playerAbility.dex,
+          playerAbility.vit,
+          playerAbility.luk);
+    #endif
     PlayerAttribute playerAttribute = new PlayerAttribute(playerAbility, new int[6]);
     PlayerInfo.PlayerAbility = playerAbility;
     PlayerInfo.PlayerAttribute = playerAttribute;
