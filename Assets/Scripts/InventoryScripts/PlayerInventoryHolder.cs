@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerInventoryHolder : InventoryHolder {
+  public static PlayerInventoryHolder Instance {get; private set;}
   public InventorySystem EquipmentBackpackInventorySystem => _equipmentBackpackInventorySystem;
   [SerializeField] protected int _backpackInventorySize;
   [SerializeField] protected InventorySystem _equipmentBackpackInventorySystem;
@@ -18,6 +18,7 @@ public class PlayerInventoryHolder : InventoryHolder {
   [SerializeField] private GameObject _materialBackpackAttribute;
   [SerializeField] private GameObject _destroyField;
   [SerializeField] private GameObject _saveEquip;
+  [SerializeField] private GameObject _refreshButton;
   [SerializeField] private DynamicInventoryDisplay _equipmentBackpackAttribute;
 
   public bool AddToInventory(InventoryItemData data, int amount) {
@@ -29,8 +30,15 @@ public class PlayerInventoryHolder : InventoryHolder {
     return false;
   }
 
+  public void ResetEquipmentBackpack() {
+    _equipmentBackpackInventorySystem = new InventorySystem(_backpackInventorySize);
+    OnDynamicInventoryDisplayRequested?.Invoke(_equipmentBackpackInventorySystem, false);
+    AddItem();
+  }
+
   protected override void Awake() {
     base.Awake();
+    Instance = this;
     _equipmentBackpackInventorySystem = new InventorySystem(_backpackInventorySize);
     OnDynamicInventoryDisplayRequested?.Invoke(_equipmentBackpackInventorySystem, false);
     _backpackParent.SetActive(false);
@@ -39,6 +47,7 @@ public class PlayerInventoryHolder : InventoryHolder {
     _hotBarName.SetActive(false);
     _destroyField.SetActive(false);
     _saveEquip.SetActive(false);
+    _refreshButton.SetActive(false);
     _equipment?.onClick.AddListener(ChangeBackpackToEquipment);
     _material?.onClick.AddListener(ChangeBackpackToMaterial);
     AddItem();
@@ -55,14 +64,6 @@ public class PlayerInventoryHolder : InventoryHolder {
     }
   }
 
-  private void ChangeBackpackToMaterial() {
-    if (_mouseInventoryItem.AssignedInventorySlot.ItemData != null) {
-      return;
-    }
-    _equipmentBackpackAttribute.gameObject.SetActive(false);
-    _materialBackpackAttribute.SetActive(true);
-  }
-
   private void ChangeBackpackToEquipment() {
     if (_mouseInventoryItem.AssignedInventorySlot.ItemData != null) {
       return;
@@ -70,6 +71,14 @@ public class PlayerInventoryHolder : InventoryHolder {
     _equipmentBackpackAttribute.gameObject.SetActive(true);
     _materialBackpackAttribute.gameObject.SetActive(false);
     OnDynamicInventoryDisplayRequested?.Invoke(_equipmentBackpackInventorySystem, false);
+  }
+
+  private void ChangeBackpackToMaterial() {
+    if (_mouseInventoryItem.AssignedInventorySlot.ItemData != null) {
+      return;
+    }
+    _equipmentBackpackAttribute.gameObject.SetActive(false);
+    _materialBackpackAttribute.SetActive(true);
   }
 
   private void AddItem() {
