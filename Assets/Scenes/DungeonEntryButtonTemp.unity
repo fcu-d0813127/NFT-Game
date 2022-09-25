@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 284184358}
   - component: {fileID: 284184357}
   - component: {fileID: 284184356}
+  - component: {fileID: 284184360}
   m_Layer: 5
   m_Name: Forging
   m_TagString: Untagged
@@ -428,6 +429,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284184354}
   m_CullTransparentMesh: 1
+--- !u!114 &284184360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284184354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  hotSpot: {x: 4, y: 0}
 --- !u!1 &299383871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1165,7 @@ GameObject:
   - component: {fileID: 1409470916}
   - component: {fileID: 1409470915}
   - component: {fileID: 1409470914}
+  - component: {fileID: 1409470918}
   m_Layer: 5
   m_Name: Dungeon
   m_TagString: Untagged
@@ -1272,6 +1288,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409470912}
   m_CullTransparentMesh: 1
+--- !u!114 &1409470918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409470912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  hotSpot: {x: 4, y: 0}
 --- !u!1 &1772231816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,6 +1553,7 @@ GameObject:
   - component: {fileID: 2040521358}
   - component: {fileID: 2040521357}
   - component: {fileID: 2040521356}
+  - component: {fileID: 2040521360}
   m_Layer: 5
   m_Name: Market
   m_TagString: Untagged
@@ -1647,3 +1678,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040521354}
   m_CullTransparentMesh: 1
+--- !u!114 &2040521360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040521354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  hotSpot: {x: 4, y: 0}
