@@ -157,7 +157,7 @@ public class EnemyAiController : MonoBehaviour {
                     }
                 }
                 if (index != -1) {
-                    GameObject enemyList = GameObject.Find("EnemyList");
+                    GameObject enemyList = NormalUseLibrary.FindInActiveObjectByName("EnemyList");
                     for (int i = 0; i < enemyList.transform.GetChild(0).gameObject.transform.childCount; i++) {
                         if (thisEnemyName == enemyList.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.transform.name) {
                             enemyList.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = EnemyInformation.GetOneEnemyBooty(index).ToString();

@@ -17,7 +17,7 @@ public class Dungeon1EnemyCreater : MonoBehaviour
         DynamicEnemyList();
     }
     private void DynamicEnemyList() {
-        GameObject enemyList = GameObject.Find("EnemyList");
+        GameObject enemyList = NormalUseLibrary.FindInActiveObjectByName("EnemyList");
         string[] NameOfEnemyList = EnemyInformation.NameOfEnemyList;
         Sprite[] EnemyImage = EnemyInformation.EnemyImage;
         bool[] EnemyQuantity = EnemyInformation.EnemyQuantity;
