@@ -19,8 +19,7 @@ public class Dungeon2EnemyCreater : MonoBehaviour
     [SerializeField] float[] mushroomGenerateRange;
     [SerializeField] float[] flyingEyeGenerateRange;
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         EnemyInformation.InitEnemyQuantity();
         //設定生成數量
         skeletonNum1 = 10;
@@ -39,11 +38,13 @@ public class Dungeon2EnemyCreater : MonoBehaviour
         GetComponent<EnemyCreater>().createEnemy(skeleton, skeletonNum2, skeletonGenerateRange2);
         GetComponent<EnemyCreater>().createEnemy(mushroom, mushroomNum, mushroomGenerateRange);
         GetComponent<EnemyCreater>().createEnemy(flyingEye, flyingEyeNum, flyingEyeGenerateRange);
+        EnemyInformation.InitEnemyInformation();
 
         DynamicEnemyList();
     }
+
     private void DynamicEnemyList() {
-        GameObject enemyList = NormalUseLibrary.FindInActiveObjectByName("EnemyList");
+        GameObject enemyManage = NormalUseLibrary.FindInActiveObjectByName("EnemyMannage");
         string[] NameOfEnemyList = EnemyInformation.NameOfEnemyList;
         Sprite[] EnemyImage = EnemyInformation.EnemyImage;
         bool[] EnemyQuantity = EnemyInformation.EnemyQuantity;
@@ -53,7 +54,7 @@ public class Dungeon2EnemyCreater : MonoBehaviour
                 oneEnemy.transform.name = NameOfEnemyList[i];
                 oneEnemy.GetComponent<Image>().sprite = EnemyImage[i];
                 oneEnemy.transform.GetChild(0).gameObject.transform.name = "0";
-                oneEnemy.transform.SetParent(enemyList.transform.GetChild(0).gameObject.transform, false);
+                oneEnemy.transform.SetParent(enemyManage.transform, false);
             }
         }
     }

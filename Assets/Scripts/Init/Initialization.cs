@@ -14,7 +14,7 @@ public class Initialization : MonoBehaviour {
   [DllImport("__Internal")]
   private static extern void LoadAbility(string playerAccount);
   [DllImport("__Internal")]
-  private static extern void LoadEquipment(string playerAccount);
+  private static extern void LoadEquipment(string playerAccount, int isInit);
   [DllImport("__Internal")]
   private static extern void LoadPlayerStatus(string playerAccount);
   [DllImport("__Internal")]
@@ -32,7 +32,7 @@ public class Initialization : MonoBehaviour {
         Sapphire = 250,
         Emerald = 250
       };
-      string a = "{\"equipments\":[{\"tokenId\":\"1\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}}]}";
+      string a = "{\"equipments\":[{\"tokenId\":\"1\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}},{\"tokenId\":\"2\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}}]}";
       PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(a);
       PlayerInfo.PlayerStatus = new PlayerStatus{
         name = "111"
@@ -68,7 +68,7 @@ public class Initialization : MonoBehaviour {
     } else {
       // LoadSkill(_playerAccount);
       LoadAbility(_playerAccount);
-      LoadEquipment(_playerAccount);
+      LoadEquipment(_playerAccount, 1);
       LoadPlayerStatus(_playerAccount);
       LoadRuby(_playerAccount);
       LoadSapphire(_playerAccount);
@@ -85,37 +85,31 @@ public class Initialization : MonoBehaviour {
   private void SetAbility(string ability) {
     PlayerInfo.PlayerAbility = PlayerAbility.CreateAbility(ability);
     PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
-    Debug.Log("ability");
     _checkLoad++;
   }
 
   private void SetEquipment(string equipment) {
     PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(equipment);
-    Debug.Log("Equipment");
     _checkLoad++;
   }
 
   private void SetPlayerStatus(string playerStatus) {
     PlayerInfo.PlayerStatus = PlayerStatus.CreateStatus(playerStatus);
-    Debug.Log("PlayerStatus");
     _checkLoad++;
   }
 
   private void SetRuby(string balanceOfRuby) {
     PlayerInfo.MaterialNum.Ruby = int.Parse(balanceOfRuby);
-    Debug.Log("Ruby");
     _checkLoad++;
   }
 
   private void SetSapphire(string balanceOfSapphire) {
     PlayerInfo.MaterialNum.Sapphire = int.Parse(balanceOfSapphire);
-    Debug.Log("Sapphire");
     _checkLoad++;
   }
 
   private void SetEmerald(string balanceOfEmerald) {
     PlayerInfo.MaterialNum.Emerald = int.Parse(balanceOfEmerald);
-    Debug.Log("Emerald");
     _checkLoad++;
   }
 

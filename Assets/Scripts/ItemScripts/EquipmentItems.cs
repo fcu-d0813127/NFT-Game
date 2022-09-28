@@ -19,4 +19,8 @@ public class EquipmentItems {
     }
     return null;
   }
+
+  public static void Clear() {
+    Equipments.Clear();
+  }
 }

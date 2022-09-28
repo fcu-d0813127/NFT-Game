@@ -9,15 +9,15 @@ public class Dungeon1EnemyCreater : MonoBehaviour
     [SerializeField] GameObject prefabOfEnemyInformation;
     [SerializeField] float[] generateRange = new float[4] {-12.0f, 10.0f, 6.8f, -5f};
 
-
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         EnemyInformation.InitEnemyQuantity();
         GetComponent<EnemyCreater>().createEnemy(enemy, 10, generateRange);
+        EnemyInformation.InitEnemyInformation();
         DynamicEnemyList();
     }
+
     private void DynamicEnemyList() {
-        GameObject enemyList = NormalUseLibrary.FindInActiveObjectByName("EnemyList");
+        GameObject enemyManage = NormalUseLibrary.FindInActiveObjectByName("EnemyMannage");
         string[] NameOfEnemyList = EnemyInformation.NameOfEnemyList;
         Sprite[] EnemyImage = EnemyInformation.EnemyImage;
         bool[] EnemyQuantity = EnemyInformation.EnemyQuantity;
@@ -27,7 +27,7 @@ public class Dungeon1EnemyCreater : MonoBehaviour
                 oneEnemy.transform.name = NameOfEnemyList[i];
                 oneEnemy.GetComponent<Image>().sprite = EnemyImage[i];
                 oneEnemy.transform.GetChild(0).gameObject.transform.name = "0";
-                oneEnemy.transform.SetParent(enemyList.transform.GetChild(0).gameObject.transform, false);
+                oneEnemy.transform.SetParent(enemyManage.transform, false);
             }
         }
     }

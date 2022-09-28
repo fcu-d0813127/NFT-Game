@@ -12,7 +12,7 @@ mergeInto(LibraryManager.library, {
   Init: async function(name) {
     await window.majorContract.methods.init(
         UTF8ToString(name)).send({
-          from: window.playerAccount
+          from: window.data.PLAYER_ACCOUNT
         });
     myGameInstance.SendMessage('CreateButton', 'LoadInitScene');
   },
@@ -39,7 +39,7 @@ mergeInto(LibraryManager.library, {
                   JSON.stringify(response));
             });
   },
-  LoadEquipment: async function(playerAccount) {
+  LoadEquipment: async function(playerAccount, isInit) {
     let account = UTF8ToString(playerAccount);
     let balanceOf = await window.equipmentContract.methods.balanceOf(
         account).call()
@@ -68,12 +68,19 @@ mergeInto(LibraryManager.library, {
                 };
                 equipments.push(newResponse);
               });
-    };
+    }
     const newResponse = {
       "equipments": equipments
     };
+    let targetGameObject = '';
+    if (isInit == 1) {
+      targetGameObject = 'Initialization';
+    } else {
+      targetGameObject = 'RefreshEquipment';
+    }
+    console.log('target: ' + targetGameObject);
     myGameInstance.SendMessage(
-        'Initialization',
+        targetGameObject,
         'SetEquipment',
         JSON.stringify(newResponse));
   },

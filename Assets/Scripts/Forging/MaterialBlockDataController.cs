@@ -12,8 +12,9 @@ public class MaterialBlockDataController : MonoBehaviour {
   }
 
   public void UpdateNum() {
-    MaterialNum materialNum = PlayerInfo.MaterialNum;
-    int value = (int)typeof(MaterialNum).GetProperty(Name.text).GetValue(materialNum);
+    MaterialNum materialNum = TempMaterialNum.MaterialNum;
+    string name = MaterialChineseMapping.English[Name.text];
+    int value = (int)typeof(MaterialNum).GetProperty(name).GetValue(materialNum);
     Num.text = value.ToString();
     _updateNumAnimation.Play("UpdateNumAnimation");
   }
