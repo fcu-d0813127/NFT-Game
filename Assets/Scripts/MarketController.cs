@@ -103,7 +103,7 @@ public class MarketController : MonoBehaviour
         BalanceScene();
     }
     private void BalanceScene(){//用於螢幕上顯示
-        GameObject.Find("Dollar").GetComponent<TextMeshProUGUI>().text = ("Balance:" + balance);
+        GameObject.Find("Dollar").GetComponent<TextMeshProUGUI>().text = ("金錢:" + balance);
     }
     private void BrowseProduct(){//用於螢幕上顯示資料數據
         foreach(GameObject i in Product){
@@ -114,7 +114,7 @@ public class MarketController : MonoBehaviour
             if(ProductLength > 10){
                 ProductLength = 10;
             }
-            IntroForProduct.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>".PadRight(23) + "TokenId".PadRight(26) + "Rare".PadRight(25) + "Level".PadRight(24) + "Price".PadRight(24) + "</mspace>";
+            IntroForProduct.GetComponent<TextMeshProUGUI>().text = "<mspace=1.0em>" + "     名稱     " + "稀有     " + "等級     " + "價格     " + "</mspace>";
             for(int i = 0; i < ProductLength; i++){
                 Product[i] = Instantiate(prefebOfProduct);
                 Product[i].transform.SetParent(ProductManager.transform, false);
@@ -154,7 +154,7 @@ public class MarketController : MonoBehaviour
             if(ProductLength > 10){
                 ProductLength = 10;
             }
-            IntroForProduct.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>".PadRight(24) + "TokenId".PadRight(32) + "Rare".PadRight(30) + "Level".PadRight(30) + "</mspace>";
+            IntroForProduct.GetComponent<TextMeshProUGUI>().text = "<mspace=1.0em>     " + "名稱     " + "稀有     "+ "等級     " + "</mspace>";
             for(int i = 0; i < ProductLength; i++){
                 Product[i] = Instantiate(prefebOfProduct);
                 Product[i].transform.SetParent(ProductManager.transform, false);
@@ -191,7 +191,7 @@ public class MarketController : MonoBehaviour
             if(ProductLength > 10){
                 ProductLength = 10;
             }
-            IntroForProduct.GetComponent<TextMeshProUGUI>().text = "<mspace=0.5em>".PadRight(23) + "TokenId".PadRight(26) + "Rare".PadRight(25) + "Level".PadRight(24) + "Price".PadRight(24) + "</mspace>";
+            IntroForProduct.GetComponent<TextMeshProUGUI>().text = "<mspace=1.0em>     " + "名稱     " + "稀有     " + "等級     " + "價格     " + "</mspace>";
             for(int i = 0; i < ProductLength; i++){
                 Product[i] = Instantiate(prefebOfProduct);
                 Product[i].transform.SetParent(ProductManager.transform, false);
@@ -345,15 +345,15 @@ public class MarketController : MonoBehaviour
         GameObject ErrorBox = Instantiate(prefebOfErrorMessage, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
         ErrorBox.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
         if(ErrorEvent == 1){
-            ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You don't have enough money!";
+            ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "沒有足夠金錢";
             UnlockButton();
         }
         else if(ErrorEvent == 2){
-            ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You don't input any number!";
+            ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "沒有輸入數字";
             UnlockButton();
         }
         else if(ErrorEvent == 3){
-            ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Your backsack is full!";
+            ErrorBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "你的背包已滿";
             UnlockButton();
         }
     }
@@ -419,7 +419,7 @@ public class MarketController : MonoBehaviour
     internal void GetPlayerApprove(){
         _approveUI = Instantiate(prefebOfApprove,  new Vector3(85, 0, 0), Quaternion.Euler(0, 0, 0));
         _approveUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-        _approveUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "You need to allow us to operate your ERC20/ERC721";
+        _approveUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "請授權於我操作你的ERC20/ERC721";
         Debug.Log("GetApprove");
     }
 
@@ -435,27 +435,27 @@ public class MarketController : MonoBehaviour
         if(signEvent == 1){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you sign ERC20 approve suecessfully!\nYou can sign the purchase!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "簽署合約成功\n接下來可以購買裝備";
         }
         else if(signEvent == 2){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you purchase product suecessfully!\nNow, you can check item in backpack!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "簽署合約成功\n接下來可以確認背包";
         }
         else if(signEvent == 3){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you sign ERC721 approve suecessfully!\nYou can sign the list!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "簽署合約成功\n接下來可以上架裝備";
         }
         else if(signEvent == 4){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you list product suecessfully!\nYou can check the product in Unlist page!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "簽署合約成功\n接下來可以於下架頁面查詢";
         }
         else if(signEvent == 5){
             _responseUI = Instantiate(prefebOfResponse);
             _responseUI.transform.SetParent(GameObject.Find("MarketCanvas").transform, false);
-            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "Now, you unlist product suecessfully!\nYou can check the item in backpack!";
+            _responseUI.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "簽署合約成功\n接下來可以確認背包";
         }
     }
 

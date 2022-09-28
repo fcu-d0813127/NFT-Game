@@ -41,6 +41,9 @@ mergeInto(LibraryManager.library, {
         window.data.PLAYER_ACCOUNT = PLAYER_ACCOUNT;
         window.data.MARKET_ADDRESS = CONTRACT_Market_ADDRESS;
         window.data.MAJOR_ADDRESS = MAJOR_CONTRACT_ADDRESS;
+        window.data.RUBY_ADDRESS = RUBY_CONTRACT_ADDRESS;
+        window.data.SAPPHIRE_ADDRESS = SAPPHIRE_CONTRACT_ADDRESS;
+        window.data.EMERALD_ADDRESS = EMERALD_CONTRACT_ADDRESS;
         window.Market_Contract = new window.web3.eth.Contract(
                                 CONTRACT_Market_ABI, CONTRACT_Market_ADDRESS);
         window.ERC20_Contract = new window.web3.eth.Contract(
