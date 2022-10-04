@@ -1,4 +1,6 @@
 # NFT Game Formal Edition
+https://hackmd.io/@cookieking/S1eKuy8xMo#/
+
 ## 前置動作
 - 在Unity最上方找到 Window -> Package Manager -> 在+號的右邊，切換到"Unity Registry" -> 找到"Input System"然後import.
 - 當準備要Build成WebGL時先到File -> Build Settings -> Player Settings -> Other Settings -> 找到"Active Input Handling*" -> 切換到"Both".
