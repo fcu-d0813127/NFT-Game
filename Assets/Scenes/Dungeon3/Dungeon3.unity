@@ -4868,6 +4868,7 @@ MonoBehaviour:
   dontTouchLayermask:
     serializedVersion: 2
     m_Bits: 64
+  pointer: {fileID: 6246990577648525430, guid: 5b6adc54b7f74684ba94a2887d519409, type: 3}
 --- !u!4 &1173098448
 Transform:
   m_ObjectHideFlags: 0
