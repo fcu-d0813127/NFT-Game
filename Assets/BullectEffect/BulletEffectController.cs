@@ -58,7 +58,12 @@ public class BulletEffectController : MonoBehaviour
         }
         
         if(col.gameObject.tag == "Enemy"){
-            //_bulletDamage = ...
+            EnemyStatus enemyStatus = new EnemyStatus {
+                Def = 100,
+                Mdef = 100,
+                CriResistRatio = 0.01f
+            };
+            _bulletDamage = DamageController.RealDamage(enemyStatus, AttackType.Matk);
             col.gameObject.GetComponent<HpController>().sufferDamage(_bulletDamage);
             Vector3 generatePos = col.gameObject.transform.position;
 

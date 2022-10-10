@@ -13,11 +13,10 @@ public class CameraFollow : MonoBehaviour {
   }
 
   private void FixedUpdate() {
-    
-    Vector3 targetPosition = target.position + _offset;
-    transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity,
-                                            _smoothTime);
+    if (target != null) {
+      Vector3 targetPosition = target.position + _offset;
+      transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity,
+                                              _smoothTime);
+    }
   }
-
-
 }

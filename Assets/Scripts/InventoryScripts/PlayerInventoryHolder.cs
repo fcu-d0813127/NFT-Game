@@ -20,6 +20,8 @@ public class PlayerInventoryHolder : InventoryHolder {
   [SerializeField] private GameObject _saveEquip;
   [SerializeField] private GameObject _refreshButton;
   [SerializeField] private DynamicInventoryDisplay _equipmentBackpackAttribute;
+  [SerializeField] private BackpackAttribute _backpackAttribute;
+  private EquipmentItemData[] _equips;
 
   public bool AddToInventory(InventoryItemData data, int amount) {
     if (_hotBarInventorySystem.AddToInventory(data, amount)) {
@@ -39,6 +41,7 @@ public class PlayerInventoryHolder : InventoryHolder {
   protected override void Awake() {
     base.Awake();
     Instance = this;
+    _hotBar.GetComponent<StaticInventoryDisplay>().Init();
     _equipmentBackpackInventorySystem = new InventorySystem(_backpackInventorySize);
     OnDynamicInventoryDisplayRequested?.Invoke(_equipmentBackpackInventorySystem, false);
     _backpackParent.SetActive(false);
@@ -58,8 +61,8 @@ public class PlayerInventoryHolder : InventoryHolder {
         PopUpWindowController.IsPlayerStatusOpen == false) {
       PopUpWindowController.IsBackpackOpen = true;
       BackpackAttribute backpackAbility = _attribute.GetComponent<BackpackAttribute>();
-      backpackAbility.LoadAttribute();
       ChangeBackpackToEquipment();
+      UpdateEquipBar();
       _detail.SetActive(false);
     }
   }
@@ -103,8 +106,32 @@ public class PlayerInventoryHolder : InventoryHolder {
       };
       EquipmentItems.Add(equipment);
     }
+    _equips = new EquipmentItemData[5];
     foreach (var i in EquipmentItems.Equipments) {
-      _equipmentBackpackInventorySystem.AddToInventory(i, 1);
+      bool isEquip = false;
+      for (int j = 0; j < 5; j++) {
+        if (i.Id == PlayerInfo.EquipEquipments[j]) {
+          isEquip = true;
+          _equips[j] = i;
+        }
+      }
+      if (isEquip == false) {
+        _equipmentBackpackInventorySystem.AddToInventory(i, 1);
+      }
+    }
+  }
+
+  private void UpdateEquipBar() {
+    var equipPanel = NormalUseLibrary.FindInActiveObjectByName("PlayerHotBar");
+    var equipEquipment = equipPanel.GetComponentsInChildren<InventorySlotUI>();
+    for (int i = 0; i < 5; i++) {
+      equipEquipment[i].ClearSlot();
+      if (_equips[i] != null) {
+        equipEquipment[i].AssignedInventorySlot.UpdateInventorySlot(_equips[i], 1);
+        equipEquipment[i].UpdateUISlot();
+        _backpackAttribute.UpdateAttribute(_equips[i].Attribute, true);
+        _backpackAttribute.Save();
+      }
     }
   }
 }
