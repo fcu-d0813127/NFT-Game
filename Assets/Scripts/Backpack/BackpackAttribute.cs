@@ -22,7 +22,6 @@ public class BackpackAttribute : MonoBehaviour {
       _tmpAttribute.CriDmgRatio -= attribute.CriDmgRatio;
     }
     LoadAttribute();
-    Save();
   }
 
   public void LoadAttribute() {
@@ -37,6 +36,18 @@ public class BackpackAttribute : MonoBehaviour {
     DisplayAttribute(totalAttribute);
   }
 
+  public void Save() {
+    PlayerInfo.EquipAttribute = Attribute.CopyAttribute(_tmpAttribute);
+  }
+
+  public void ResetTmpAttribute() {
+    _tmpAttribute = new Attribute();
+  }
+
+  private void OnEnable() {
+    LoadAttribute();
+  }
+
   private void DisplayAttribute(Attribute totalAttribute) {
     _attribute[0].text = totalAttribute.Atk.ToString();
     _attribute[1].text = totalAttribute.Matk.ToString();
@@ -44,9 +55,5 @@ public class BackpackAttribute : MonoBehaviour {
     _attribute[3].text = totalAttribute.Mdef.ToString();
     _attribute[4].text = $"{Mathf.FloorToInt(totalAttribute.Cri * 100).ToString("0")}%";
     _attribute[5].text = $"{Mathf.FloorToInt(totalAttribute.CriDmgRatio * 100).ToString("0")}%";
-  }
-
-  private void Save() {
-    PlayerInfo.EquipAttribute = _tmpAttribute;
   }
 }

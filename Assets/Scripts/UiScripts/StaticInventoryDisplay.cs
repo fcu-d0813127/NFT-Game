@@ -16,7 +16,7 @@ public class StaticInventoryDisplay : InventoryDisplay {
     }
   }
 
-  protected override void Start() {
+  public void Init() {
     if (_inventoryHolder != null) {
       _inventorySystem = _inventoryHolder.HotBarInventorySystem;
       _inventorySystem.OnInventorySlotChanged += UpdateSlot;
@@ -24,5 +24,8 @@ public class StaticInventoryDisplay : InventoryDisplay {
       Debug.Log($"No inventory assigned to {this.gameObject}.");
     }
     AssignSlot(_inventorySystem);
+  }
+
+  protected override void Start() {
   }
 }

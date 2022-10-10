@@ -39,6 +39,20 @@ mergeInto(LibraryManager.library, {
                   JSON.stringify(response));
             });
   },
+  LoadEquip: async function(playerAccount) {
+    await window.majorContract.methods.equipmentOf(
+        UTF8ToString(playerAccount)).call()
+            .then((response) => {
+              for (let i = 0; i < 5; i++) {
+                response[i] = undefined;
+              }
+              console.log('smart contract: ' + response);
+              myGameInstance.SendMessage(
+                  'Initialization',
+                  'SetEquips',
+                  JSON.stringify(response));
+            });
+  },
   LoadEquipment: async function(playerAccount, isInit) {
     let account = UTF8ToString(playerAccount);
     let balanceOf = await window.equipmentContract.methods.balanceOf(
@@ -139,7 +153,7 @@ mergeInto(LibraryManager.library, {
       console.log(exchange[i]);
     }
     var material = [0, 0, 0];
-    await window.majorContract.methods.exchangeMaterial(exchange).send({from: window.playerAccount})
+    await window.majorContract.methods.exchangeMaterial(exchange).send({from: window.data.PLAYER_ACCOUNT})
     .on('transactionHash', function(hash){
       console.log(hash);
     })

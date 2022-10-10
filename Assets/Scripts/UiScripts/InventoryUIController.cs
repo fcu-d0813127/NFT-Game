@@ -10,6 +10,7 @@ public class InventoryUIController : MonoBehaviour {
   [SerializeField] private GameObject _saveEquip;
   [SerializeField] private GameObject _refreshButton;
   [SerializeField] private DynamicInventoryDisplay _equipmentBackpackPanel;
+  [SerializeField] private BackpackAttribute _backpackAttribute;
 
   private void OnEnable() {
     InventoryHolder.OnDynamicInventoryDisplayRequested += DisplayInventory;
@@ -22,6 +23,16 @@ public class InventoryUIController : MonoBehaviour {
   private void Update() {
     if (_backpackParent.activeInHierarchy &&
         Keyboard.current.qKey.wasPressedThisFrame) {
+      _backpackAttribute.ResetTmpAttribute();
+      var equipPanel = GameObject.FindObjectOfType<StaticInventoryDisplay>();
+      var equipEquipment = equipPanel.GetComponentsInChildren<InventorySlotUI>();
+      foreach (var i in equipEquipment) {
+        if (i.AssignedInventorySlot.ItemData != null) {
+          i.ClearSlot();
+        }
+      }
+      EquipmentItems.Clear();
+      PlayerInventoryHolder.Instance.ResetEquipmentBackpack();
       PopUpWindowController.IsBackpackOpen = false;
       CloseBackpackUI();
     }
