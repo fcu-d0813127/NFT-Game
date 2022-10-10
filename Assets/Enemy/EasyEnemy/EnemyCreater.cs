@@ -6,6 +6,7 @@ public class EnemyCreater : MonoBehaviour
 {
 
     [SerializeField] LayerMask dontTouchLayermask;
+    [SerializeField] GameObject pointer;
 
     //物件生成 : (物件, 數量, [X軸最左邊, x軸最右邊, y軸最上面, y軸最下面])
     public void createEnemy(GameObject enemy, int enemyNum, float[] range){
@@ -18,7 +19,11 @@ public class EnemyCreater : MonoBehaviour
             
             //查看該矩形區域是否有任何碰撞體
             if (!Physics2D.OverlapBox(generatePos, enemy.transform.localScale / 2, 0.0f, dontTouchLayermask)) {
-                Instantiate(enemy, generatePos, new Quaternion(0, 0, 0, 1));
+                GameObject thisEnemy = Instantiate(enemy, generatePos, new Quaternion(0, 0, 0, 1));
+                
+                //連同指示箭頭一同生成
+                GameObject thisEnemyPointer = Instantiate(pointer, generatePos, new Quaternion(0, 0, 0, 1));
+                thisEnemyPointer.GetComponent<enemyPointer>().followEnemy = thisEnemy;
 
                 tempCount++;
             }

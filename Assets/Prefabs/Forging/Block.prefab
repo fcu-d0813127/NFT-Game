@@ -221,7 +221,7 @@ MonoBehaviour:
   m_text: "\u7DE8\u8F2F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
-  m_sharedMaterial: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+  m_sharedMaterial: {fileID: -5011557502064387810, guid: cf5a43600644fba479fc49fd3916544f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 1842935057525138768}
   - component: {fileID: 698654884390109437}
   - component: {fileID: 7991339504457663641}
+  - component: {fileID: 5024361239857097918}
   m_Layer: 5
   m_Name: Cancel
   m_TagString: Untagged
@@ -486,6 +487,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5024361239857097918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978075382002990607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  hotSpot: {x: 4, y: 0}
 --- !u!1 &2050886367640303060
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +570,7 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
-  m_sharedMaterial: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+  m_sharedMaterial: {fileID: -5011557502064387810, guid: cf5a43600644fba479fc49fd3916544f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -826,6 +841,7 @@ GameObject:
   - component: {fileID: 5525144518657765732}
   - component: {fileID: 3440049012038404854}
   - component: {fileID: 791840521636294440}
+  - component: {fileID: 203647593881429608}
   m_Layer: 5
   m_Name: Edit
   m_TagString: Untagged
@@ -936,6 +952,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &203647593881429608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6161643369073913286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  hotSpot: {x: 4, y: 0}
 --- !u!1 &7161497922728859923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,7 +1035,7 @@ MonoBehaviour:
   m_text: "\u6E05\u9664"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
-  m_sharedMaterial: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+  m_sharedMaterial: {fileID: -5011557502064387810, guid: cf5a43600644fba479fc49fd3916544f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
