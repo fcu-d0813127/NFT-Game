@@ -121,13 +121,13 @@ public class MarketButtonController : MonoBehaviour
                 Marketcanvas.GetComponent<MarketController>().setClickProduct(Convert.ToUInt32(name) - 1);
                 var attributeTemp = Marketcanvas.GetComponent<MarketController>().GetProductAttribute();
                 var skillTemp = Marketcanvas.GetComponent<MarketController>().GetProductSkill();
-                GameObject.Find("ProductWantToBuyTMP").GetComponent<TextMeshProUGUI>().text = ("You want to buy" + '\n' 
-                + "TokenId:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n' + "Price:" + Marketcanvas.GetComponent<MarketController>().getProductPrice() + '\n'
-                + "Rarity:" + Marketcanvas.GetComponent<MarketController>().GetProductRarity() + '\n'
-                + "Part:" + Marketcanvas.GetComponent<MarketController>().GetProductPart() + '\n'
-                + "Level:" + Marketcanvas.GetComponent<MarketController>().GetProductLevel() + '\n'
-                + "Skills:" + skillTemp[0] + "," + skillTemp[1] + "," + skillTemp[2]  + '\n'
-                + "Attribute:" + attributeTemp[0] + "," + attributeTemp[1] + "," + attributeTemp[2] + "," + attributeTemp[3] + "," + attributeTemp[4] + "," + attributeTemp[5]);
+                GameObject.Find("ProductWantToBuyTMP").GetComponent<TextMeshProUGUI>().text = ("你欲購買" + '\n' 
+                + "名稱:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n' + "價格:" + Marketcanvas.GetComponent<MarketController>().getProductPrice() + '\n'
+                + "稀有度:" + Marketcanvas.GetComponent<MarketController>().GetProductRarity() + '\n'
+                + "部位:" + Marketcanvas.GetComponent<MarketController>().GetProductPart() + '\n'
+                + "價格:" + Marketcanvas.GetComponent<MarketController>().GetProductLevel() + '\n'
+                + "技能:" + skillTemp[0] + "," + skillTemp[1] + "," + skillTemp[2]  + '\n'
+                + "屬性:" + attributeTemp[0] + "," + attributeTemp[1] + "," + attributeTemp[2] + "," + attributeTemp[3] + "," + attributeTemp[4] + "," + attributeTemp[5]);
             }
             else if(pagemode == 2){
                 string name = ("Product" + this.gameObject.name.Substring(6));
@@ -136,9 +136,9 @@ public class MarketButtonController : MonoBehaviour
                 GameObject Marketcanvas = GameObject.Find("MarketCanvas");
                 name = this.gameObject.name.Substring(6);
                 Marketcanvas.GetComponent<MarketController>().setClickProduct(Convert.ToUInt32(name) - 1);
-                GameObject.Find("ListTMP").GetComponent<TextMeshProUGUI>().text = ("You want to list" + '\n' 
-                + "TokenId:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n' + 
-                "Please input positive integer");
+                GameObject.Find("ListTMP").GetComponent<TextMeshProUGUI>().text = ("你欲上架" + '\n' 
+                + "名稱:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n' + 
+                "請輸入價格");
             }
             else if(pagemode == 3){
                 string name = ("Product" + this.gameObject.name.Substring(6));
@@ -147,8 +147,8 @@ public class MarketButtonController : MonoBehaviour
                 GameObject Marketcanvas = GameObject.Find("MarketCanvas");
                 name = this.gameObject.name.Substring(6);
                 Marketcanvas.GetComponent<MarketController>().setClickProduct(Convert.ToUInt32(name) - 1);
-                GameObject.Find("ProductWantToBuyTMP").GetComponent<TextMeshProUGUI>().text = ("You want to Unlist" + '\n' 
-                + "TokenId:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n'+  "Price" + Marketcanvas.GetComponent<MarketController>().getProductPrice());
+                GameObject.Find("ProductWantToBuyTMP").GetComponent<TextMeshProUGUI>().text = ("你欲下架" + '\n' 
+                + "名稱:" + Marketcanvas.GetComponent<MarketController>().getProductTokenId() + '\n'+  "價格:" + Marketcanvas.GetComponent<MarketController>().getProductPrice());
             }
             marketcanvas.GetComponent<MarketController>().LockButton();
         }

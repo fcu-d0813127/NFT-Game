@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Dungeon2EnemyCreater : MonoBehaviour
@@ -7,6 +8,7 @@ public class Dungeon2EnemyCreater : MonoBehaviour
     [SerializeField] GameObject skeleton;
     [SerializeField] GameObject mushroom;
     [SerializeField] GameObject flyingEye;
+    [SerializeField] GameObject prefabOfEnemyInformation;
     [SerializeField] int skeletonNum1;
     [SerializeField] int skeletonNum2;
     [SerializeField] int mushroomNum;
@@ -18,6 +20,7 @@ public class Dungeon2EnemyCreater : MonoBehaviour
     [SerializeField] float[] flyingEyeGenerateRange;
 
     void Awake() {
+        EnemyInformation.InitEnemyQuantity();
         //設定生成數量
         skeletonNum1 = 10;
         skeletonNum2 = 3;
@@ -35,5 +38,24 @@ public class Dungeon2EnemyCreater : MonoBehaviour
         GetComponent<EnemyCreater>().createEnemy(skeleton, skeletonNum2, skeletonGenerateRange2);
         GetComponent<EnemyCreater>().createEnemy(mushroom, mushroomNum, mushroomGenerateRange);
         GetComponent<EnemyCreater>().createEnemy(flyingEye, flyingEyeNum, flyingEyeGenerateRange);
+        EnemyInformation.InitEnemyInformation();
+
+        DynamicEnemyList();
+    }
+
+    private void DynamicEnemyList() {
+        GameObject enemyManage = NormalUseLibrary.FindInActiveObjectByName("EnemyMannage");
+        string[] NameOfEnemyList = EnemyInformation.NameOfEnemyList;
+        Sprite[] EnemyImage = EnemyInformation.EnemyImage;
+        bool[] EnemyQuantity = EnemyInformation.EnemyQuantity;
+        for (int i = 0; i < NameOfEnemyList.Length; i++) {
+            if (EnemyQuantity[i] == true) {
+                GameObject oneEnemy = Instantiate(prefabOfEnemyInformation, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+                oneEnemy.transform.name = NameOfEnemyList[i];
+                oneEnemy.GetComponent<Image>().sprite = EnemyImage[i];
+                oneEnemy.transform.GetChild(0).gameObject.transform.name = "0";
+                oneEnemy.transform.SetParent(enemyManage.transform, false);
+            }
+        }
     }
 }

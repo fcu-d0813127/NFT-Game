@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5973125169130548896}
   m_Layer: 0
   m_Name: FireTraderNPC
-  m_TagString: Untagged
+  m_TagString: Trader
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,3 +149,5 @@ MonoBehaviour:
   _currentDistance: {x: 0, y: 0}
   _totalDistance: 10
   speed: 0.7
+  PrefabOfShowMaterial: {fileID: 1958050385321711701, guid: 961fecbdad16a0144b96dca36ea56441,
+    type: 3}

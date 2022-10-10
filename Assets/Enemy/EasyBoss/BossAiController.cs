@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BossAiController : MonoBehaviour {
 
@@ -35,6 +36,7 @@ public class BossAiController : MonoBehaviour {
     private Vector2 playerPos;
     private Vector2 _lastPos;
     private UnityEngine.AI.NavMeshAgent agent;
+    private bool _isDead;
 
     void Start() {
 
@@ -48,6 +50,7 @@ public class BossAiController : MonoBehaviour {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        _isDead = false;
 
     }
 
@@ -65,9 +68,9 @@ public class BossAiController : MonoBehaviour {
         // 依據條件轉換狀態
         if(GetComponent<HpController>().getHp() <= 0){ //怪物死亡
             _enemyStatus = Status.dead;
-        }else if(GetComponent<Animator>().GetBool("isTakeHit")){
+        } else if(GetComponent<Animator>().GetBool("isTakeHit")){
             _enemyStatus = Status.takeHit;
-        }else if(isPlayerInThisCircle(_attackRadius)){    
+        } else if(isPlayerInThisCircle(_attackRadius)){    
            //怪物即將攻擊玩家
             _enemyStatus = Status.attack; 
         } else if(isPlayerInThisCircle(_searchRadius)){ 
@@ -168,6 +171,27 @@ public class BossAiController : MonoBehaviour {
             
             agent.speed = 0;
             wall.SetActive(false);
+            if(_isDead == false){
+                _isDead = true;
+                var index = EnemyInformation.AddBooty(this.gameObject.name);
+                string[] nameOfEnemyList = EnemyInformation.NameOfEnemyList;
+                string thisEnemyName= "";
+                for (int i = 0; i < EnemyInformation.NameOfEnemyList.Length; i++) {
+                    if (nameOfEnemyList[i] == this.gameObject.name.Substring(0, nameOfEnemyList[i].Length)) {
+                        thisEnemyName = nameOfEnemyList[i];
+                        break;
+                    }
+                }
+                if (index != -1) {
+                    GameObject enemyList = NormalUseLibrary.FindInActiveObjectByName("EnemyList");
+                    for (int i = 0; i < enemyList.transform.GetChild(0).gameObject.transform.childCount; i++) {
+                        if (thisEnemyName == enemyList.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.transform.name) {
+                            enemyList.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = EnemyInformation.GetOneEnemyBooty(index).ToString();
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         void enemyTakeHit(){ 

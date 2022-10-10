@@ -10,6 +10,7 @@ TagManager:
   - InputUi
   - ApproveUi
   - Block
+  - Trader
   layers:
   - Default
   - TransparentFX

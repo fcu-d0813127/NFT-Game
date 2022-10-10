@@ -1207,10 +1207,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Dollar:'
+  m_text: "\u91D1\u9322:"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
+  m_sharedMaterial: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1331,8 +1332,20 @@ PrefabInstance:
     - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_text
-      value: List
+      value: "\u4E0A\u67B6"
       objectReference: {fileID: 0}
+    - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
+    - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
     - target: {fileID: 5688793497331051680, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_Colors.m_DisabledColor.b
@@ -1792,8 +1805,20 @@ PrefabInstance:
     - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_text
-      value: Unlist
+      value: "\u4E0B\u67B6"
       objectReference: {fileID: 0}
+    - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
+    - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
     - target: {fileID: 5688793497331051680, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_Colors.m_DisabledColor.b
@@ -1931,8 +1956,20 @@ PrefabInstance:
     - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_text
-      value: Product
+      value: "\u5546\u54C1"
       objectReference: {fileID: 0}
+    - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
+    - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+        type: 2}
     - target: {fileID: 5688793497331051680, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_Interactable
@@ -2328,10 +2365,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TokenId                                                          Price
+  m_text: "\u7B49\u7D1A                         \u540D\u7A31                                                         
+    \u50F9\u683C                               \u7A00\u6709"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
+  m_sharedMaterial: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

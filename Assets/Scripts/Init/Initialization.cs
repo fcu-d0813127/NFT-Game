@@ -16,6 +16,8 @@ public class Initialization : MonoBehaviour {
   [DllImport("__Internal")]
   private static extern void LoadEquipment(string playerAccount, int isInit);
   [DllImport("__Internal")]
+  private static extern void LoadEquip(string playerAccount);
+  [DllImport("__Internal")]
   private static extern void LoadPlayerStatus(string playerAccount);
   [DllImport("__Internal")]
   private static extern void LoadRuby(string playerAccount);
@@ -25,6 +27,10 @@ public class Initialization : MonoBehaviour {
   private static extern void LoadEmerald(string playerAccount);
 
   private void Awake() {
+    if (PlayerInfo.EquipEquipments == null) {
+      PlayerInfo.EquipEquipments = new int[5];
+    }
+    PlayerInfo.EquipAttribute = new Attribute();
     // Editor 測試用
     #if UNITY_EDITOR
       PlayerInfo.MaterialNum = new MaterialNum {
@@ -39,7 +45,6 @@ public class Initialization : MonoBehaviour {
       };
       PlayerInfo.PlayerAbility = new PlayerAbility(10, 10, 10, 10, 10);
       PlayerInfo.PlayerAttribute = new PlayerAttribute(PlayerInfo.PlayerAbility, new int[6]);
-      PlayerInfo.EquipAttribute = new Attribute();
       StartCoroutine(LoadSceneAsync("PlayerInit"));
       StartCoroutine(LoadSceneAsync("Main"));
       StartCoroutine(LoadSceneAsync("HomeMap"));
@@ -69,6 +74,7 @@ public class Initialization : MonoBehaviour {
       // LoadSkill(_playerAccount);
       LoadAbility(_playerAccount);
       LoadEquipment(_playerAccount, 1);
+      LoadEquip(_playerAccount);
       LoadPlayerStatus(_playerAccount);
       LoadRuby(_playerAccount);
       LoadSapphire(_playerAccount);
@@ -79,7 +85,7 @@ public class Initialization : MonoBehaviour {
   }
 
   private void SetSkill(string skill) {
-    PlayerInfo.PlayerSkills = PlayerSkills.CreateSkills(skill);
+    // PlayerInfo.PlayerSkills = PlayerSkills.CreateSkills(skill);
   }
 
   private void SetAbility(string ability) {
@@ -90,6 +96,11 @@ public class Initialization : MonoBehaviour {
 
   private void SetEquipment(string equipment) {
     PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(equipment);
+    _checkLoad++;
+  }
+
+  private void SetEquips(string equips) {
+    PlayerInfo.EquipEquipments = PlayerEquips.CreateEquips(equips);
     _checkLoad++;
   }
 
@@ -114,7 +125,7 @@ public class Initialization : MonoBehaviour {
   }
 
   private IEnumerator WaitDataLoad() {
-    yield return new WaitUntil(() => _checkLoad >= 6);
+    yield return new WaitUntil(() => _checkLoad >= 7);
     StartCoroutine(LoadSceneAsync("PlayerInit"));
     StartCoroutine(LoadSceneAsync("Main"));
     StartCoroutine(LoadSceneAsync("HomeMap"));

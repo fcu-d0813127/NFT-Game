@@ -12,7 +12,7 @@ public class EnemyCreater : MonoBehaviour
     public void createEnemy(GameObject enemy, int enemyNum, float[] range){
         int tempCount = 0; //實際生成到第幾隻
         int whileCount = 0; //第幾次嘗試生成
-
+        EnemyInformation.SetEnemyQuantity(enemy.transform.name);
         while (tempCount < enemyNum) {
             //Vector2 generatePos = new Vector2(Random.Range(-12.0f, 10.0f), Random.Range(6.8f, -5f));
             Vector2 generatePos = new Vector2(Random.Range(range[0], range[1]), Random.Range(range[2], range[3]));

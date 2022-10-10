@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyAiController : MonoBehaviour {
 
@@ -26,6 +27,7 @@ public class EnemyAiController : MonoBehaviour {
     private Vector2 playerPos;
     private Vector2 _lastPos;
     private UnityEngine.AI.NavMeshAgent agent;
+    private bool _isDead;//避免怪物死亡重複呼叫特定程式
 
     /*怪物數據參考 副本1哥布林  
     _searchRadius = 3.5f;
@@ -43,6 +45,7 @@ public class EnemyAiController : MonoBehaviour {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        _isDead = false;
 
     }
 
@@ -57,9 +60,9 @@ public class EnemyAiController : MonoBehaviour {
         // 依據條件轉換狀態
         if(GetComponent<HpController>().getHp() <= 0){ //怪物死亡
             _enemyStatus = Status.dead;
-        }else if(GetComponent<Animator>().GetBool("isTakeHit")){
+        } else if(GetComponent<Animator>().GetBool("isTakeHit")){
             _enemyStatus = Status.takeHit;
-        }else if(isPlayerInThisCircle(_attackRadius)){ //怪物發現玩家
+        } else if(isPlayerInThisCircle(_attackRadius)){ //怪物發現玩家
             _enemyStatus = Status.attack;
         } else if(isPlayerInThisCircle(_searchRadius)){ //怪物即將攻擊玩家
             _enemyStatus = Status.run;
@@ -142,6 +145,28 @@ public class EnemyAiController : MonoBehaviour {
             GetComponent<BoxCollider2D>().enabled = false;
             this.Invoke("DestroyThis", _deathDelayTime);
             agent.speed = 0;
+            if (_isDead == false) {
+                _isDead = true;
+                var index = EnemyInformation.AddBooty(this.gameObject.name);
+                string[] nameOfEnemyList = EnemyInformation.NameOfEnemyList;
+                string thisEnemyName= "";
+                for (int i = 0; i < EnemyInformation.NameOfEnemyList.Length; i++) {
+                    if (nameOfEnemyList[i] == this.gameObject.name.Substring(0, nameOfEnemyList[i].Length)) {
+                        thisEnemyName = nameOfEnemyList[i];
+                        break;
+                    }
+                }
+                if (index != -1) {
+                    GameObject enemyList = NormalUseLibrary.FindInActiveObjectByName("EnemyList");
+                    for (int i = 0; i < enemyList.transform.GetChild(0).gameObject.transform.childCount; i++) {
+                        if (thisEnemyName == enemyList.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.transform.name) {
+                            enemyList.transform.GetChild(0).gameObject.transform.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = EnemyInformation.GetOneEnemyBooty(index).ToString();
+                            break;
+                        }
+                    }
+                }
+                    
+            }
         }
 
 
