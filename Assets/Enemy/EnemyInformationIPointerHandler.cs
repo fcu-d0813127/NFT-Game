@@ -12,13 +12,11 @@ public class EnemyInformationIPointerHandler : MonoBehaviour, IPointerEnterHandl
     enemyList.SetActive(false);
   }
   public void OnPointerEnter(PointerEventData pointerEventData){
-    Debug.Log("In");
     enemyList.SetActive(true);
   }
 
     //Detect when Cursor leaves the GameObject
   public void OnPointerExit(PointerEventData pointerEventData){
-    Debug.Log("Out");
     enemyList.SetActive(false);
   }
 }

@@ -11,6 +11,7 @@ public class SaveEquip : MonoBehaviour {
       int boots,
       int weapon);
   private Button _saveButton;
+  private int[] equips;
   [SerializeField] private BackpackAttribute _backpackAttribute;
 
   private void Awake() {
@@ -22,7 +23,7 @@ public class SaveEquip : MonoBehaviour {
     _backpackAttribute.Save();
     var equipPanel = GameObject.FindObjectOfType<StaticInventoryDisplay>();
     var equipEquipment = equipPanel.GetComponentsInChildren<InventorySlotUI>();
-    int[] equips = new int[5];
+    equips = new int[5];
     for (int i = 0; i < 5; i++) {
       if (equipEquipment[i].AssignedInventorySlot.ItemData == null) {
         equips[i] = 0;
@@ -31,10 +32,14 @@ public class SaveEquip : MonoBehaviour {
       }
     }
     #if UNITY_EDITOR
-      PlayerInfo.EquipEquipments = equips;
+      SaveEquips();
     #endif
     #if UNITY_WEBGL && !UNITY_EDITOR
       Equip(equips[1], equips[2], equips[3], equips[4], equips[0]);
     #endif
+  }
+
+  private void SaveEquips() {
+    PlayerInfo.EquipEquipments = equips;
   }
 }

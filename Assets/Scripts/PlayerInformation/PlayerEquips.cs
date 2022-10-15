@@ -8,7 +8,6 @@ public class PlayerEquips {
   public int weapon;
 
   public static int[] CreateEquips(string equipsJson) {
-    Debug.Log("unity: " + equipsJson);
     PlayerEquips playerEquips = JsonUtility.FromJson<PlayerEquips>(equipsJson);
     int[] equips = new int[5];
     equips[0] = playerEquips.weapon;

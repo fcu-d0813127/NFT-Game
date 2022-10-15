@@ -1,6 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Networking;
 
 public class PlayerInventoryHolder : InventoryHolder {
   public static PlayerInventoryHolder Instance {get; private set;}
@@ -85,26 +87,51 @@ public class PlayerInventoryHolder : InventoryHolder {
   }
 
   private void AddItem() {
-    foreach (var i in PlayerInfo.PlayerEquipment.equipments) {
+    int count = 1;
+    foreach (var i in PlayerInfo.PlayerEquipment) {
       Attribute attribute = new Attribute {
-        Atk = i.equipmentStatus.attribute[0],
-        Matk = i.equipmentStatus.attribute[1],
-        Def = i.equipmentStatus.attribute[2],
-        Mdef = i.equipmentStatus.attribute[3],
-        Cri = (float)i.equipmentStatus.attribute[4] / 10000,
-        CriDmgRatio = (float)i.equipmentStatus.attribute[5] / 100
+        Atk = int.Parse(i.attributes[1].value),
+        Matk = int.Parse(i.attributes[3].value),
+        Def = int.Parse(i.attributes[2].value),
+        Mdef = int.Parse(i.attributes[4].value),
+        Cri = (float)int.Parse(i.attributes[5].value) / 10000,
+        CriDmgRatio = (float)int.Parse(i.attributes[6].value) / 100
       };
+      int part = -1;
+      int nameLength = i.name.Length;
+      string partName = i.name.Substring(nameLength - 2);
+      if (partName == "武器") {
+        part = 0;
+      } else if (partName == "頭盔") {
+        part = 3;
+      } else if (partName == "胸甲") {
+        part = 1;
+      } else if (partName == "護腿") {
+        part = 2;
+      } else if (partName == "靴子") {
+        part = 4;
+      }
+      string[] imageSplitArray = i.image.Split('/');
+      int imageSplitArrayLength = imageSplitArray.Length;
+      string imageHash = imageSplitArray[imageSplitArrayLength - 1];
+      string uri = "https://ipfs.io/ipfs/" + imageHash;
       EquipmentItemData equipment = new EquipmentItemData {
-        Id = i.tokenId,
-        DisplayName = $"Id: {i.tokenId}",
+        Id = int.Parse(PlayerInfo.EquipmentTokenIds[count]),
+        DisplayName = i.name,
         MaxStackSize = 1,
-        Rarity = i.equipmentStatus.rarity,
-        Part = i.equipmentStatus.part,
-        Level = i.equipmentStatus.level,
+        Rarity = i.attributes[0].value,
+        Part = part,
         Attribute = attribute,
-        Skills = i.equipmentStatus.skills
+        Icon = null
       };
-      EquipmentItems.Add(equipment);
+      count++;
+      EquipmentItemData exsistEquipment = EquipmentItems.Find(equipment);
+      if (exsistEquipment == null) {
+        EquipmentItems.Add(equipment);
+        StartCoroutine(GetTexture(uri, equipment));
+      } else if (exsistEquipment.Icon == null) {
+        StartCoroutine(GetTexture(uri, equipment));
+      }
     }
     _equips = new EquipmentItemData[5];
     foreach (var i in EquipmentItems.Equipments) {
@@ -132,6 +159,21 @@ public class PlayerInventoryHolder : InventoryHolder {
         _backpackAttribute.UpdateAttribute(_equips[i].Attribute, true);
         _backpackAttribute.Save();
       }
+    }
+  }
+
+  private IEnumerator GetTexture(string uri, EquipmentItemData equipment) {
+    UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri);
+    yield return www.SendWebRequest();
+
+    if (www.result != UnityWebRequest.Result.Success) {
+      Debug.Log(www.error);
+      StartCoroutine(GetTexture(uri, equipment));
+    } else {
+      Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+      equipment.Icon = Sprite.Create(myTexture,
+                                     new Rect(0.0f, 0.0f, myTexture.width, myTexture.height),
+                                     new Vector2(0.5f, 0.5f));
     }
   }
 }

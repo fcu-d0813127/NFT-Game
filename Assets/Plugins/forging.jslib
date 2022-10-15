@@ -62,30 +62,24 @@ mergeInto(LibraryManager.library, {
         part, amountOfRuby, amountOfSapphire, amountOfEmerald).send({
           from: window.data.PLAYER_ACCOUNT
         }).then((response) => {
-          window.tempData = response;
           const eventLength = Object.keys(response.events).length;
           const tokenIdHex = response.events[eventLength - 1].raw.topics[3];
           const tokenIdDec = parseInt(tokenIdHex, 16);
           return tokenIdDec;
         });
-    let equipments = [];
-    await window.equipmentContract.methods.tokenStatOf(tokenId).call()
+    myGameInstance.SendMessage(
+        'ForgingButtonController',
+        'SetTokenId',
+        tokenId);
+    let equipmentsUri = '';
+    await window.equipmentContract.methods.tokenURI(tokenId).call()
         .then((response) => {
-          for (let i = 0; i < 5; i++) {
-            response[i] = undefined;
-          }
-          const newResponse = {
-            "tokenId": tokenId,
-            "equipmentStatus": response
-          };
-          equipments.push(newResponse);
+          let hash = response.split('/');
+          equipmentsUri += `/${hash[hash.length - 1]}`;
         });
-    const newResponse = {
-      "equipments": equipments
-    };
     myGameInstance.SendMessage(
         'ForgingButtonController',
         'SetEquipment',
-        JSON.stringify(newResponse));
+        equipmentsUri);
   }
 });
