@@ -1383,6 +1383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
   cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &295490159
@@ -3084,6 +3085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CursorNormal: {fileID: 0}
   cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &914502576
@@ -3714,6 +3716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
   cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!224 &984860339 stripped
@@ -4214,6 +4217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
   cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &1067726917
@@ -4801,6 +4805,7 @@ GameObject:
   - component: {fileID: 1169801100}
   - component: {fileID: 1169801099}
   - component: {fileID: 1169801098}
+  - component: {fileID: 1169801103}
   m_Layer: 5
   m_Name: SaveEquip
   m_TagString: Untagged
@@ -4924,6 +4929,21 @@ RectTransform:
   m_AnchoredPosition: {x: 393, y: -409}
   m_SizeDelta: {x: 103.3888, y: 76.4048}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1169801103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169801097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  hotSpot: {x: 4, y: 0}
 --- !u!1001 &1246724668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6333,6 +6353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
   cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &1472611267

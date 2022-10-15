@@ -16,7 +16,6 @@ public class DestroyButtonController : MonoBehaviour {
   private void DestroyEquipment() {
     if (_mouseItemData.AssignedInventorySlot.ItemData != null) {
       int tokenId = _mouseItemData.AssignedInventorySlot.ItemData.Id;
-      Debug.Log(tokenId);
       #if UNITY_WEBGL && !UNITY_EDITOR
         DestroyEquipmentSmartContract(tokenId);
       #endif

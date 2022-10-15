@@ -1,11 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class Initialization : MonoBehaviour {
   private int _checkLoad = 0;
+  private int _checkEquipmentLoad = 0;
   private string _playerAccount;
+  private List<PlayerEquipment> _playerEquipments = new List<PlayerEquipment>();
   [SerializeField] private Animator _fadeOut;
   [DllImport("__Internal")]
   private static extern void IsInited(string playerAccount);
@@ -38,8 +42,12 @@ public class Initialization : MonoBehaviour {
         Sapphire = 250,
         Emerald = 250
       };
-      string a = "{\"equipments\":[{\"tokenId\":\"1\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}},{\"tokenId\":\"2\",\"equipmentStatus\":{\"rarity\":\"1\",\"part\":\"4\",\"level\":\"1\",\"attribute\":[\"5000\",\"100\",\"1000\",\"100\",\"500\",\"6\"],\"skills\":[\"0\",\"0\",\"0\"]}}]}";
-      PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(a);
+      string b = "{\"description\":\"一把樸實無華的武器\",\"image\":\"ipfs://QmcRyo6LNNRRgAXSrdCuFqzZP4HXVhnsGe52uvFFB64oZE\",\"name\":\"\u57fa\u790e\u6b66\u5668\",\"attributes\":[{\"trait_type\":\"rarity\",\"value\":\"common\"},{\"trait_type\":\"atk\",\"value\":100},{\"trait_type\":\"def\",\"value\":100},{\"trait_type\":\"matk\",\"value\":0},{\"trait_type\":\"mdef\",\"value\":0},{\"trait_type\":\"cri\",\"value\":0},{\"trait_type\":\"criDmgRatio\",\"value\":0}]}";
+      PlayerEquipment a = PlayerEquipment.CreateEquipment(b);
+      _playerEquipments.Add(a);
+      _playerEquipments.Add(a);
+      PlayerInfo.PlayerEquipment = _playerEquipments;
+      PlayerInfo.EquipmentTokenIds = new string[]{"", "1", "2"};
       PlayerInfo.PlayerStatus = new PlayerStatus{
         name = "111"
       };
@@ -94,8 +102,20 @@ public class Initialization : MonoBehaviour {
     _checkLoad++;
   }
 
-  private void SetEquipment(string equipment) {
-    PlayerInfo.PlayerEquipment = PlayerEquipment.CreateEquipment(equipment);
+  private void SetEquipment(string equipmentUriList) {
+    string[] equipmentUris = equipmentUriList.Split('/');
+    foreach (string i in equipmentUris) {
+      if (i == "") {
+        continue;
+      }
+      string uri = "https://ipfs.io/ipfs/" + i;
+      StartCoroutine(GetRequest(uri));
+    }
+    StartCoroutine(WaitEquipmentLoad(equipmentUris.Length - 1));
+  }
+
+  private void SetEquipmentTokenId(string tokenIds) {
+    PlayerInfo.EquipmentTokenIds = tokenIds.Split('/');
     _checkLoad++;
   }
 
@@ -125,13 +145,19 @@ public class Initialization : MonoBehaviour {
   }
 
   private IEnumerator WaitDataLoad() {
-    yield return new WaitUntil(() => _checkLoad >= 7);
+    yield return new WaitUntil(() => _checkLoad >= 8);
     StartCoroutine(LoadSceneAsync("PlayerInit"));
     StartCoroutine(LoadSceneAsync("Main"));
     StartCoroutine(LoadSceneAsync("HomeMap"));
     StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
     StartCoroutine(UnLoadSceneAsync("Initialization"));
     StartCoroutine(UnLoadSceneAsync("PlayerInit"));
+  }
+
+  private IEnumerator WaitEquipmentLoad(int length) {
+    yield return new WaitUntil(() => _checkEquipmentLoad >= length);
+    PlayerInfo.PlayerEquipment = _playerEquipments;
+    _checkLoad++;
   }
 
   private IEnumerator UnLoadSceneAsync(string sceneName) {
@@ -145,6 +171,35 @@ public class Initialization : MonoBehaviour {
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
     while (!asyncLoad.isDone) {
       yield return null;
+    }
+  }
+
+  private IEnumerator GetRequest(string uri) {
+    using (UnityWebRequest webRequest = UnityWebRequest.Get(uri)) {
+      // Request and wait for the desired page.
+      yield return webRequest.SendWebRequest();
+
+      string[] pages = uri.Split('/');
+      int page = pages.Length - 1;
+
+      switch (webRequest.result) {
+        case UnityWebRequest.Result.ConnectionError:
+        case UnityWebRequest.Result.DataProcessingError:
+          Debug.LogError(pages[page] + ": Error: " + webRequest.error);
+          break;
+        case UnityWebRequest.Result.ProtocolError:
+          Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
+          Debug.Log("Retry");
+          StartCoroutine(GetRequest(uri));
+          break;
+        case UnityWebRequest.Result.Success:
+          string data = webRequest.downloadHandler.text;
+          Debug.Log(pages[page] + ":\nReceived: " + data);
+          PlayerEquipment playerEquipment = PlayerEquipment.CreateEquipment(data);
+          _playerEquipments.Add(playerEquipment);
+          _checkEquipmentLoad++;
+          break;
+      }
     }
   }
 }

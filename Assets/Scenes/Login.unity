@@ -184,7 +184,7 @@ MonoBehaviour:
   m_text: "\u904A\u6232\u540D\u5B57"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
-  m_sharedMaterial: {fileID: 2698413814002081325, guid: cf5a43600644fba479fc49fd3916544f,
+  m_sharedMaterial: {fileID: -5011557502064387810, guid: cf5a43600644fba479fc49fd3916544f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -583,7 +583,7 @@ MonoBehaviour:
   m_text: "\u767B\u5165 "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
-  m_sharedMaterial: {fileID: 2698413814002081325, guid: cf5a43600644fba479fc49fd3916544f,
+  m_sharedMaterial: {fileID: -5011557502064387810, guid: cf5a43600644fba479fc49fd3916544f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -999,6 +999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loginAnimation: {fileID: 1795323971}
+  _cursor: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
 --- !u!114 &1889437263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,7 +1091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorArrow: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
   cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!65 &1889437270

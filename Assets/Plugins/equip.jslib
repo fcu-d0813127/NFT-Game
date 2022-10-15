@@ -9,5 +9,8 @@ mergeInto(LibraryManager.library, {
         helmet, chestplate, leggings, boots, weapon).send({
           from: window.data.PLAYER_ACCOUNT
         });
+    myGameInstance.SendMessage(
+        'SaveEquip',
+        'SaveEquips');
   }
 });

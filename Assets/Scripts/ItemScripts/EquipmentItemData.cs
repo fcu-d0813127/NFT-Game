@@ -1,5 +1,5 @@
 public class EquipmentItemData : InventoryItemData {
-  public int Rarity;
+  public string Rarity;
   public int Part;
   public int Level;
   public Attribute Attribute;

@@ -46,7 +46,6 @@ mergeInto(LibraryManager.library, {
               for (let i = 0; i < 5; i++) {
                 response[i] = undefined;
               }
-              console.log('smart contract: ' + response);
               myGameInstance.SendMessage(
                   'Initialization',
                   'SetEquips',
@@ -61,42 +60,38 @@ mergeInto(LibraryManager.library, {
               return response;
             });
     let tokenIds = [];
+    let tokenIdString = '';
     for (let i = 0; i < balanceOf; i++) {
       await window.equipmentContract.methods.tokenOfOwnerByIndex(
           account, i).call()
               .then((response) => {
+                tokenIdString += `/${response}`;
                 tokenIds.push(response);
               });
     }
-    let equipments = [];
+    let equipmentsUri = '';
     for (let i = 0; i < balanceOf; i++) {
-      await window.equipmentContract.methods.tokenStatOf(
+      await window.equipmentContract.methods.tokenURI(
           tokenIds[i]).call()
               .then((response) => {
-                for (let i = 0; i < 5; i++) {
-                  response[i] = undefined;
-                }
-                const newResponse = {
-                  "tokenId": tokenIds[i],
-                  "equipmentStatus": response
-                };
-                equipments.push(newResponse);
+                let hash = response.split('/');
+                equipmentsUri += `/${hash[hash.length - 1]}`;
               });
     }
-    const newResponse = {
-      "equipments": equipments
-    };
     let targetGameObject = '';
     if (isInit == 1) {
       targetGameObject = 'Initialization';
     } else {
       targetGameObject = 'RefreshEquipment';
     }
-    console.log('target: ' + targetGameObject);
     myGameInstance.SendMessage(
         targetGameObject,
         'SetEquipment',
-        JSON.stringify(newResponse));
+        equipmentsUri);
+    myGameInstance.SendMessage(
+        targetGameObject,
+        'SetEquipmentTokenId',
+        tokenIdString);
   },
   LoadPlayerStatus: async function(playerAccount) {
     await window.majorContract.methods.playerStatusOf(

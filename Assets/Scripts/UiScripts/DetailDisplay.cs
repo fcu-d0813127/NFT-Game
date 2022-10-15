@@ -14,9 +14,6 @@ public class DetailDisplay : MonoBehaviour {
   private enum EquipPart {
     Weapon, Breastplate, Pants, Helmet, Shoes
   }
-  private enum RarityMap {
-    Common, Uncommon, Rare, Legendary
-  }
 
   public void OnHover(InventoryItemData onHoverItem) {
     var equipment = EquipmentItems.Find(onHoverItem);
@@ -34,13 +31,13 @@ public class DetailDisplay : MonoBehaviour {
     } else if (equipment.Part == (int)EquipPart.Shoes) {
       _part.text = "靴子";
     }
-    if (equipment.Rarity == (int)RarityMap.Common) {
+    if (equipment.Rarity == "common") {
       _rarity.text = "常見";
-    } else if (equipment.Rarity == (int)RarityMap.Uncommon) {
+    } else if (equipment.Rarity == "uncommon") {
       _rarity.text = "不常見";
-    } else if (equipment.Rarity == (int)RarityMap.Rare) {
+    } else if (equipment.Rarity == "rare") {
       _rarity.text = "稀有";
-    } else if (equipment.Rarity == (int)RarityMap.Legendary) {
+    } else if (equipment.Rarity == "legendary") {
       _rarity.text = "傳說";
     }
     _name.text = equipment.DisplayName;
