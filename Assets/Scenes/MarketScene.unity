@@ -136,6 +136,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 83110942}
     m_Modifications:
+    - target: {fileID: 5387006134201389628, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_text
@@ -1210,7 +1215,7 @@ MonoBehaviour:
   m_text: "\u91D1\u9322:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
-  m_sharedMaterial: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+  m_sharedMaterial: {fileID: -5011557502064387810, guid: cf5a43600644fba479fc49fd3916544f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1329,6 +1334,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 83110942}
     m_Modifications:
+    - target: {fileID: 5387006134201389628, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_text
@@ -1802,6 +1812,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 83110942}
     m_Modifications:
+    - target: {fileID: 5387006134201389628, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_text
@@ -1953,6 +1968,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 83110942}
     m_Modifications:
+    - target: {fileID: 5387006134201389628, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_text
@@ -2369,7 +2389,7 @@ MonoBehaviour:
     \u50F9\u683C                               \u7A00\u6709"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf5a43600644fba479fc49fd3916544f, type: 2}
-  m_sharedMaterial: {fileID: -7533889996649194188, guid: cf5a43600644fba479fc49fd3916544f,
+  m_sharedMaterial: {fileID: -5011557502064387810, guid: cf5a43600644fba479fc49fd3916544f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2488,6 +2508,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 83110942}
     m_Modifications:
+    - target: {fileID: 5387006134201389628, guid: a5f5e3fb23ecd644d8967334f991a005,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 5688793497055699137, guid: a5f5e3fb23ecd644d8967334f991a005,
         type: 3}
       propertyPath: m_text

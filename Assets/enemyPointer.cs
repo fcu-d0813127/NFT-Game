@@ -33,11 +33,14 @@ public class enemyPointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if(Time.time < startTime) return;
-        if(followEnemy == null) return;
+        if(followEnemy == null) {
+            Destroy(this.gameObject);
+            return;
+        }
         float height = 2f * mainCamera.orthographicSize;
         float width = height * mainCamera.aspect;
-        Debug.Log(width);
 
         maxX = mainCamera.transform.position.x + width / 2;
         maxX = maxX - spaceBetweenScreen;
