@@ -3365,7 +3365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _confirmButton: {fileID: 1789859092}
   _clearButton: {fileID: 2110162158}
-  _generateItmeIcon: {fileID: 177714916}
+  _generateItemIcon: {fileID: 177714916}
   _selectPart: {fileID: 1365072721}
 --- !u!4 &839988508
 Transform:
@@ -3639,7 +3639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &918816000
 GameObject:
@@ -5473,7 +5474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &1396906904
 GameObject:
@@ -7257,7 +7259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &1793913387
 GameObject:
@@ -8715,7 +8718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &2138488001
 GameObject:
