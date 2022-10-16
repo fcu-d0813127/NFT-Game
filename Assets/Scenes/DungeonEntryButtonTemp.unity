@@ -225,8 +225,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -243,13 +243,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.09
-  m_fontSizeBase: 40.09
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -441,8 +441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &299383871
 GameObject:
@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -609,8 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &331222115
 GameObject:
@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -777,8 +777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &471773388
 GameObject:
@@ -848,8 +848,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -866,13 +866,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.09
-  m_fontSizeBase: 40.09
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -984,8 +984,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1120,8 +1120,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1138,13 +1138,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.09
-  m_fontSizeBase: 40.09
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1336,8 +1336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!1 &1772231816
 GameObject:
@@ -1510,8 +1510,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1691,7 +1691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1728,6 +1728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}

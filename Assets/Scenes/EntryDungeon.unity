@@ -525,6 +525,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon3
       objectReference: {fileID: 0}
+    - target: {fileID: 2960495278775130213, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 4464257667298598824, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_Pivot.x
@@ -766,7 +771,7 @@ PrefabInstance:
     - target: {fileID: 2578398500878602862, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_Name
-      value: Button (3)
+      value: Button (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4464257667298598824, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
@@ -1604,8 +1609,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -107, y: -4.5328}
-  m_SizeDelta: {x: 35, y: 997.1086}
+  m_AnchoredPosition: {x: -113.53076, y: -4.5328}
+  m_SizeDelta: {x: 21.9385, y: 997.1086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &663172261
 MonoBehaviour:
@@ -1782,6 +1787,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Entry
       objectReference: {fileID: 0}
+    - target: {fileID: 2960495278775130213, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 4464257667298598824, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3043,15 +3053,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8490566, g: 0.6041126, b: 0.34763262, a: 1}
+  m_Color: {r: 0.5235849, g: 0.78686684, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf,
-    type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3081,8 +3090,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorNormal: {fileID: 2800000, guid: 7df3732cc0e54f246ab3dc25556a22e3, type: 3}
-  cursorPointer: {fileID: 2800000, guid: 7514ef179aa52b8418a16aac8eb30788, type: 3}
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
   hotSpot: {x: 4, y: 0}
 --- !u!224 &1382440380 stripped
 RectTransform:
@@ -3874,6 +3883,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 2960495278775130213, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 4464257667298598824, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4038,6 +4052,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon2
       objectReference: {fileID: 0}
+    - target: {fileID: 2960495278775130213, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 4464257667298598824, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4803,6 +4822,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon1
       objectReference: {fileID: 0}
+    - target: {fileID: 2960495278775130213, guid: 5bc3f894d0fb2874aa910d392c5edc11,
+        type: 3}
+      propertyPath: cursorPointer
+      value: 
+      objectReference: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
     - target: {fileID: 4464257667298598824, guid: 5bc3f894d0fb2874aa910d392c5edc11,
         type: 3}
       propertyPath: m_Pivot.x
