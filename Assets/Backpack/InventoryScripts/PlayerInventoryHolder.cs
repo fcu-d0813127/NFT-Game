@@ -60,7 +60,8 @@ public class PlayerInventoryHolder : InventoryHolder {
 
   private void Update() {
     if (Keyboard.current.bKey.wasPressedThisFrame &&
-        PopUpWindowController.IsPlayerStatusOpen == false) {
+        PopUpWindowController.IsPlayerStatusOpen == false &&
+        PopUpWindowController.IsBackpackOpen == false) {
       PopUpWindowController.IsBackpackOpen = true;
       BackpackAttribute backpackAbility = _attribute.GetComponent<BackpackAttribute>();
       ChangeBackpackToEquipment();
