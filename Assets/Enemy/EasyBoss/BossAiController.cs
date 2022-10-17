@@ -55,6 +55,7 @@ public class BossAiController : MonoBehaviour {
     }
 
     void Update() {
+        if(player == null) return;
         EnemyAI();
     }
 

@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.6000061, y: 5}
-  m_SizeDelta: {x: -30.297, y: -72.7127}
+  m_AnchoredPosition: {x: 3, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2721520723013526073
 CanvasRenderer:
@@ -171,7 +171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.0445557, y: 26}
+  m_AnchoredPosition: {x: -27, y: 26}
   m_SizeDelta: {x: -4.0891113, y: -25.118896}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2721520723254517449
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -126.91292, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -283,7 +283,6 @@ GameObject:
   - component: {fileID: 2721520723539518044}
   - component: {fileID: 2721520723539518042}
   - component: {fileID: 2721520723539518045}
-  - component: {fileID: 1154521366955698757}
   m_Layer: 5
   m_Name: DeathWindow
   m_TagString: Untagged
@@ -351,18 +350,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1154521366955698757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2721520723539518047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 058788c1129564d47aa6ea72abf5306b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2721520724223704434
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,8 +390,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.7329, y: -31}
-  m_SizeDelta: {x: 233.5397, y: 88.4266}
+  m_AnchoredPosition: {x: -3.5, y: -24.1}
+  m_SizeDelta: {x: 320.3308, y: 88.4266}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2721520724223704333
 CanvasRenderer:
@@ -497,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34efbd9fd491bb44b5327b2277b9c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!114 &2721520724223704433
 MonoBehaviour:
   m_ObjectHideFlags: 0

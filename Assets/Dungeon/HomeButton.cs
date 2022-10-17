@@ -5,9 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class HomeButton : MonoBehaviour {
   private Button _homeButton;
-
+  [SerializeField] GameObject player;
   private void Awake() {
-
     _homeButton = GetComponent<Button>();
 
     _homeButton.onClick.AddListener(Load);
@@ -15,7 +14,10 @@ public class HomeButton : MonoBehaviour {
   }
 
   private void Load() {
+    
     StartCoroutine(LoadSceneAsync());
+    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    Destroy(player);
   }
 
   IEnumerator LoadSceneAsync() {

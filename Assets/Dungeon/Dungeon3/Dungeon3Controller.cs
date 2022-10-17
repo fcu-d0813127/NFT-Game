@@ -29,10 +29,9 @@ public class Dungeon3Controller : MonoBehaviour {
 
     // Update is called once per frames
     void Update() {
-        
+        if(player == null) return;
+
         if((player.transform.position.x < entryEdge) && !_isEnd){
-
-
             if(!_isStart){
                 _entryTime = Time.time;
                 _isStart = true;
@@ -52,7 +51,6 @@ public class Dungeon3Controller : MonoBehaviour {
             tempBoss.z = -9.999f;
             mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, tempBoss, ref _velocity,
                                                 _smoothTime);
-       
             
         }
     }
