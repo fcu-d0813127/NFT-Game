@@ -5,10 +5,9 @@ using UnityEngine;
 public class Dungeon1Controller : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    
+
     // Start is called before the first frame update
     void Start() {
-        player = GameObject.FindWithTag("Player");
         player.transform.position = transform.position;
     }
 

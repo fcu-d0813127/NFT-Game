@@ -33,7 +33,7 @@ public class enemyPointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if(Time.time < startTime) return;
         if(followEnemy == null) {
             Destroy(this.gameObject);
@@ -74,6 +74,9 @@ public class enemyPointer : MonoBehaviour
 
         transform.position = safePos;
 
+        if(GameObject.Find("Player") == null)
+            return;
+            
         Vector2 dir = followEnemy.transform.position - GameObject.Find("Player").transform.position;
 
         //角度硬算出來的，不要太認真看
