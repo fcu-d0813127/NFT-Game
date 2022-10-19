@@ -62,34 +62,9 @@ public class ForgingButtonController : MonoBehaviour {
 
     // Editor 測試用
     #if UNITY_EDITOR
-      Attribute attribute = new Attribute {
-        Atk = 100.0f,
-        Matk = 100.0f,
-        Def = 100.0f,
-        Mdef = 100.0f,
-        Cri = 0.01f,
-        CriDmgRatio = 0.01f
-      };
-      NowEquipmentItemData = new EquipmentItemData {
-        Id = 0,
-        DisplayName = "Test",
-        MaxStackSize = 1,
-        Rarity = "common",
-        Part = part,
-        Level = 1,
-        Attribute = attribute,
-        Skills = new int[3]
-      };
-      EquipmentItems.Add(NowEquipmentItemData);
-      // 清除已經鍛造的素材
-      foreach (BlockDataController block in blocks) {
-        Destroy(block.gameObject);
-      }
-      _generateItemIcon.color = Color.cyan;
-      ProbabilityController.Instance.ClearProbabilityValue();
-      CreateBlock.Instance.ResetGeneratePositionY();
-      PlayerInfo.MaterialNum = TempMaterialNum.MaterialNum;
-      _sendMaterialNum = new MaterialNum();
+      _generateItemTokenId = 87;
+      string a = "/QmbNebpkj1LBT2XG3htaZ3rHkhL97PFa3H7f4EwwuR5xad";
+      SetEquipment(a);
     #endif
   }
 
@@ -149,6 +124,7 @@ public class ForgingButtonController : MonoBehaviour {
       Attribute = attribute,
       Icon = null
     };
+    EquipmentItems.Add(NowEquipmentItemData);
     StartCoroutine(GetTexture(uri, NowEquipmentItemData));
     
     // 清除已經鍛造的素材
@@ -208,6 +184,7 @@ public class ForgingButtonController : MonoBehaviour {
       equipment.Icon = Sprite.Create(myTexture,
                                      new Rect(0.0f, 0.0f, myTexture.width, myTexture.height),
                                      new Vector2(0.5f, 0.5f));
+      _generateItemIcon.sprite = equipment.Icon;
     }
   }
 }

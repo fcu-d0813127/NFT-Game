@@ -86,12 +86,12 @@ mergeInto(LibraryManager.library, {
     }
     myGameInstance.SendMessage(
         targetGameObject,
-        'SetEquipment',
-        equipmentsUri);
-    myGameInstance.SendMessage(
-        targetGameObject,
         'SetEquipmentTokenId',
         tokenIdString);
+    myGameInstance.SendMessage(
+        targetGameObject,
+        'SetEquipment',
+        equipmentsUri);
   },
   LoadPlayerStatus: async function(playerAccount) {
     await window.majorContract.methods.playerStatusOf(

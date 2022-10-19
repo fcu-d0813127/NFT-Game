@@ -8,6 +8,10 @@ public class InventoryHolder : MonoBehaviour {
   [SerializeField] protected InventorySystem _hotBarInventorySystem;
   [SerializeField] private int _inventorySize;
 
+  public void Clear() {
+    _hotBarInventorySystem.InventorySlots.Clear();
+  }
+
   protected virtual void Awake() {
     _hotBarInventorySystem = new InventorySystem(_inventorySize);
   }
