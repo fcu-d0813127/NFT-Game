@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 3098439100755784376}
   - component: {fileID: 8474544435042052898}
   - component: {fileID: -1609794027231304710}
+  - component: {fileID: 2050091298298866751}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -218,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _hpMax: 3000
+  popup: {fileID: 0}
 --- !u!114 &8474544435042052898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,9 +232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a1f83051d06de4d93e6b93021071b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPointLeft: {fileID: 9041419289048365877}
-  attackPointRight: {fileID: 1972262924866377560}
-  attackRange: 0.6
+  _attackPointLeft: {fileID: 0}
+  _attackPointRight: {fileID: 0}
+  _attackRange: 0.5
   attackLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -249,12 +251,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b28685808adec4bb11794d48735a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normakAttackKey: k
+  normalAttackKey: k
   skillAttack1: x
+  _attackTimeRecord: 0
+  _attackFrequency: 0.4
   skillEffect: {fileID: 5294572246900308109, guid: c8c3cfe5099c4cb489914048204d489f,
     type: 3}
   _skillOffsetX: 0
   _skillOffsetY: 0
+--- !u!114 &2050091298298866751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5869242670888567459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a0ab02583951d4ebca739527e7c142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deathDelayTime: 1
+  _DeathWindow: {fileID: 2721520723539518047, guid: 7485a610cd29eec4ca808583ef438b0c,
+    type: 3}
 --- !u!1 &8663215770703136613
 GameObject:
   m_ObjectHideFlags: 0

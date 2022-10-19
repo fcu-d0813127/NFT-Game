@@ -18,6 +18,9 @@ public class HpBarController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if(obj == null)
+            return;
+
         _tempHp = obj.GetComponent<HpController>().getHp();
         _tempHpMax = obj.GetComponent<HpController>().getHpMax();
         
