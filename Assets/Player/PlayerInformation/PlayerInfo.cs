@@ -5,7 +5,7 @@ public class PlayerInfo {
   public static PlayerStatus PlayerStatus;
   public static int[] EquipEquipments;
   public static PlayerAbility PlayerAbility;
-  public static List<PlayerEquipment> PlayerEquipment;
+  public static Dictionary<int, PlayerEquipment> PlayerEquipment;
   public static string[] EquipmentTokenIds;
   public static PlayerAttribute PlayerAttribute;
   public static Attribute EquipAttribute;

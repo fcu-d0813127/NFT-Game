@@ -31,7 +31,6 @@ public class InventoryUIController : MonoBehaviour {
           i.ClearSlot();
         }
       }
-      PlayerInventoryHolder.Instance.ResetEquipmentBackpack();
       PopUpWindowController.IsBackpackOpen = false;
       CloseBackpackUI();
     }

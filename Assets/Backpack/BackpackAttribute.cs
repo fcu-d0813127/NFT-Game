@@ -42,6 +42,7 @@ public class BackpackAttribute : MonoBehaviour {
 
   public void ResetTmpAttribute() {
     _tmpAttribute = new Attribute();
+    LoadAttribute();
   }
 
   private void OnEnable() {

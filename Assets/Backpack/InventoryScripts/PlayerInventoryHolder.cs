@@ -37,6 +37,7 @@ public class PlayerInventoryHolder : InventoryHolder {
   public void ResetEquipmentBackpack() {
     _equipmentBackpackInventorySystem = new InventorySystem(_backpackInventorySize);
     OnDynamicInventoryDisplayRequested?.Invoke(_equipmentBackpackInventorySystem, false);
+    Clear();
     AddItem();
   }
 
@@ -64,8 +65,8 @@ public class PlayerInventoryHolder : InventoryHolder {
         PopUpWindowController.IsBackpackOpen == false) {
       PopUpWindowController.IsBackpackOpen = true;
       BackpackAttribute backpackAbility = _attribute.GetComponent<BackpackAttribute>();
+      ResetEquipmentBackpack();
       ChangeBackpackToEquipment();
-      UpdateEquipBar();
       _detail.SetActive(false);
     }
   }
@@ -88,19 +89,18 @@ public class PlayerInventoryHolder : InventoryHolder {
   }
 
   private void AddItem() {
-    int count = 1;
     foreach (var i in PlayerInfo.PlayerEquipment) {
       Attribute attribute = new Attribute {
-        Atk = int.Parse(i.attributes[1].value),
-        Matk = int.Parse(i.attributes[3].value),
-        Def = int.Parse(i.attributes[2].value),
-        Mdef = int.Parse(i.attributes[4].value),
-        Cri = (float)int.Parse(i.attributes[5].value) / 10000,
-        CriDmgRatio = (float)int.Parse(i.attributes[6].value) / 100
+        Atk = int.Parse(i.Value.attributes[1].value),
+        Matk = int.Parse(i.Value.attributes[3].value),
+        Def = int.Parse(i.Value.attributes[2].value),
+        Mdef = int.Parse(i.Value.attributes[4].value),
+        Cri = (float)int.Parse(i.Value.attributes[5].value) / 10000,
+        CriDmgRatio = (float)int.Parse(i.Value.attributes[6].value) / 100
       };
       int part = -1;
-      int nameLength = i.name.Length;
-      string partName = i.name.Substring(nameLength - 2);
+      int nameLength = i.Value.name.Length;
+      string partName = i.Value.name.Substring(nameLength - 2);
       if (partName == "武器") {
         part = 0;
       } else if (partName == "頭盔") {
@@ -112,20 +112,19 @@ public class PlayerInventoryHolder : InventoryHolder {
       } else if (partName == "靴子") {
         part = 4;
       }
-      string[] imageSplitArray = i.image.Split('/');
+      string[] imageSplitArray = i.Value.image.Split('/');
       int imageSplitArrayLength = imageSplitArray.Length;
       string imageHash = imageSplitArray[imageSplitArrayLength - 1];
       string uri = "https://ipfs.io/ipfs/" + imageHash;
       EquipmentItemData equipment = new EquipmentItemData {
-        Id = int.Parse(PlayerInfo.EquipmentTokenIds[count]),
-        DisplayName = i.name,
+        Id = i.Key,
+        DisplayName = i.Value.name,
         MaxStackSize = 1,
-        Rarity = i.attributes[0].value,
+        Rarity = i.Value.attributes[0].value,
         Part = part,
         Attribute = attribute,
         Icon = null
       };
-      count++;
       EquipmentItemData exsistEquipment = EquipmentItems.Find(equipment);
       if (exsistEquipment == null) {
         EquipmentItems.Add(equipment);
@@ -136,6 +135,16 @@ public class PlayerInventoryHolder : InventoryHolder {
     }
     _equips = new EquipmentItemData[5];
     foreach (var i in EquipmentItems.Equipments) {
+      bool isExsist = false;
+      foreach (var j in PlayerInfo.PlayerEquipment) {
+        if (i.Id == j.Key) {
+          isExsist = true;
+          break;
+        }
+      }
+      if (isExsist == false) {
+        continue;
+      }
       bool isEquip = false;
       for (int j = 0; j < 5; j++) {
         if (i.Id == PlayerInfo.EquipEquipments[j]) {
@@ -147,9 +156,11 @@ public class PlayerInventoryHolder : InventoryHolder {
         _equipmentBackpackInventorySystem.AddToInventory(i, 1);
       }
     }
+    UpdateEquipBar();
   }
 
   private void UpdateEquipBar() {
+    _backpackAttribute.ResetTmpAttribute();
     var equipPanel = NormalUseLibrary.FindInActiveObjectByName("PlayerHotBar");
     var equipEquipment = equipPanel.GetComponentsInChildren<InventorySlotUI>();
     for (int i = 0; i < 5; i++) {
