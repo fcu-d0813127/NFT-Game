@@ -65,8 +65,8 @@ public class PlayerInventoryHolder : InventoryHolder {
         PopUpWindowController.IsBackpackOpen == false) {
       PopUpWindowController.IsBackpackOpen = true;
       BackpackAttribute backpackAbility = _attribute.GetComponent<BackpackAttribute>();
-      ResetEquipmentBackpack();
       ChangeBackpackToEquipment();
+      ResetEquipmentBackpack();
       _detail.SetActive(false);
     }
   }
@@ -77,7 +77,6 @@ public class PlayerInventoryHolder : InventoryHolder {
     }
     _equipmentBackpackAttribute.gameObject.SetActive(true);
     _materialBackpackAttribute.gameObject.SetActive(false);
-    OnDynamicInventoryDisplayRequested?.Invoke(_equipmentBackpackInventorySystem, false);
   }
 
   private void ChangeBackpackToMaterial() {

@@ -2,19 +2,24 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class cursorControllor : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
-  public Texture2D CursorNormal;
-  public Texture2D cursorPointer;
-  public Vector2 hotSpot = new Vector2(4,0);
+  [SerializeField] private Vector2 _hotSpot = new Vector2(4,0);
+  private Texture2D _cursorDefault;
+  private Texture2D _cursorPointer;
 
   public void OnPointerEnter(PointerEventData eventData) {
-    Cursor.SetCursor(cursorPointer, hotSpot, CursorMode.ForceSoftware);
+    Cursor.SetCursor(_cursorPointer, _hotSpot, CursorMode.ForceSoftware);
   }
 
   public void OnPointerExit(PointerEventData eventData) {
-    Cursor.SetCursor(CursorNormal, Vector2.zero, CursorMode.ForceSoftware);
+    Cursor.SetCursor(_cursorDefault, Vector2.zero, CursorMode.ForceSoftware);
   }
 
-  void OnDestroy() {
-    Cursor.SetCursor(CursorNormal, Vector2.zero, CursorMode.ForceSoftware);
+  private void Awake() {
+    _cursorDefault = CursorTexture.CursorDefault;
+    _cursorPointer = CursorTexture.CursorPointer;
+  }
+
+  private void OnDisable() {
+    Cursor.SetCursor(_cursorDefault, Vector2.zero, CursorMode.ForceSoftware);
   }
 }

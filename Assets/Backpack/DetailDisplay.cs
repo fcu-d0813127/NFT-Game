@@ -37,7 +37,7 @@ public class DetailDisplay : MonoBehaviour {
       _rarity.text = "不常見";
     } else if (equipment.Rarity == "rare") {
       _rarity.text = "稀有";
-    } else if (equipment.Rarity == "legendary") {
+    } else if (equipment.Rarity == "legend") {
       _rarity.text = "傳說";
     }
     _name.text = equipment.DisplayName;

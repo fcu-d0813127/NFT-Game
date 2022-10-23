@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 6604064768002933779}
   - component: {fileID: 4768030829057262785}
   - component: {fileID: 903448202722659317}
+  - component: {fileID: 2874589538092276472}
   m_Layer: 5
   m_Name: ExitDungeonButton
   m_TagString: Untagged
@@ -495,3 +496,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ed6669799e4634ea075967b51b5d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2874589538092276472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206389748836453103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
+  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
+  hotSpot: {x: 4, y: 0}

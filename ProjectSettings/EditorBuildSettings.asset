@@ -36,9 +36,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Dungeon1.unity
     guid: f3361280e4f9db84791e27104df3cb68
   - enabled: 1
-    path: Assets/Scenes/MarketScene.unity
-    guid: 3932f9826ad324c4faee32b94f631fed
-  - enabled: 1
     path: Assets/Scenes/Dungeon2.unity
     guid: a56b6ee5f2136cf45bf099f1fbe9527d
   - enabled: 1

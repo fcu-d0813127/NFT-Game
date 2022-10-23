@@ -132,6 +132,7 @@ public class ForgingButtonController : MonoBehaviour {
     foreach (BlockDataController block in blocks) {
       Destroy(block.gameObject);
     }
+    _generateItemIcon.sprite = null;
     _generateItemIcon.color = Color.cyan;
     ProbabilityController.Instance.ClearProbabilityValue();
     CreateBlock.Instance.ResetGeneratePositionY();
