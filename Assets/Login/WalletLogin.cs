@@ -13,6 +13,7 @@ public class WalletLogin : MonoBehaviour {
   private static extern void EnableChangeAccountReload();
 
   private void Awake() {
+    CursorTexture.Init();
     _loginButton = GetComponent<Button>();
     #if UNITY_WEBGL && !UNITY_EDITOR
       _loginButton.onClick.AddListener(OnLogin);  // WebGL 用
