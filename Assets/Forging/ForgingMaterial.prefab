@@ -421,6 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: {fileID: 537543318611234970}
   Num: {fileID: 7716214960004780131}
+  Icon: {fileID: 7319318129418647150}
   _updateNumAnimation: {fileID: 8522281707255191931}
 --- !u!114 &4689194946176934825
 MonoBehaviour:

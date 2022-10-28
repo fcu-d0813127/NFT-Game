@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class BlockDataController : MonoBehaviour {
   public TMP_Text Name;
   public TMP_Text Num;
+  public Image Icon;
   public MaterialBlockDataController MaterialBlockDataController {get; private set;}
 
   public int AddNum(int num) {

@@ -499,9 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
-  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
-  hotSpot: {x: 4, y: 0}
+  _hotSpot: {x: 4, y: 0}
 --- !u!1 &2050886367640303060
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: {fileID: 7996806108769324383}
   Num: {fileID: 528931677293239088}
+  Icon: {fileID: 4318074720527922797}
 --- !u!114 &7091882053186961738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,9 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8529498c600cc5349a15b201a31a5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorNormal: {fileID: 2800000, guid: 542ff4d262c295f4eafcc4afcfeb72a2, type: 3}
-  cursorPointer: {fileID: 2800000, guid: 0614eb9c06d97ba43b4a17b823a1fce5, type: 3}
-  hotSpot: {x: 4, y: 0}
+  _hotSpot: {x: 4, y: 0}
 --- !u!1 &7161497922728859923
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,6 +28,8 @@ public class CreateBlock : MonoBehaviour {
     BlockDataController blockData = block.GetComponent<BlockDataController>();
     blockData.Name.text = materialName;
     blockData.Num.text = materialNum.ToString();
+    blockData.Icon.sprite = materialBlockDataController.Icon.sprite;
+    blockData.Icon.color = Color.white;
     blockData.SetMaterialBlockDataController(materialBlockDataController);
 
     // Update next generate y
