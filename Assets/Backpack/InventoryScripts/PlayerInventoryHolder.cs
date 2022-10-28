@@ -76,6 +76,7 @@ public class PlayerInventoryHolder : InventoryHolder {
       return;
     }
     _equipmentBackpackAttribute.gameObject.SetActive(true);
+    _refreshButton.SetActive(true);
     _materialBackpackAttribute.gameObject.SetActive(false);
   }
 
@@ -84,6 +85,7 @@ public class PlayerInventoryHolder : InventoryHolder {
       return;
     }
     _equipmentBackpackAttribute.gameObject.SetActive(false);
+    _refreshButton.SetActive(false);
     _materialBackpackAttribute.SetActive(true);
   }
 
