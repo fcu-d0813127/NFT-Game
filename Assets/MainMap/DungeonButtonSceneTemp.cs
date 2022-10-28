@@ -12,6 +12,7 @@ public class DungeonButtonSceneTemp : MonoBehaviour {
   }
 
   private void Load() {
+    PopUpWindowController.Clear();
     StartCoroutine(LoadSceneAsync());
   }
 

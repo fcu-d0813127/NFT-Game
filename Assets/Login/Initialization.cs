@@ -9,7 +9,7 @@ public class Initialization : MonoBehaviour {
   private int _checkLoad = 0;
   private int _checkEquipmentLoad = 0;
   private string _playerAccount;
-  private List<PlayerEquipment> _playerEquipments = new List<PlayerEquipment>();
+  private Dictionary<int, PlayerEquipment> _playerEquipments = new Dictionary<int, PlayerEquipment>();
   [SerializeField] private Animator _fadeOut;
   [DllImport("__Internal")]
   private static extern void IsInited(string playerAccount);
@@ -44,8 +44,8 @@ public class Initialization : MonoBehaviour {
       };
       string b = "{\"description\":\"一把樸實無華的武器\",\"image\":\"ipfs://QmcRyo6LNNRRgAXSrdCuFqzZP4HXVhnsGe52uvFFB64oZE\",\"name\":\"\u57fa\u790e\u6b66\u5668\",\"attributes\":[{\"trait_type\":\"rarity\",\"value\":\"common\"},{\"trait_type\":\"atk\",\"value\":100},{\"trait_type\":\"def\",\"value\":100},{\"trait_type\":\"matk\",\"value\":0},{\"trait_type\":\"mdef\",\"value\":0},{\"trait_type\":\"cri\",\"value\":0},{\"trait_type\":\"criDmgRatio\",\"value\":0}]}";
       PlayerEquipment a = PlayerEquipment.CreateEquipment(b);
-      _playerEquipments.Add(a);
-      _playerEquipments.Add(a);
+      _playerEquipments.Add(1, a);
+      _playerEquipments.Add(2, a);
       PlayerInfo.PlayerEquipment = _playerEquipments;
       PlayerInfo.EquipmentTokenIds = new string[]{"", "1", "2"};
       PlayerInfo.PlayerStatus = new PlayerStatus{
@@ -104,12 +104,15 @@ public class Initialization : MonoBehaviour {
 
   private void SetEquipment(string equipmentUriList) {
     string[] equipmentUris = equipmentUriList.Split('/');
+    int j = 1;
     foreach (string i in equipmentUris) {
       if (i == "") {
         continue;
       }
+      int tokenId = int.Parse(PlayerInfo.EquipmentTokenIds[j]);
       string uri = "https://ipfs.io/ipfs/" + i;
-      StartCoroutine(GetRequest(uri));
+      StartCoroutine(GetRequest(uri, tokenId));
+      j++;
     }
     StartCoroutine(WaitEquipmentLoad(equipmentUris.Length - 1));
   }
@@ -174,7 +177,7 @@ public class Initialization : MonoBehaviour {
     }
   }
 
-  private IEnumerator GetRequest(string uri) {
+  private IEnumerator GetRequest(string uri, int index) {
     using (UnityWebRequest webRequest = UnityWebRequest.Get(uri)) {
       // Request and wait for the desired page.
       yield return webRequest.SendWebRequest();
@@ -190,13 +193,13 @@ public class Initialization : MonoBehaviour {
         case UnityWebRequest.Result.ProtocolError:
           Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
           Debug.Log("Retry");
-          StartCoroutine(GetRequest(uri));
+          StartCoroutine(GetRequest(uri, index));
           break;
         case UnityWebRequest.Result.Success:
           string data = webRequest.downloadHandler.text;
           Debug.Log(pages[page] + ":\nReceived: " + data);
           PlayerEquipment playerEquipment = PlayerEquipment.CreateEquipment(data);
-          _playerEquipments.Add(playerEquipment);
+          _playerEquipments.Add(index, playerEquipment);
           _checkEquipmentLoad++;
           break;
       }
