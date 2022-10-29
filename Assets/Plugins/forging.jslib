@@ -35,6 +35,10 @@ mergeInto(LibraryManager.library, {
           window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
+              }).on('error', function(error, receipt) {
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'Cancel');
               });
     }
     if (canUseSapphireBalanceOf < amountOfSapphire) {
@@ -43,6 +47,10 @@ mergeInto(LibraryManager.library, {
           window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
+              }).on('error', function(error, receipt) {
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'Cancel');
               });
     }
     if (canUseEmeraldBalanceOf < amountOfEmerald) {
@@ -51,6 +59,10 @@ mergeInto(LibraryManager.library, {
           window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
+              }).on('error', function(error, receipt) {
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'Cancel');
               });
     }
     if (isApprove) {
@@ -58,14 +70,18 @@ mergeInto(LibraryManager.library, {
           'ApproveResponseController',
           'Cancel');
     }
-    const tokenId = await window.majorContract.methods.forge(
+    let tokenId;
+    await window.majorContract.methods.forge(
         part, amountOfRuby, amountOfSapphire, amountOfEmerald).send({
           from: window.data.PLAYER_ACCOUNT
-        }).then((response) => {
-          const eventLength = Object.keys(response.events).length;
-          const tokenIdHex = response.events[eventLength - 1].raw.topics[3];
-          const tokenIdDec = parseInt(tokenIdHex, 16);
-          return tokenIdDec;
+        }).on('receipt', function(receipt) {
+          const eventLength = Object.keys(receipt.events).length;
+          const tokenIdHex = receipt.events[eventLength - 1].raw.topics[3];
+          tokenId = parseInt(tokenIdHex, 16);
+        }).on('error', function(error, receipt) {
+          myGameInstance.SendMessage(
+              'ForgingButtonController',
+              'Cancel');
         });
     myGameInstance.SendMessage(
         'ForgingButtonController',

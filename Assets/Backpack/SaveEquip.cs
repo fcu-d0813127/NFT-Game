@@ -36,10 +36,18 @@ public class SaveEquip : MonoBehaviour {
     #endif
     #if UNITY_WEBGL && !UNITY_EDITOR
       Equip(equips[1], equips[2], equips[3], equips[4], equips[0]);
+      LoadingSceneController.LoadScene();
     #endif
   }
 
   private void SaveEquips() {
     PlayerInfo.EquipEquipments = equips;
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      LoadingSceneController.UnLoadScene();
+    #endif
+  }
+
+  private void Cancel() {
+    LoadingSceneController.UnLoadScene();
   }
 }

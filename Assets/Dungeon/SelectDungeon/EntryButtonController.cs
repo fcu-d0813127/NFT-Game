@@ -27,6 +27,7 @@ public class EntryButtonController : MonoBehaviour {
     // WebGL 用
     #if UNITY_WEBGL && !UNITY_EDITOR
       EntryDungeonSmartContract(dungeonIndexOf);
+      LoadingSceneController.LoadScene();
     #endif
 
     // Editor 測試用
@@ -37,7 +38,14 @@ public class EntryButtonController : MonoBehaviour {
 
   private void EntryDungeonScene() {
     string dungeonName = OnSelectedDungeon.Name;
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      LoadingSceneController.UnLoadScene();
+    #endif
     SceneManager.LoadScene(dungeonName);
     SceneManager.LoadScene("AttackUiPanel", LoadSceneMode.Additive);
+  }
+
+  private void Cancel() {
+    LoadingSceneController.UnLoadScene();
   }
 }

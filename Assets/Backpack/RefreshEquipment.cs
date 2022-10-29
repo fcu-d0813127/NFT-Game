@@ -22,6 +22,7 @@ public class RefreshEquipment : MonoBehaviour {
     _checkEquipmentLoad = 0;
     #if UNITY_WEBGL && !UNITY_EDITOR
       LoadEquipment(PlayerInfo.AccountAddress, 0);
+      LoadingSceneController.LoadScene();
     #endif
     #if UNITY_EDITOR
       RefreshBackpack();
@@ -55,6 +56,7 @@ public class RefreshEquipment : MonoBehaviour {
     yield return new WaitUntil(() => _checkEquipmentLoad >= length);
     PlayerInfo.PlayerEquipment = _playerEquipments;
     RefreshBackpack();
+    LoadingSceneController.UnLoadScene();
   }
 
   private IEnumerator GetRequest(string uri, int tokenId) {

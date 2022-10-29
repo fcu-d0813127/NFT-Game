@@ -18,6 +18,7 @@ public class DestroyButtonController : MonoBehaviour {
       int tokenId = _mouseItemData.AssignedInventorySlot.ItemData.Id;
       #if UNITY_WEBGL && !UNITY_EDITOR
         DestroyEquipmentSmartContract(tokenId);
+        LoadingSceneController.LoadScene();
       #endif
       // 消除裝備
       #if UNITY_EDITOR
@@ -28,5 +29,12 @@ public class DestroyButtonController : MonoBehaviour {
 
   private void ClearMouse() {
     _mouseItemData.ClearSlot();
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      LoadingSceneController.UnLoadScene();
+    #endif
+  }
+
+  private void Cancel() {
+    LoadingSceneController.UnLoadScene();
   }
 }

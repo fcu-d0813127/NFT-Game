@@ -58,6 +58,7 @@ public class ForgingButtonController : MonoBehaviour {
           PlayerInfo.MaterialNum.Ruby,
           PlayerInfo.MaterialNum.Sapphire,
           PlayerInfo.MaterialNum.Emerald);
+      LoadingSceneController.LoadScene();
     #endif
 
     // Editor 測試用
@@ -138,6 +139,9 @@ public class ForgingButtonController : MonoBehaviour {
     CreateBlock.Instance.ResetGeneratePositionY();
     PlayerInfo.MaterialNum = TempMaterialNum.MaterialNum;
     _sendMaterialNum = new MaterialNum();
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      LoadingSceneController.UnLoadScene();
+    #endif
   }
 
   private BlockDataController[] HasBlock() {
@@ -187,5 +191,9 @@ public class ForgingButtonController : MonoBehaviour {
                                      new Vector2(0.5f, 0.5f));
       _generateItemIcon.sprite = equipment.Icon;
     }
+  }
+
+  private void Cancel() {
+    LoadingSceneController.UnLoadScene();
   }
 }

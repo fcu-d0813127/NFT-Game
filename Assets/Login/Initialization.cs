@@ -31,6 +31,7 @@ public class Initialization : MonoBehaviour {
   private static extern void LoadEmerald(string playerAccount);
 
   private void Awake() {
+    LoadingSceneController.LoadScene();
     if (PlayerInfo.EquipEquipments == null) {
       PlayerInfo.EquipEquipments = new int[5];
     }
@@ -58,6 +59,7 @@ public class Initialization : MonoBehaviour {
       StartCoroutine(LoadSceneAsync("HomeMap"));
       StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
       StartCoroutine(UnLoadSceneAsync("Initialization"));
+      StartCoroutine(UnLoadSceneAsync("Loading"));
       StartCoroutine(UnLoadSceneAsync("PlayerInit"));
     #endif
 
@@ -155,6 +157,7 @@ public class Initialization : MonoBehaviour {
     StartCoroutine(LoadSceneAsync("DungeonEntryButtonTemp"));
     StartCoroutine(UnLoadSceneAsync("Initialization"));
     StartCoroutine(UnLoadSceneAsync("PlayerInit"));
+    StartCoroutine(UnLoadSceneAsync("Loading"));
   }
 
   private IEnumerator WaitEquipmentLoad(int length) {
