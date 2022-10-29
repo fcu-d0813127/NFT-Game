@@ -166,6 +166,10 @@ mergeInto(LibraryManager.library, {
           material[2] += decimalNumber / Math.pow(10, 18);
         }
       }
+    }).on('error', function(error, receipt) {
+      myGameInstance.SendMessage(
+          'FireTraderNPC',
+          'Cancel');
     });
     var materialTemp = material[0] + ',' + material[1] + ',' + material[2];
     myGameInstance.SendMessage('FireTraderNPC', 'ShowRewardMaterial', materialTemp);

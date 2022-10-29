@@ -15,6 +15,7 @@ public class ApproveResponseController : MonoBehaviour {
   }
 
   private void Cancel() {
+    LoadingSceneController.UnLoadScene();
     Destroy(_myselfGameObject);
     _myselfGameObject = null;
   }

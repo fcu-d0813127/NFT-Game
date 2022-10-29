@@ -27,14 +27,22 @@ mergeInto(LibraryManager.library, {
           window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
+              }).on('error', function(error, receipt) {
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'Cancel');
               });
       myGameInstance.SendMessage(
           'ApproveResponseController',
           'Cancel');
     }
     await window.majorContract.methods.enterDungeon(indexOfDungeon).send({
-      from: window.data.PLAYER_ACCOUNT
-    })
+          from: window.data.PLAYER_ACCOUNT
+        }).on('error', function(error, receipt) {
+          myGameInstance.SendMessage(
+            'Entry',
+            'Cancel');
+        });
     myGameInstance.SendMessage(
         'Entry',
         'EntryDungeonScene');
