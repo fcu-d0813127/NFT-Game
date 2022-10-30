@@ -80,6 +80,7 @@ public class Initialization : MonoBehaviour {
     if (isInited == 0) {
       // Not inited -> Create
       StartCoroutine(LoadSceneAsync("CreateCharacter"));
+      StartCoroutine(UnLoadSceneAsync("Loading"));
     } else {
       // LoadSkill(_playerAccount);
       LoadAbility(_playerAccount);
