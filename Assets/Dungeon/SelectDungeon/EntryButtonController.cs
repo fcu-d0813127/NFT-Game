@@ -40,4 +40,13 @@ public class EntryButtonController : MonoBehaviour {
     SceneManager.LoadScene(dungeonName);
     SceneManager.LoadScene("AttackUiPanel", LoadSceneMode.Additive);
   }
+
+  private void SetEntryButtonInteractable(int buttonControl) {
+    GameObject enterButton = NormalUseLibrary.FindInActiveObjectByName("Entry");
+    if (buttonControl == 1) {
+      enterButton.GetComponent<Button>().interactable = false;
+    } else {
+      enterButton.GetComponent<Button>().interactable = true;
+    }
+  }
 }

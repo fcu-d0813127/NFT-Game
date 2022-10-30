@@ -43,5 +43,27 @@ mergeInto(LibraryManager.library, {
             .then((response) => {
               console.log('My balance of: ' + window.web3.utils.fromWei(response));
             });
+  },
+  dungeonOf: async function(indexOfDungeon) {
+    var enterControl = 0;
+    await window.majorContract.methods.dungeonOf(
+        indexOfDungeon).call()
+            .then((response) => {
+              var remainEnemy = response[1];
+              var singleEnemy = response[3];
+              for (var i = 0; i < 5; i++) {
+                if (parseInt(remainEnemy[i], 10) < parseInt(singleEnemy[i], 10)) {
+                  console.log(parseInt(remainEnemy[i], 10));
+                  console.log(parseInt(singleEnemy[i], 10));
+                  enterControl = 1;
+                  break;
+                }
+              }
+            });
+    myGameInstance.SendMessage(
+      'Entry',
+      'SetEntryButtonInteractable',
+      enterControl
+    );
   }
 });
