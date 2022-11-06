@@ -18,6 +18,12 @@ mergeInto(LibraryManager.library, {
     if (canUseBalanceOf < dungeonCost) {
       if (myBalanceOf < dungeonCost) {
         console.log('Your money not enough!');
+        myGameInstance.SendMessage(
+            'ApproveResponseController',
+            'CloseLoading');
+        myGameInstance.SendMessage(
+            'ApproveResponseController',
+            'OpenMoneyNotEnough');
         return;
       }
       myGameInstance.SendMessage(
@@ -27,14 +33,25 @@ mergeInto(LibraryManager.library, {
           window.data.MAJOR_ADDRESS, window.web3.utils.toWei('1', 'tether'))
               .send({
                 from: window.data.PLAYER_ACCOUNT
+              }).on('error', function(error, receipt) {
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'Cancel');
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'CloseLoading');
               });
       myGameInstance.SendMessage(
           'ApproveResponseController',
           'Cancel');
     }
     await window.majorContract.methods.enterDungeon(indexOfDungeon).send({
-      from: window.data.PLAYER_ACCOUNT
-    })
+          from: window.data.PLAYER_ACCOUNT
+        }).on('error', function(error, receipt) {
+          myGameInstance.SendMessage(
+              'Entry',
+              'Cancel');
+        });
     myGameInstance.SendMessage(
         'Entry',
         'EntryDungeonScene');
@@ -65,5 +82,27 @@ mergeInto(LibraryManager.library, {
       'SetEntryButtonInteractable',
       enterControl
     );
+  },
+  GetMyCoin: async function() {
+    const myBalanceOf = await window.ERC20_Contract.methods.balanceOf(
+        window.data.PLAYER_ACCOUNT).call()
+            .then((response) => {
+              return window.web3.utils.fromWei(response);
+            });
+    myGameInstance.SendMessage(
+        'CoinController',
+        'SetMyCoin',
+        myBalanceOf);
+  },
+  GetDungeonCost: async function(indexOfDungeon) {
+    const dungeonCost = await window.majorContract.methods.dungeonOf(
+        indexOfDungeon).call()
+            .then((response) => {
+              return window.web3.utils.fromWei(response.cost);
+            });
+    myGameInstance.SendMessage(
+        'CoinController',
+        'SetDungeonCost',
+        dungeonCost);
   }
 });

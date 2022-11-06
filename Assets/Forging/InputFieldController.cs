@@ -4,6 +4,7 @@ using TMPro;
 
 public class InputFieldController : MonoBehaviour {
   public static InputFieldController Instance {get; private set;}
+  public bool IsOpen = false;
   [SerializeField] private GameObject _inputFieldPrefab;
   [SerializeField] private GameObject _parentCanvas;
   private Button _noButton;
@@ -28,6 +29,7 @@ public class InputFieldController : MonoBehaviour {
   }
 
   public void OpenInputField() {
+    IsOpen = true;
     GameObject inputField = Instantiate(_inputFieldPrefab);
     inputField.transform.SetParent(_parentCanvas.transform, false);
     _noButton = GameObject.Find("No").GetComponent<Button>();
@@ -87,6 +89,7 @@ public class InputFieldController : MonoBehaviour {
     Destroy(_myselfGameObject);
     _myselfGameObject = null;
     ProbabilityController.Instance.UpdateProbability();
+    IsOpen = false;
   }
 
   private void PressNo() {
@@ -97,6 +100,7 @@ public class InputFieldController : MonoBehaviour {
     if (block != null && block.GetComponent<BlockButtonController>().IsButtonEnable == false) {
       block.GetComponent<BlockButtonController>().EnableButton();
     }
+    IsOpen = false;
   }
 
   private void ConstraintInValidValue() {

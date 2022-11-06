@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using System;
+
 public class DungeonButton : MonoBehaviour {
   [DllImport("__Internal")]
   private static extern void dungeonOf(int indexOfDungeon);
+  [DllImport("__Internal")]
+  private static extern void GetDungeonCost(int indexOfDungeon);
   private Button _myselfButton;
   private TMP_Text _nowSelectDungeon;
   private Image _dungeonPreview;
@@ -24,8 +27,6 @@ public class DungeonButton : MonoBehaviour {
   private void ButtonHandler() {
     string name = this.gameObject.name;
     if (name == "Exit") {
-      GameObject player = GameObject.FindGameObjectWithTag("Player");
-      Destroy(player);
       StartCoroutine(LoadSceneAsync("Initialization"));
     } else {
       GameObject outline = transform.Find("Outline").gameObject;
@@ -38,13 +39,13 @@ public class DungeonButton : MonoBehaviour {
       OnSelectedDungeon.Name = name;
       _dungeonPreview.color = Color.white;
       _dungeonPreview.sprite = Resources.Load<Sprite>($"DungeonPreviewImages/{name}Preview");
-      #if UNITY_EDITOR
-      #endif
       #if UNITY_WEBGL && !UNITY_EDITOR
         if (name.Substring(0, 6) == "Button") {//排除前3副本以外
           
         } else {
-          dungeonOf(Convert.ToInt32(name.Substring(7)) - 1);
+          int indexOfDungeon = Convert.ToInt32(name.Substring(7)) - 1;
+          dungeonOf(indexOfDungeon);
+          GetDungeonCost(indexOfDungeon);
         }
       #endif
     }

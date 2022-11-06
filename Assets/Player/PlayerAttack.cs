@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {   
-
+    public bool AttackAble = true;
     public string normalAttackKey = "k";
     public string skillAttack1 = "x"; //波動拳
 
@@ -24,6 +24,9 @@ public class PlayerAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if (AttackAble == false) {
+            return;
+        }
         _attackTimeRecord += Time.deltaTime;
         
         if(_attackTimeRecord >= _attackFrequency){

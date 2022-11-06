@@ -7,14 +7,10 @@ public class ProbabilityController : MonoBehaviour {
   private const float _rare = 10.0f * 20.0f;
   private const float _uncommon = 30.0f * 20.0f;
   private const float _common = 55.0f * 20.0f;
-  [SerializeField] private TMP_Text _lagendaryProbabilityPhysic;
-  [SerializeField] private TMP_Text _rareProbabilityPhysic;
-  [SerializeField] private TMP_Text _uncommonProbabilityPhysic;
-  [SerializeField] private TMP_Text _commonProbabilityPhysic;
-  [SerializeField] private TMP_Text _lagendaryProbabilityMagic;
-  [SerializeField] private TMP_Text _rareProbabilityMagic;
-  [SerializeField] private TMP_Text _uncommonProbabilityMagic;
-  [SerializeField] private TMP_Text _commonProbabilityMagic;
+  [SerializeField] private TMP_Text _lagendaryProbabilityUI;
+  [SerializeField] private TMP_Text _rareProbabilityUI;
+  [SerializeField] private TMP_Text _uncommonProbabilityUI;
+  [SerializeField] private TMP_Text _commonProbabilityUI;
   private float _lagendaryProbability;
   private float _rareProbability;
   private float _uncommonProbability;
@@ -22,9 +18,6 @@ public class ProbabilityController : MonoBehaviour {
 
   public void UpdateProbability() {
     int totalNum = GetTotalMaterialNum();
-    int rubyNum = GetRubyNum();
-    int sapphireNum = GetSapphireNum();
-    float defaultDivide = 0.5f + (sapphireNum - rubyNum) * 0.0025f;
     if (totalNum < 300) {
       ClearProbabilityValue();
       return;
@@ -37,47 +30,25 @@ public class ProbabilityController : MonoBehaviour {
         (offset > 200 ? 5.0f * 20.0f : (offset > 100 ? offset - 100 : 0.0f));
     _rareProbability = _rare + (offset <= 100 ? 0.0f : offset - 100);
     _lagendaryProbability = _lagendary + (offset <= 200 ? 0.0f : offset - 200);
-    UpdateUiText(defaultDivide);
+    UpdateUiText();
   }
 
   public void ClearProbabilityValue() {
-    _lagendaryProbabilityPhysic.text = "X";
-    _rareProbabilityPhysic.text = "X";
-    _uncommonProbabilityPhysic.text = "X";
-    _commonProbabilityPhysic.text = "X";
-    _lagendaryProbabilityMagic.text = "X";
-    _rareProbabilityMagic.text = "X";
-    _uncommonProbabilityMagic.text = "X";
-    _commonProbabilityMagic.text = "X";
+    _lagendaryProbabilityUI.text = "X";
+    _rareProbabilityUI.text = "X";
+    _uncommonProbabilityUI.text = "X";
+    _commonProbabilityUI.text = "X";
   }
 
   private void Awake() {
     Instance = this;
   }
 
-  private void Update() {
-    if (Input.GetKeyUp(KeyCode.Space)) {
-      UpdateProbability();
-    }
-  }
-
-  private void UpdateUiText(float defaultDivide) {
-    float _lagendaryPhysic = _lagendaryProbability / 20.0f * (1.0f - defaultDivide);
-    float _rarePhysic = _rareProbability / 20.0f * (1.0f - defaultDivide);
-    float _uncommonPhysic = _uncommonProbability / 20.0f * (1.0f - defaultDivide);
-    float _commonPhysic = _commonProbability / 20.0f * (1.0f - defaultDivide);
-    float _lagendaryMagic = _lagendaryProbability / 20.0f * defaultDivide;
-    float _rareMagic = _rareProbability / 20.0f * defaultDivide;
-    float _uncommonMagic = _uncommonProbability / 20.0f * defaultDivide;
-    float _commonMagic = _commonProbability / 20.0f * defaultDivide;
-    _lagendaryProbabilityPhysic.text = _lagendaryPhysic.ToString("0.00");
-    _rareProbabilityPhysic.text = _rarePhysic.ToString("0.00");
-    _uncommonProbabilityPhysic.text = _uncommonPhysic.ToString("0.00");
-    _commonProbabilityPhysic.text = _commonPhysic.ToString("0.00");
-    _lagendaryProbabilityMagic.text = _lagendaryMagic.ToString("0.00");
-    _rareProbabilityMagic.text = _rareMagic.ToString("0.00");
-    _uncommonProbabilityMagic.text = _uncommonMagic.ToString("0.00");
-    _commonProbabilityMagic.text = _commonMagic.ToString("0.00");
+  private void UpdateUiText() {
+    _lagendaryProbabilityUI.text = (_lagendaryProbability / 20.0f).ToString("0.00");
+    _rareProbabilityUI.text = (_rareProbability / 20.0f).ToString("0.00");
+    _uncommonProbabilityUI.text = (_uncommonProbability / 20.0f).ToString("0.00");
+    _commonProbabilityUI.text = (_commonProbability / 20.0f).ToString("0.00");
   }
 
   private int GetTotalMaterialNum() {

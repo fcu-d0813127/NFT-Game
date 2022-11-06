@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 public class RefreshEquipment : MonoBehaviour {
   [DllImport("__Internal")]
   private static extern void LoadEquipment(string playerAccount, int isInit);
+  [SerializeField] private MouseItemData _mouseItem;
   private int _checkEquipmentLoad;
   private Button _refreshEquipmentButton;
   private Dictionary<int, PlayerEquipment> _playerEquipments = new Dictionary<int, PlayerEquipment>();
@@ -18,10 +19,14 @@ public class RefreshEquipment : MonoBehaviour {
   }
 
   private void Refresh() {
+    if (_mouseItem.AssignedInventorySlot.ItemData != null) {
+      _mouseItem.ClearSlot();
+    }
     _playerEquipments.Clear();
     _checkEquipmentLoad = 0;
     #if UNITY_WEBGL && !UNITY_EDITOR
       LoadEquipment(PlayerInfo.AccountAddress, 0);
+      LoadingSceneController.LoadScene();
     #endif
     #if UNITY_EDITOR
       RefreshBackpack();
@@ -55,6 +60,7 @@ public class RefreshEquipment : MonoBehaviour {
     yield return new WaitUntil(() => _checkEquipmentLoad >= length);
     PlayerInfo.PlayerEquipment = _playerEquipments;
     RefreshBackpack();
+    LoadingSceneController.UnLoadScene();
   }
 
   private IEnumerator GetRequest(string uri, int tokenId) {

@@ -14,8 +14,6 @@ public class LoadForging : MonoBehaviour {
   private void LoadForgingScene() {
     PopUpWindowController.Clear();
     StartCoroutine(LoadSceneAsync());
-    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    Destroy(player);
   }
 
   private IEnumerator LoadSceneAsync() {

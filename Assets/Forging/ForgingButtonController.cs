@@ -22,6 +22,7 @@ public class ForgingButtonController : MonoBehaviour {
   [SerializeField] private Button _clearButton;
   [SerializeField] private Image _generateItemIcon;
   [SerializeField] private TMP_Dropdown _selectPart;
+  [SerializeField] private GameObject _remind;
   private MaterialNum _sendMaterialNum = new MaterialNum();
   private int _generateItemTokenId;
 
@@ -58,10 +59,12 @@ public class ForgingButtonController : MonoBehaviour {
           PlayerInfo.MaterialNum.Ruby,
           PlayerInfo.MaterialNum.Sapphire,
           PlayerInfo.MaterialNum.Emerald);
+      LoadingSceneController.LoadScene();
     #endif
 
     // Editor 測試用
     #if UNITY_EDITOR
+      LoadingSceneController.LoadScene();
       _generateItemTokenId = 87;
       string a = "/QmbNebpkj1LBT2XG3htaZ3rHkhL97PFa3H7f4EwwuR5xad";
       SetEquipment(a);
@@ -88,7 +91,7 @@ public class ForgingButtonController : MonoBehaviour {
     StartCoroutine(GetRequest(uri));
   }
 
-  private void CreateEquipment(PlayerEquipment equipment) {
+  private IEnumerator CreateEquipment(PlayerEquipment equipment) {
     Attribute attribute = new Attribute {
       Atk = int.Parse(equipment.attributes[1].value),
       Matk = int.Parse(equipment.attributes[3].value),
@@ -124,20 +127,28 @@ public class ForgingButtonController : MonoBehaviour {
       Attribute = attribute,
       Icon = null
     };
+    yield return StartCoroutine(GetTexture(uri, NowEquipmentItemData));
     EquipmentItems.Add(NowEquipmentItemData);
-    StartCoroutine(GetTexture(uri, NowEquipmentItemData));
     
     // 清除已經鍛造的素材
     BlockDataController[] blocks = HasBlock();
     foreach (BlockDataController block in blocks) {
       Destroy(block.gameObject);
     }
-    _generateItemIcon.sprite = null;
-    _generateItemIcon.color = Color.cyan;
+    _generateItemIcon.sprite = NowEquipmentItemData.Icon;
     ProbabilityController.Instance.ClearProbabilityValue();
     CreateBlock.Instance.ResetGeneratePositionY();
     PlayerInfo.MaterialNum = TempMaterialNum.MaterialNum;
     _sendMaterialNum = new MaterialNum();
+    LoadingSceneController.UnLoadScene();
+    _remind.SetActive(true);
+    _remind.GetComponent<Animation>().Play("ForgingComplete");
+    StartCoroutine(DelayClose());
+  }
+
+  private IEnumerator DelayClose() {
+    yield return new WaitForSeconds(2.0f);
+    _remind.SetActive(false);
   }
 
   private BlockDataController[] HasBlock() {
@@ -166,7 +177,7 @@ public class ForgingButtonController : MonoBehaviour {
           string data = webRequest.downloadHandler.text;
           Debug.Log(pages[page] + ":\nReceived: " + data);
           PlayerEquipment playerEquipment = PlayerEquipment.CreateEquipment(data);
-          CreateEquipment(playerEquipment);
+          StartCoroutine(CreateEquipment(playerEquipment));
           break;
       }
     }
@@ -185,7 +196,10 @@ public class ForgingButtonController : MonoBehaviour {
       equipment.Icon = Sprite.Create(myTexture,
                                      new Rect(0.0f, 0.0f, myTexture.width, myTexture.height),
                                      new Vector2(0.5f, 0.5f));
-      _generateItemIcon.sprite = equipment.Icon;
     }
+  }
+
+  private void Cancel() {
+    LoadingSceneController.UnLoadScene();
   }
 }

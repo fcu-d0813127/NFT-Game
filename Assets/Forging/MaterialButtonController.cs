@@ -10,6 +10,9 @@ public class MaterialButtonController : MonoBehaviour {
   }
 
   private void OpenInputFieldObject() {
+    if (InputFieldController.Instance.IsOpen == true) {
+      return;
+    }
     MaterialBlockDataController material = GetComponent<MaterialBlockDataController>();
     InputFieldController.Instance.SetMaterial(material);
     InputFieldController.Instance.OpenInputField();

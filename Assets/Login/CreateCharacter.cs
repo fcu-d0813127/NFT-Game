@@ -15,11 +15,17 @@ public class CreateCharacter : MonoBehaviour {
   private void Awake() {
     _initAnimation.SetActive(false);
     _myselfButton = GetComponent<Button>();
-    _myselfButton.onClick.AddListener(InitPlayer);
+    #if UNITY_WEBGL && !UNITY_EDITOR
+      _myselfButton.onClick.AddListener(InitPlayer);
+    #endif
+    #if UNITY_EDITOR
+      _myselfButton.onClick.AddListener(LoadInitScene);
+    #endif
   }
 
   private void InitPlayer() {
     Init(_name.text);
+    LoadingSceneController.LoadScene();
   }
 
   private void LoadInitScene() {
@@ -31,6 +37,7 @@ public class CreateCharacter : MonoBehaviour {
     Animator animator = _initAnimation.GetComponent<Animator>();
     animator.SetTrigger("Init");
     yield return new WaitForSeconds(1f);
+    LoadingSceneController.UnLoadScene();
     yield return StartCoroutine(LoadSceneAsync("Initialization"));
   }
 
@@ -40,5 +47,9 @@ public class CreateCharacter : MonoBehaviour {
     while (!asyncLoad.isDone) {
       yield return null;
     }
+  }
+
+  private void Cancel() {
+    LoadingSceneController.UnLoadScene();
   }
 }
