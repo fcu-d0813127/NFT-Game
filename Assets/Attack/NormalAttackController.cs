@@ -40,7 +40,12 @@ public class NormalAttackController : MonoBehaviour
         };
         //Jimmy !! 傷害判斷在這
         foreach(Collider2D hitObj in hitObjs){ 
-            _attackDamage = DamageController.RealDamage(enemyStatus, AttackType.Atk);
+            Debug.Log(hitObj.gameObject.name);
+            if (hitObj.tag == "Enemy") {
+                _attackDamage = DamageController.RealDamage(enemyStatus, AttackType.Atk);
+            } else {
+                _attackDamage = 500;
+            }
             hitObj.GetComponent<HpController>().sufferDamage(_attackDamage);      
         }
     }
