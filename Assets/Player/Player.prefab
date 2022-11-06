@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b79925c5ba0934a8ce6c1e32b33ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerMoveAble: 1
   _playerSpeed: 6
 --- !u!114 &3098439100755784376
 MonoBehaviour:
@@ -232,8 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a1f83051d06de4d93e6b93021071b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackPointLeft: {fileID: 0}
-  _attackPointRight: {fileID: 0}
+  _attackPointLeft: {fileID: 9041419289048365877}
+  _attackPointRight: {fileID: 1972262924866377560}
   _attackRange: 0.5
   attackLayers:
     serializedVersion: 2
@@ -251,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b28685808adec4bb11794d48735a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackAble: 1
   normalAttackKey: k
   skillAttack1: x
   _attackTimeRecord: 0
@@ -272,8 +274,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathDelayTime: 1
-  _DeathWindow: {fileID: 2721520723539518047, guid: 7485a610cd29eec4ca808583ef438b0c,
-    type: 3}
 --- !u!1 &8663215770703136613
 GameObject:
   m_ObjectHideFlags: 0
