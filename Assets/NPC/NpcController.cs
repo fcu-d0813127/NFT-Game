@@ -21,6 +21,9 @@ public class NpcController : MonoBehaviour {
   }
 
   void OnCollisionEnter2D(Collision2D col) {
+    GameObject player = GameObject.Find("Player");
+    player.GetComponent<PlayerMove>().PlayerMoveAble = false;
+    player.GetComponent<PlayerAttack>().AttackAble = false;
     #if UNITY_EDITOR
       int[] enemyBootyTemp = new int[5];//這邊數字(怪物種類數量)寫死
       for (int i = 0; i < 5; i++) {//這邊數字(怪物種類數量)寫死
@@ -61,8 +64,6 @@ public class NpcController : MonoBehaviour {
   internal void LeaveDungeonScene() {
     Destroy(_showMaterial);
     SceneManager.LoadScene("Initialization");
-    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    Destroy(player);
   }
 
   private void Cancel() {

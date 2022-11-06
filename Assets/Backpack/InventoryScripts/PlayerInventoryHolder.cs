@@ -38,7 +38,7 @@ public class PlayerInventoryHolder : InventoryHolder {
     _equipmentBackpackInventorySystem = new InventorySystem(_backpackInventorySize);
     OnDynamicInventoryDisplayRequested?.Invoke(_equipmentBackpackInventorySystem, false);
     Clear();
-    AddItem();
+    StartCoroutine(AddItem());
   }
 
   protected override void Awake() {
@@ -56,7 +56,7 @@ public class PlayerInventoryHolder : InventoryHolder {
     _refreshButton.SetActive(false);
     _equipment?.onClick.AddListener(ChangeBackpackToEquipment);
     _material?.onClick.AddListener(ChangeBackpackToMaterial);
-    AddItem();
+    StartCoroutine(AddItem());
   }
 
   private void Update() {
@@ -89,7 +89,7 @@ public class PlayerInventoryHolder : InventoryHolder {
     _materialBackpackAttribute.SetActive(true);
   }
 
-  private void AddItem() {
+  private IEnumerator AddItem() {
     foreach (var i in PlayerInfo.PlayerEquipment) {
       Attribute attribute = new Attribute {
         Atk = int.Parse(i.Value.attributes[1].value),
@@ -127,12 +127,11 @@ public class PlayerInventoryHolder : InventoryHolder {
         Icon = null
       };
       EquipmentItemData exsistEquipment = EquipmentItems.Find(equipment);
-      if (exsistEquipment == null) {
-        EquipmentItems.Add(equipment);
-        StartCoroutine(GetTexture(uri, equipment));
-      } else if (exsistEquipment.Icon == null) {
-        StartCoroutine(GetTexture(uri, equipment));
+      if (exsistEquipment != null) {
+        continue;
       }
+      yield return StartCoroutine(GetTexture(uri, equipment));
+      EquipmentItems.Add(equipment);
     }
     _equips = new EquipmentItemData[5];
     foreach (var i in EquipmentItems.Equipments) {

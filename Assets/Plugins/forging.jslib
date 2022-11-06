@@ -39,6 +39,9 @@ mergeInto(LibraryManager.library, {
                 myGameInstance.SendMessage(
                     'ApproveResponseController',
                     'Cancel');
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'CloseLoading');
               });
     }
     if (canUseSapphireBalanceOf < amountOfSapphire) {
@@ -51,6 +54,9 @@ mergeInto(LibraryManager.library, {
                 myGameInstance.SendMessage(
                     'ApproveResponseController',
                     'Cancel');
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'CloseLoading');
               });
     }
     if (canUseEmeraldBalanceOf < amountOfEmerald) {
@@ -63,6 +69,9 @@ mergeInto(LibraryManager.library, {
                 myGameInstance.SendMessage(
                     'ApproveResponseController',
                     'Cancel');
+                myGameInstance.SendMessage(
+                    'ApproveResponseController',
+                    'CloseLoading');
               });
     }
     if (isApprove) {

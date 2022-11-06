@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem;
  
 public class PlayerMove : MonoBehaviour {
-  private bool _playerMove = true;
+  public bool PlayerMoveAble = true;
   private Rigidbody2D _body;
   [SerializeField] private float _playerSpeed = 5.0f;
  
@@ -13,11 +13,11 @@ public class PlayerMove : MonoBehaviour {
  
   private void FixedUpdate() {
     if (Keyboard.current.bKey.isPressed || Keyboard.current.sKey.isPressed) {
-      _playerMove = false;
+      PlayerMoveAble = false;
     } else if (Keyboard.current.qKey.isPressed) {
-      _playerMove = true;
+      PlayerMoveAble = true;
     }
-    if (_playerMove == false) {
+    if (PlayerMoveAble == false) {
       return;
     }
     if (Input.GetAxis("Horizontal") < 0) {

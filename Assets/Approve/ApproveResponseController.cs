@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class ApproveResponseController : MonoBehaviour {
   [SerializeField] private GameObject _approveResponsePrefab;
+  [SerializeField] private GameObject _moneyNotEnoughPrefab;
   [SerializeField] private GameObject _parentCanvas;
   private GameObject _myselfGameObject;
 
@@ -9,14 +11,28 @@ public class ApproveResponseController : MonoBehaviour {
     if (_myselfGameObject != null) {
       return;
     }
-    GameObject _approveResponseGameObject = Instantiate(_approveResponsePrefab);
-    _approveResponseGameObject.transform.SetParent(_parentCanvas.transform, false);
-    _myselfGameObject = _approveResponseGameObject;
+    GameObject approveResponseGameObject = Instantiate(_approveResponsePrefab);
+    approveResponseGameObject.transform.SetParent(_parentCanvas.transform, false);
+    _myselfGameObject = approveResponseGameObject;
+  }
+
+  private void OpenMoneyNotEnough() {
+    GameObject moneyNotEnoughGameObject = Instantiate(_moneyNotEnoughPrefab);
+    moneyNotEnoughGameObject.transform.SetParent(_parentCanvas.transform, false);
+    StartCoroutine(DelayDestroy(moneyNotEnoughGameObject));
+  }
+
+  private IEnumerator DelayDestroy(GameObject gameObject) {
+    yield return new WaitForSeconds(2.0f);
+    Destroy(gameObject);
   }
 
   private void Cancel() {
-    LoadingSceneController.UnLoadScene();
     Destroy(_myselfGameObject);
     _myselfGameObject = null;
+  }
+
+  private void CloseLoading() {
+    LoadingSceneController.UnLoadScene();
   }
 }

@@ -13,6 +13,10 @@ mergeInto(LibraryManager.library, {
     await window.majorContract.methods.init(
         UTF8ToString(name)).send({
           from: window.data.PLAYER_ACCOUNT
+        }).on('error', function(error, receipt) {
+          myGameInstance.SendMessage(
+              'CreateButton',
+              'Cancel');
         });
     myGameInstance.SendMessage('CreateButton', 'LoadInitScene');
   },

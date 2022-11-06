@@ -48,4 +48,8 @@ public class CreateCharacter : MonoBehaviour {
       yield return null;
     }
   }
+
+  private void Cancel() {
+    LoadingSceneController.UnLoadScene();
+  }
 }
