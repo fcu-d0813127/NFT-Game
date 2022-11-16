@@ -33,18 +33,15 @@ public class NormalAttackController : MonoBehaviour
 
         Collider2D[] hitObjs = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, attackLayers);
         
-        EnemyStatus enemyStatus = new EnemyStatus {
-            Def = 100,
-            Mdef = 100,
-            CriResistRatio = 0.01f
-        };
         //Jimmy !! 傷害判斷在這
         foreach(Collider2D hitObj in hitObjs){ 
             Debug.Log(hitObj.gameObject.name);
             if (hitObj.tag == "Enemy") {
-                _attackDamage = DamageController.RealDamage(enemyStatus, AttackType.Atk);
+                Attribute enemyAttribute = hitObj.gameObject.GetComponent<EnemyStatus>().Attribute;
+                _attackDamage = DamageController.RealDamage(PlayerInfo.PlayerAttribute, enemyAttribute, AttackType.Atk, true);
             } else {
-                _attackDamage = 500;
+                Attribute enemyAttribute = GetComponent<EnemyStatus>().Attribute;
+                _attackDamage = DamageController.RealDamage(enemyAttribute, PlayerInfo.PlayerAttribute, AttackType.Atk, false);
             }
             hitObj.GetComponent<HpController>().sufferDamage(_attackDamage);      
         }

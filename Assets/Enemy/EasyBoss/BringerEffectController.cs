@@ -28,7 +28,8 @@ public class BringerEffectController : MonoBehaviour
         //判定是否攻擊到
         if (Physics2D.OverlapBox(transform.position, transform.localScale / 2, 0.0f, _playerLayermask)) {
             _isHit = true;
-            //_damage = ...
+            Attribute enemyAttribute = GameObject.Find("BringerOfDeath").GetComponent<EnemyStatus>().Attribute;
+            _damage = DamageController.RealDamage(PlayerInfo.PlayerAttribute, enemyAttribute, AttackType.Matk, true);
             _player.GetComponent<HpController>().sufferDamage(_damage);
         }
     }
