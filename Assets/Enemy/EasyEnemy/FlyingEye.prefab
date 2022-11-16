@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 3625441901622608868}
   - component: {fileID: 2075362340995620965}
   - component: {fileID: 3366094941223383143}
+  - component: {fileID: 12539075526529807}
   m_Layer: 7
   m_Name: FlyingEye
   m_TagString: Enemy
@@ -249,6 +250,25 @@ NavMeshAgent:
   m_BaseOffset: 0.27
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &12539075526529807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7053220199202796345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72517cf65f43a5f4c9d4241548c0fa69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attribute:
+    Atk: 500
+    Matk: 500
+    Def: 100
+    Mdef: 100
+    Cri: 0.05
+    CriDmgRatio: 1.1
 --- !u!1 &8786660906689769043
 GameObject:
   m_ObjectHideFlags: 0

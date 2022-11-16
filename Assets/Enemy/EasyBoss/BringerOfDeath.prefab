@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5851007205571938915}
   - component: {fileID: 5608135735750064608}
   - component: {fileID: 1961140373633241174}
+  - component: {fileID: 635822130380187001}
   m_Layer: 7
   m_Name: BringerOfDeath
   m_TagString: Enemy
@@ -223,6 +224,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.41244188, y: 0.54656804}
   m_EdgeRadius: 0
+--- !u!114 &635822130380187001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180370862954920638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72517cf65f43a5f4c9d4241548c0fa69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attribute:
+    Atk: 1000
+    Matk: 1000
+    Def: 500
+    Mdef: 500
+    Cri: 0.5
+    CriDmgRatio: 2
 --- !u!1 &594828123454257854
 GameObject:
   m_ObjectHideFlags: 0

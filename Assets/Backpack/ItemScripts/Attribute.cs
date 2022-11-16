@@ -1,3 +1,4 @@
+[System.Serializable]
 public class Attribute {
   public float Atk;
   public float Matk;
