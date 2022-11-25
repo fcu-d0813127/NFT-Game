@@ -151,7 +151,7 @@ mergeInto(LibraryManager.library, {
     for(let i = 0; i < exchange.length; i++){
       console.log(exchange[i]);
     }
-    var material = [0, 0, 0];
+    var material = [0, 0, 0, 0];
     await window.majorContract.methods.exchangeMaterial(exchange).send({from: window.data.PLAYER_ACCOUNT})
     .on('transactionHash', function(hash){
       console.log(hash);
@@ -162,12 +162,12 @@ mergeInto(LibraryManager.library, {
         decimalNumber = parseInt(receipt.events[key].raw.data, 16);
         if(receipt.events[key].address === window.data.RUBY_ADDRESS) {
           material[0] += decimalNumber / Math.pow(10, 18);
-        }
-        else if(receipt.events[key].address === window.data.SAPPHIRE_ADDRESS) {
+        } else if(receipt.events[key].address === window.data.SAPPHIRE_ADDRESS) {
           material[1] += decimalNumber / Math.pow(10, 18);
-        }
-        else if(receipt.events[key].address === window.data.EMERALD_ADDRESS) {
+        } else if(receipt.events[key].address === window.data.EMERALD_ADDRESS) {
           material[2] += decimalNumber / Math.pow(10, 18);
+        } else if(receipt.events[key].address === window.data.ERC20_ADDRESS) {
+          material[3] += decimalNumber / Math.pow(10, 18);
         }
       }
     }).on('error', function(error, receipt) {
@@ -175,7 +175,7 @@ mergeInto(LibraryManager.library, {
           'FireTraderNPC',
           'Cancel');
     });
-    var materialTemp = material[0] + ',' + material[1] + ',' + material[2];
+    var materialTemp = material[0] + ',' + material[1] + ',' + material[2] + ',' + material[3];
     myGameInstance.SendMessage('FireTraderNPC', 'ShowRewardMaterial', materialTemp);
   }
 });
