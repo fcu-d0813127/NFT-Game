@@ -6,6 +6,45 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Login.unity
+    guid: 187eb8f18fe4e4148a06f26d9509621c
+  - enabled: 1
+    path: Assets/Scenes/Initialization.unity
+    guid: 4a2ed857fbc454a49a3ece67c8628271
+  - enabled: 1
+    path: Assets/Scenes/CreateCharacter.unity
+    guid: 86d30475e6c119840bad6e38460bd35e
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: a3b002a65f7093b41b6a6df6ecdbc187
+  - enabled: 1
+    path: Assets/Scenes/Backpack.unity
+    guid: 35b6d2b5cb3994e40a16aac6f564785e
+  - enabled: 1
+    path: Assets/Scenes/EntryDungeon.unity
+    guid: a540dafe19aa94c4eae6a25d7a9aa096
+  - enabled: 1
+    path: Assets/Scenes/HomeMap.unity
+    guid: c36628053a8627c44a563c6863d275d7
+  - enabled: 1
+    path: Assets/Scenes/DungeonEntryButtonTemp.unity
+    guid: b2f331fdad3d2d948915abdda52bbafa
+  - enabled: 1
+    path: Assets/Scenes/Dungeon1.unity
+    guid: f3361280e4f9db84791e27104df3cb68
+  - enabled: 1
+    path: Assets/Scenes/Dungeon2.unity
+    guid: a56b6ee5f2136cf45bf099f1fbe9527d
+  - enabled: 1
+    path: Assets/Scenes/Dungeon3.unity
+    guid: 06c15ca49b54bad4dad839cd5033c532
+  - enabled: 1
+    path: Assets/Scenes/Forging.unity
+    guid: e661bf181163968448fdd15fcd4a20e0
+  - enabled: 1
+    path: Assets/Scenes/AttackUiPanel.unity
+    guid: 0205662ca655e70468e447fcd5c7f0bb
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 7568262bccff38f4d91fd65cdcfc6d79
   m_configObjects: {}

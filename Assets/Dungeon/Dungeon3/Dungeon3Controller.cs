@@ -1,0 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Dungeon3Controller : MonoBehaviour {
+    private float _smoothTime = 0.07f;
+    private Vector3 _offset = new Vector3(0f, 0f, -10f);
+    private Vector3 _velocity = Vector3.zero;
+
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject boss;
+    [SerializeField] float entryEdge;
+    [SerializeField] GameObject mainCamera;
+    [SerializeField] GameObject bigHpBar;
+    [SerializeField] GameObject wall;
+    [SerializeField] Vector3 spawnPoint = new Vector3(7.77f, 6.68f, 0);
+
+    private float _entryTime;
+    private bool _isStart = false;
+    private bool _isEnd = false;
+
+    //Todo:Boss目前先用拉的，但日後仍需考慮Boss用生成的狀況
+
+    void Start() {
+        player = GameObject.FindWithTag("Player");
+        player.transform.position = spawnPoint;
+        entryEdge = -17f;
+    }
+
+    // Update is called once per frames
+    void Update() {
+        if(player == null) return;
+
+        if((player.transform.position.x < entryEdge) && !_isEnd){
+            if(!_isStart){
+                _entryTime = Time.time;
+                _isStart = true;
+                bigHpBar.SetActive(true);
+                wall.SetActive(true);
+            }
+
+            if(Time.time - _entryTime > 1){
+                _isEnd = true;
+                mainCamera.GetComponent<CameraFollow>().enabled = true;
+                return;
+            }
+            
+            mainCamera.GetComponent<CameraFollow>().enabled = false;
+            //在切換時可能導致z軸亂掉而無法顯示，故強制改為999;
+            Vector3 tempBoss = boss.transform.position;
+            tempBoss.z = -9.999f;
+            mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, tempBoss, ref _velocity,
+                                                _smoothTime);
+            
+        }
+    }
+}
