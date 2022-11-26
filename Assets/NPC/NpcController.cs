@@ -54,7 +54,9 @@ public class NpcController : MonoBehaviour {
     string[] materialOfGain = materialOfSend.Split(',');
     _showMaterial = Instantiate(PrefabOfShowMaterial);
     _showMaterial.transform.SetParent(GameObject.Find("Canvas").transform, false);
-    _showMaterial.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "獲得以下素材\n紅寶石:" + materialOfGain[0] + "\n藍寶石:" + materialOfGain[1] + "\n綠寶石:" + materialOfGain[2];
+    _showMaterial.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "獲得以下素材" + 
+    "\n紅寶石:" + materialOfGain[0] + "\n藍寶石:" + materialOfGain[1] + 
+    "\n綠寶石:" + materialOfGain[2] + "\n遊戲幣:" + materialOfGain[3];
     #if UNITY_WEBGL && !UNITY_EDITOR
       LoadingSceneController.UnLoadScene();
     #endif
