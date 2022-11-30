@@ -1,16 +1,7 @@
-# NFT Game Formal Edition
-https://hackmd.io/@cookieking/S1eKuy8xMo
+# NFT Game 
 
-## 前置動作
-- 在Unity最上方找到 Window -> Package Manager -> 在+號的右邊，切換到"Unity Registry" -> 找到"Input System"然後import.
-- 當準備要Build成WebGL時先到File -> Build Settings -> Player Settings -> Other Settings -> 找到"Active Input Handling*" -> 切換到"Both".
-## 資料夾內的內容有
-1. Scene : 兩個 scene，分別為主畫面及第一個副本
-2. importAssets : 兩個網路 import 進來的 assets
-3. Enemy : Enemy 相關之程式碼，及哥布林這個 prefab 物件
-4. Animations : 所有動畫控制以及動畫檔案
+![](https://github.com/fcu-d0813127/NftGameFormalEdition/blob/main/poster_for_readme.jpg)
 
-預計下個版本會導入路徑規劃套件，此版本較為乾淨
 ## 功能
 ### 登入
 - 基本的註冊跟登入功能
@@ -32,16 +23,5 @@ https://hackmd.io/@cookieking/S1eKuy8xMo
 ### 角色狀態
 - 使用S鍵來打開角色資訊，用Q鍵來關閉
 - 當可分配能力點數不為0時，可以對自己的能力來分配，分配完成後按下Save按鈕來儲存
-
-# 2022/07/03
-
-* 新增玩家血條
-* 新增怪物攻擊能力
-* 蠻多檔案有改檔名，可能要再注意一下是否能正常運行
-## 攻擊的部分由下方三個處理 (傷害在這調)
-* `/CommonScript/NormalAttackController.cs` : 統一處理玩家/怪物/BOSS的普通攻擊
-* `/BullectEffect/BulletEffectController.cs` : 波動拳
-* `/Enemy/EasyBoss/BringerEffectControllor.cs`:Boss遠程攻擊
-
 
 
